@@ -1,132 +1,679 @@
-/* ── 3 色（柔らかい白・柔らかい黒・オリーブ）のみ ── */
+/* ── 4色パレット ── */
 :root {
-  --soft-white: #f7f7f7;   /* 背景用 #fff ほど眩しくない白 */
-  --soft-black: #2b2b2b;   /* 文字・H セル用 真っ黒より柔らかい黒 */
-  --accent-olive: #758c36; /* 差し色 落ち着いたオリーブグリーン */
+  --charcoal: #2a2d34;      /* チャコール（上品な黒） */
+  --pearl: #f4f5f7;         /* パール（上品な白） */
+  --sage: #6b7c32;          /* セージグリーン（メイン差し色） */
+  --amber: #c49356;         /* アンバー（サブ差し色） */
 }
 
-/* ベース */
-body {
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-               Hiragino Kaku Gothic ProN, Yu Gothic, sans-serif;
+/* リセット & ベース */
+* {
+  box-sizing: border-box;
   margin: 0;
-  color: var(--soft-black);
-  background: var(--soft-white);
+  padding: 0;
 }
 
-/* カード & 共通枠 */
-.card,
-.strategy-table-wrap,
-.balance-display,
-.history-table,
-.alert,
-.floating-timer {
-  background: var(--soft-white);
-  border: 2px solid var(--accent-olive);
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, 
+               "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--charcoal);
+  background: var(--pearl);
+  transition: all 0.3s ease;
+}
+
+/* レイアウト */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+/* タブナビゲーション */
+.tab-navigation {
+  display: flex;
+  background: var(--pearl);
+  border-radius: 4px;
+  padding: 3px;
+  margin-bottom: 14px;
+  border: 2px solid var(--sage);
+  box-shadow: 0 2px 8px rgba(42, 45, 52, 0.1);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: var(--charcoal);
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: var(--sage);
+  color: var(--pearl);
+}
+
+.tab-btn:hover:not(.active) {
+  background: rgba(107, 124, 50, 0.1);
+  color: var(--charcoal);
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* カード */
+.card {
+  background: var(--pearl);
+  border-radius: 4px;
+  box-shadow: 0 2px 12px rgba(42, 45, 52, 0.12);
+  overflow: hidden;
+  border: 1px solid var(--sage);
+}
+
+.card__body {
+  padding: 12px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--charcoal);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* フォーム */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin-bottom: 4px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid var(--sage);
   border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(43,43,43,.1);
+  font-size: 16px;
+  background: var(--pearl);
+  color: var(--charcoal);
+  transition: all 0.2s ease;
 }
 
-/* ボタン */
+.form-control:focus {
+  outline: none;
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(196, 147, 86, 0.2);
+}
+
+/* 資金管理 */
+.money-management {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.balance-display {
+  background: var(--charcoal);
+  border: 2px solid var(--sage);
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 12px;
+  color: var(--pearl);
+}
+
+.balance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  padding: 3px 0;
+}
+
+.balance-label {
+  font-weight: 600;
+  color: rgba(244, 245, 247, 0.8);
+  font-size: 13px;
+}
+
+.balance-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--pearl);
+}
+
+.bet-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--amber);
+}
+
+.bet-rate {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(244, 245, 247, 0.9);
+}
+
+.auto-toggle {
+  font-size: 12px;
+  color: rgba(244, 245, 247, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.targets-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.target-item {
+  text-align: center;
+  padding: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(244, 245, 247, 0.3);
+  background: rgba(244, 245, 247, 0.1);
+}
+
+.target-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(244, 245, 247, 0.8);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.target-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--pearl);
+}
+
+/* ボタン - 4色活用 */
 .btn {
-  padding: 6px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
   border: none;
   border-radius: 3px;
+  font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: .2s;
+  transition: all 0.2s ease;
+  text-decoration: none;
 }
-.btn--primary   {background: var(--accent-olive); color: var(--soft-white);}
-.btn--primary:hover {filter: brightness(90%);}
-.btn--error     {background: var(--soft-black); color: var(--soft-white);}
-.btn--error:hover   {filter: brightness(120%);}
-.btn--success   {background: var(--soft-white); color: var(--soft-black);
-                 border: 2px solid var(--accent-olive);}
-.btn--success:hover {background: #ededed;}
-.btn--outline   {background: transparent; color: var(--accent-olive);
-                 border: 2px solid var(--accent-olive);}
-.btn--outline:hover {background: var(--accent-olive); color: var(--soft-white);}
 
-/* ──────────────────────────────────────────────
-   ▼ 戦略テーブル：横幅を極限まで圧縮し縦を広げる
-   ────────────────────────────────────────────── */
-.strategy-table {
-  border-collapse: collapse;
-  font-size: 7px;          /* 文字をさらに小さく */
-  min-width: 170px;        /* 1列目 28px + 10 列 × 12px （=148）+ 余裕 */
+.btn--primary {
+  background: var(--sage);
+  color: var(--pearl);
 }
+
+.btn--primary:hover {
+  background: var(--amber);
+  color: var(--pearl);
+}
+
+.btn--success {
+  background: var(--pearl);
+  color: var(--charcoal);
+  border: 2px solid var(--sage);
+}
+
+.btn--success:hover {
+  background: rgba(107, 124, 50, 0.1);
+}
+
+.btn--error {
+  background: var(--charcoal);
+  color: var(--pearl);
+}
+
+.btn--error:hover {
+  background: rgba(42, 45, 52, 0.9);
+}
+
+.btn--secondary {
+  background: var(--amber);
+  color: var(--pearl);
+}
+
+.btn--secondary:hover {
+  background: rgba(196, 147, 86, 0.9);
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--sage);
+  border: 2px solid var(--sage);
+}
+
+.btn--outline:hover {
+  background: var(--sage);
+  color: var(--pearl);
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+.game-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.session-controls > * + * {
+  margin-top: 10px;
+}
+
+/* Hard / Soft テーブル自動レイアウト */
+.strategy-blocks {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .strategy-blocks {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
+
+/* 戦略テーブル - 4色配色・縦長比率・自動スケール */
+.strategy-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 14px 0 8px;
+  text-align: center;
+  color: var(--charcoal);
+}
+
+.strategy-table-wrap {
+  --tbl-scale: 1;
+  transform: scale(var(--tbl-scale));
+  transform-origin: top left;
+  overflow-x: auto;
+  border: 2px solid var(--sage);
+  border-radius: 3px;
+  background: var(--pearl);
+  max-width: 100%;
+  box-shadow: 0 4px 16px rgba(107, 124, 50, 0.15);
+}
+
+.strategy-table {
+  width: 100%;
+  min-width: 170px;
+  border-collapse: collapse;
+  font-size: 7px;
+}
+
 .strategy-table th,
 .strategy-table td {
-  padding: 0;              /* 余白ゼロで横幅節約 */
+  padding: 0;
   text-align: center;
   font-weight: 700;
-  line-height: 22px;       /* ▼ 縦を広げる（セル高さ≒line-height） */
+  line-height: 22px;
+  border: 1px solid var(--sage);
 }
 
-/* 1 列目（プレイヤーハンド）: 長方形 */
+/* 1列目（プレイヤーハンド）- 長方形 */
 .strategy-table thead th:first-child,
 .strategy-table .rowhdr {
-  width: 28px !important;  /* 45 → 28px に圧縮 */
-  background: var(--accent-olive);
-  color: var(--soft-white);
-  border: 1px solid var(--accent-olive);
+  width: 28px !important;
+  min-width: 28px !important;
+  max-width: 28px !important;
+  height: 24px !important;
+  background: var(--sage);
+  color: var(--pearl);
+  font-size: 6px !important;
 }
 
-/* 2 列目以降（正方形セル） */
+/* 2列目以降（正方形セル） */
 .strategy-table th:not(:first-child),
 .strategy-table td {
-  width: 12px !important;  /* 16 → 12px へさらに圧縮 */
-  height: 24px !important; /* line-height+α で縦長に */
-  border: 1px solid var(--accent-olive);
-  color: var(--soft-black);
+  width: 12px !important;
+  min-width: 12px !important;
+  max-width: 12px !important;
+  height: 24px !important;
+  font-size: 6px !important;
 }
 
-/* 列見出し（ディーラー） */
+/* 列見出し（ディーラー）- アンバー差し色 */
 .strategy-table thead th:not(:first-child) {
-  background: var(--accent-olive);
-  color: var(--soft-white);
+  background: var(--amber);
+  color: var(--pearl);
   position: sticky;
   top: 0;
   z-index: 3;
 }
 
+.strategy-table .rowhdr {
+  position: sticky;
+  left: 0;
+  z-index: 4;
+}
+
 /* グループ行（Hard/Soft） */
 .strategy-table .group td {
   width: 28px !important;
-  background: var(--accent-olive);
-  color: var(--soft-white);
-  font-size: 6px;
-  border: 1px solid var(--accent-olive);
+  background: rgba(107, 124, 50, 0.8);
+  color: var(--pearl);
+  font-size: 5px !important;
 }
 
-/* Hit / Stand セル */
-.strategy-table td.h {background: var(--soft-black); color: var(--soft-white);}
-.strategy-table td.s {background: var(--soft-white); color: var(--soft-black);}
+/* Hit/Stand セル */
+.strategy-table td.h {
+  background: var(--charcoal);
+  color: var(--pearl);
+}
 
-/* 凡例 */
+.strategy-table td.s {
+  background: var(--pearl);
+  color: var(--charcoal);
+}
+
 .legend {
-  margin-top: 4px;
-  font-size: 8px;
   display: flex;
   gap: 4px;
+  justify-content: center;
+  padding: 4px;
+  background: var(--pearl);
 }
+
 .chip {
   padding: 1px 4px;
   border-radius: 2px;
-  border: 1px solid var(--accent-olive);
+  font-size: 8px;
+  font-weight: 700;
+  border: 1px solid var(--sage);
 }
-.chip-h {background: var(--soft-black); color: var(--soft-white);}
-.chip-s {background: var(--soft-white); color: var(--soft-black);}
 
-/* モバイル：さらに横幅圧縮し縦伸ばす */
-@media (max-width:600px){
-  .strategy-table{
-    min-width:150px;
-    font-size:6px;
+.chip-h {
+  background: var(--charcoal);
+  color: var(--pearl);
+}
+
+.chip-s {
+  background: var(--pearl);
+  color: var(--charcoal);
+}
+
+/* カウンター - アンバー活用 */
+.counters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 8px;
+  background: rgba(196, 147, 86, 0.1);
+  border: 2px solid var(--amber);
+  border-radius: 3px;
+}
+
+.counter-item {
+  text-align: center;
+}
+
+.counter-label {
+  display: block;
+  font-size: 11px;
+  color: var(--charcoal);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.counter-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--amber);
+}
+
+/* 履歴テーブル */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid var(--sage);
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.history-table th {
+  background: var(--sage);
+  font-weight: 600;
+  color: var(--pearl);
+}
+
+.history-table tbody tr:nth-child(even) {
+  background: rgba(107, 124, 50, 0.05);
+}
+
+/* フローティングタイマー */
+.floating-timer {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: var(--charcoal);
+  border: 2px solid var(--amber);
+  border-radius: 3px;
+  padding: 6px 8px;
+  z-index: 1000;
+  color: var(--pearl);
+  box-shadow: 0 4px 16px rgba(42, 45, 52, 0.3);
+}
+
+.timer-body {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timer-label {
+  font-size: 11px;
+  color: var(--pearl);
+  font-weight: 600;
+}
+
+.timer-value {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--amber);
+  min-width: 70px;
+  text-align: center;
+}
+
+.timer-btn {
+  border: 1px solid var(--amber);
+  background: var(--amber);
+  color: var(--pearl);
+  border-radius: 2px;
+  padding: 2px 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+  background: rgba(196, 147, 86, 0.8);
+}
+
+/* アラート */
+.alert {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-weight: 600;
+  max-width: 90%;
+  text-align: center;
+  border: 2px solid;
+  box-shadow: 0 4px 16px rgba(42, 45, 52, 0.2);
+}
+
+.alert--success {
+  background: var(--pearl);
+  color: var(--sage);
+  border-color: var(--sage);
+}
+
+.alert--error {
+  background: var(--charcoal);
+  color: var(--pearl);
+  border-color: var(--amber);
+}
+
+.alert--warning {
+  background: rgba(196, 147, 86, 0.1);
+  color: var(--charcoal);
+  border-color: var(--amber);
+}
+
+.alert--info {
+  background: var(--sage);
+  color: var(--pearl);
+  border-color: var(--amber);
+}
+
+/* 自動スケール */
+@media (max-width: 480px) {
+  .strategy-table-wrap { --tbl-scale: 0.85; }
+}
+
+@media (max-width: 360px) {
+  .strategy-table-wrap { --tbl-scale: 0.75; }
+  .strategy-table {
+    min-width: 150px;
+    font-size: 6px;
   }
   .strategy-table thead th:first-child,
-  .strategy-table .rowhdr      {width:24px !important; line-height:20px;}
+  .strategy-table .rowhdr { 
+    width: 24px !important; 
+    line-height: 20px; 
+  }
   .strategy-table th:not(:first-child),
-  .strategy-table td           {width:10px !important; height:26px !important;}
-  .strategy-table .group td    {width:24px !important; font-size:5px;}
+  .strategy-table td { 
+    width: 10px !important; 
+    height: 26px !important; 
+  }
+  .strategy-table .group td { 
+    width: 24px !important; 
+    font-size: 5px !important; 
+  }
+}
+
+@media (min-width: 1200px) {
+  .strategy-table-wrap { --tbl-scale: 1.15; }
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: var(--charcoal);
+    color: var(--pearl);
+  }
+  
+  .app-header h1,
+  .section-title,
+  .strategy-title {
+    color: var(--pearl);
+  }
+  
+  .card,
+  .form-control,
+  .strategy-table-wrap {
+    background: var(--charcoal);
+    border-color: var(--sage);
+    color: var(--pearl);
+  }
+  
+  .tab-navigation {
+    background: var(--charcoal);
+  }
+  
+  .balance-display {
+    background: var(--pearl);
+    color: var(--charcoal);
+  }
+  
+  .balance-label,
+  .target-label {
+    color: rgba(42, 45, 52, 0.8);
+  }
+  
+  .balance-value,
+  .target-value {
+    color: var(--charcoal);
+  }
+  
+  .bet-amount {
+    color: var(--amber);
+  }
+  
+  .strategy-table td.h {
+    background: var(--pearl);
+    color: var(--charcoal);
+  }
+  
+  .strategy-table td.s {
+    background: var(--charcoal);
+    color: var(--pearl);
+  }
+  
+  .floating-timer {
+    background: var(--pearl);
+    color: var(--charcoal);
+  }
+  
+  .timer-label,
+  .timer-value {
+    color: var(--charcoal);
+  }
+  
+  .timer-value {
+    color: var(--amber);
+  }
 }
