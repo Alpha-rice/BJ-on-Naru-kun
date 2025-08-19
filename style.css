@@ -1,45 +1,270 @@
-/* 戦略テーブル - 転置・統一幅・さらに小さく */
+/* リセット & ベース */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #f8f9fc;
+  transition: all 0.3s ease;
+}
+
+/* レイアウト */
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 8px;
+}
+
+.app-header {
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.app-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 4px;
+}
+
+/* タブナビゲーション */
+.tab-navigation {
+  display: flex;
+  background: #ffffff;
+  border-radius: 4px;
+  padding: 3px;
+  margin-bottom: 14px;
+  border: 1px solid #e1e8ed;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 10px 14px;
+  border: none;
+  background: transparent;
+  color: #657786;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: #1da1f2;
+  color: #ffffff;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #f7f9fa;
+  color: #14171a;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* カード */
+.card {
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  overflow: hidden;
+  border: 1px solid #e1e8ed;
+}
+
+.card__body {
+  padding: 12px;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #14171a;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+/* フォーム */
+.form-group {
+  margin-bottom: 12px;
+}
+
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #536471;
+  margin-bottom: 4px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #cfd9de;
+  border-radius: 3px;
+  font-size: 16px;
+  background: #ffffff;
+  color: #14171a;
+  transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #1da1f2;
+}
+
+/* 資金管理 - 豊かな色使い */
+.money-management {
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.balance-display {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border: none;
+  border-radius: 4px;
+  padding: 10px;
+  margin-top: 12px;
+  color: #ffffff;
+}
+
+.balance-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 6px;
+  padding: 3px 0;
+}
+
+.balance-label {
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  font-size: 13px;
+}
+
+.balance-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.bet-amount {
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffd700;
+}
+
+.bet-rate {
+  font-size: 14px;
+  font-weight: 600;
+  color: #98fb98;
+}
+
+.auto-toggle {
+  font-size: 12px;
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.targets-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.target-item {
+  text-align: center;
+  padding: 6px;
+  border-radius: 3px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+}
+
+.target-label {
+  display: block;
+  font-size: 11px;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.target-value {
+  display: block;
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* 戦略テーブル - 完全統一サイズ・豊かな色使い */
+.strategy-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 14px 0 8px;
+  text-align: center;
+  color: #14171a;
+}
+
 .strategy-table-wrap {
   overflow-x: auto;
-  border: 2px solid #dee2e6;
+  border: 2px solid #1da1f2;
   border-radius: 3px;
   background: #ffffff;
   max-width: 100%;
+  box-shadow: 0 2px 8px rgba(29,161,242,0.1);
 }
 
 .strategy-table {
   width: 100%;
-  min-width: 500px; /* 600px → 500px */
+  min-width: 500px;
   border-collapse: collapse;
-  font-size: 9px; /* 10px → 9px */
+  font-size: 9px;
 }
 
-/* 転置テーブル: 全セルを20pxに統一（28px → 20px） */
+/* 完全統一: すべてのセル（th, td, rowhdr含む）を18pxに統一 */
 .strategy-table th,
-.strategy-table td {
-  width: 20px !important;
-  min-width: 20px !important;
-  max-width: 20px !important;
-  height: 20px !important;
-  border: 1px solid #dee2e6;
-  padding: 0px !important; /* 1px → 0px */
+.strategy-table td,
+.strategy-table .rowhdr,
+.strategy-table thead th:first-child {
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: 18px !important;
+  border: 1px solid #e1e8ed;
+  padding: 0px !important;
   text-align: center;
   vertical-align: middle;
-  font-size: 7px !important; /* 8px → 7px */
+  font-size: 7px !important;
   font-weight: 700;
   line-height: 1 !important;
 }
 
+/* 列見出し（ディーラーカード） */
 .strategy-table thead th {
-  background: #495057;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 3;
 }
 
+/* 行見出し（プレイヤーハンド） - 列見出しと同じスタイル */
 .strategy-table .rowhdr {
-  background: #495057;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
   position: sticky;
   left: 0;
@@ -47,59 +272,332 @@
   text-align: center;
 }
 
+/* グループ行（Hard/Soft区分） */
 .strategy-table .group td {
-  background: #6c757d;
+  background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
   color: #ffffff;
   font-weight: 700;
   text-align: center;
-  font-size: 6px !important; /* 7px → 6px */
+  font-size: 6px !important;
 }
 
+/* Hit セル */
 .strategy-table td.h {
-  background: #dc3545;
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
   color: #ffffff;
 }
 
+/* Stand セル */
 .strategy-table td.s {
-  background: #28a745;
+  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
   color: #ffffff;
 }
 
 .legend {
   display: flex;
-  gap: 3px; /* 4px → 3px */
+  gap: 3px;
   justify-content: center;
-  padding: 4px; /* 6px → 4px */
-  background: #f8f9fa;
+  padding: 4px;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
 }
 
 .chip {
-  padding: 1px 6px; /* 2px 8px → 1px 6px */
+  padding: 1px 6px;
   border-radius: 2px;
-  font-size: 9px; /* 10px → 9px */
+  font-size: 9px;
   font-weight: 700;
 }
 
-/* レスポンシブ - さらに小さく */
+.chip-s {
+  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+  color: #ffffff;
+}
+
+.chip-h {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: #ffffff;
+}
+
+/* ボタン - 豊かな色使い */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 3px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.btn--primary {
+  background: linear-gradient(135deg, #1da1f2 0%, #1991db 100%);
+  color: #ffffff;
+}
+
+.btn--primary:hover {
+  background: linear-gradient(135deg, #1991db 0%, #1472a4 100%);
+}
+
+.btn--success {
+  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+  color: #ffffff;
+}
+
+.btn--success:hover {
+  background: linear-gradient(135deg, #20bf6b 0%, #1dd1a1 100%);
+}
+
+.btn--error {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: #ffffff;
+}
+
+.btn--error:hover {
+  background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+}
+
+.btn--secondary {
+  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+  color: #ffffff;
+}
+
+.btn--secondary:hover {
+  background: linear-gradient(135deg, #6c5ce7 0%, #5f3dc4 100%);
+}
+
+.btn--outline {
+  background: #ffffff;
+  color: #1da1f2;
+  border: 2px solid #1da1f2;
+}
+
+.btn--outline:hover {
+  background: #1da1f2;
+  color: #ffffff;
+}
+
+.btn--full-width {
+  width: 100%;
+}
+
+.game-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+}
+
+.session-controls > * + * {
+  margin-top: 10px;
+}
+
+/* カウンター */
+.counters {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 8px;
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+  border: 2px solid #fd9644;
+  border-radius: 3px;
+}
+
+.counter-item {
+  text-align: center;
+}
+
+.counter-label {
+  display: block;
+  font-size: 11px;
+  color: #8b4513;
+  margin-bottom: 2px;
+  font-weight: 600;
+}
+
+.counter-value {
+  display: block;
+  font-size: 24px;
+  font-weight: 800;
+  color: #2d3436;
+}
+
+/* 履歴テーブル */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid #e1e8ed;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.history-table th {
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  font-weight: 600;
+  color: #14171a;
+}
+
+.history-table tbody tr:nth-child(even) {
+  background: #f8f9fc;
+}
+
+/* フローティングタイマー */
+.floating-timer {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
+  border: 2px solid #74b9ff;
+  border-radius: 3px;
+  padding: 6px 8px;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+.timer-body {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timer-label {
+  font-size: 11px;
+  color: #ddd;
+  font-weight: 600;
+}
+
+.timer-value {
+  font-family: 'Courier New', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  color: #74b9ff;
+  min-width: 70px;
+  text-align: center;
+}
+
+.timer-btn {
+  border: 1px solid #74b9ff;
+  background: rgba(116,185,255,0.2);
+  color: #ffffff;
+  border-radius: 2px;
+  padding: 2px 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.timer-btn:hover {
+  background: rgba(116,185,255,0.4);
+}
+
+/* アラート */
+.alert {
+  position: fixed;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1001;
+  padding: 8px 14px;
+  border-radius: 3px;
+  font-weight: 600;
+  max-width: 90%;
+  text-align: center;
+  border: 2px solid;
+  color: #ffffff;
+}
+
+.alert--success {
+  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
+  border-color: #00b894;
+}
+
+.alert--error {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  border-color: #d63031;
+}
+
+.alert--warning {
+  background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+  border-color: #f39c12;
+  color: #2d3436;
+}
+
+.alert--info {
+  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+  border-color: #3742fa;
+}
+
+/* ダークモード */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #15202b;
+    color: #ffffff;
+  }
+  
+  .app-header h1,
+  .section-title,
+  .strategy-title {
+    color: #ffffff;
+  }
+  
+  .card,
+  .form-control,
+  .strategy-table-wrap {
+    background: #192734;
+    border-color: #38444d;
+    color: #ffffff;
+  }
+  
+  .tab-navigation {
+    background: #192734;
+    border-color: #38444d;
+  }
+  
+  .tab-btn {
+    color: #8899a6;
+  }
+  
+  .tab-btn:hover:not(.active) {
+    background: #253341;
+    color: #ffffff;
+  }
+  
+  .history-table tbody tr:nth-child(even) {
+    background: #253341;
+  }
+}
+
+/* レスポンシブ */
 @media (max-width: 600px) {
   .container {
     padding: 6px;
   }
   
   .strategy-table {
-    min-width: 400px; /* 500px → 400px */
+    min-width: 400px;
   }
   
+  /* モバイルでもすべて統一サイズ維持 */
   .strategy-table th,
-  .strategy-table td {
-    width: 18px !important; /* 20px → 18px */
-    min-width: 18px !important;
-    max-width: 18px !important;
-    height: 18px !important;
-    font-size: 6px !important; /* 7px → 6px */
+  .strategy-table td,
+  .strategy-table .rowhdr,
+  .strategy-table thead th:first-child {
+    width: 16px !important;
+    min-width: 16px !important;
+    max-width: 16px !important;
+    height: 16px !important;
+    font-size: 6px !important;
   }
   
   .strategy-table .group td {
-    font-size: 5px !important; /* 6px → 5px */
+    font-size: 5px !important;
   }
 }
