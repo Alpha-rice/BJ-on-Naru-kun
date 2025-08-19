@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BlackjackGuide - シンプル版</title>
+    <title>BlackjackGuide - コンパクト版</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- ダークモード切り替えボタン -->
+    <button class="theme-toggle" id="themeToggle">🌙 Dark</button>
+
     <div class="container">
         <header class="header">
             <h1>BlackjackGuide</h1>
@@ -24,7 +27,7 @@
                     </div>
                     <div class="checkbox-group">
                         <input type="checkbox" id="autoAdjustToggle" checked>
-                        <label for="autoAdjustToggle">自動ベット調整</label>
+                        <label for="autoAdjustToggle">自動調整</label>
                     </div>
                 </div>
 
@@ -73,15 +76,15 @@
                 </div>
             </section>
 
-            <!-- 戦略表セクション -->
+            <!-- 戦略表セクション（前版復活） -->
             <section class="strategy-section">
                 <h2>基本戦略表</h2>
                 <div class="strategy-container">
-                    <div class="table-wrapper">
-                        <table id="strategyTable" class="strategy-table">
+                    <div class="strategy-table-wrap">
+                        <table id="strategyTable" class="strategy-table" data-highlight-mode="active">
                             <thead>
                                 <tr>
-                                    <th class="corner">プレイヤー＼ディーラー</th>
+                                    <th>Player \ Dealer</th>
                                     <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
                                     <th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
                                 </tr>
@@ -89,32 +92,23 @@
                             <tbody>
                                 <!-- Hard Hands -->
                                 <tr class="section-header">
-                                    <td colspan="11">Hard Hands（ペア以外）</td>
+                                    <td colspan="11">Hard Hands</td>
                                 </tr>
-                                <tr><td class="player">21</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">20</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">19</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">18</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">17</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">16</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">15</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">14</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">13</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">12</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
                                 <tr><td class="player">11</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">12</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">13</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">14</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">15</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">16</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="h">H</td></tr>
+                                <tr><td class="player">17+</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
                                 
                                 <!-- Soft Hands -->
                                 <tr class="section-header">
-                                    <td colspan="11">Soft Hands（A含む）</td>
+                                    <td colspan="11">Soft Hands</td>
                                 </tr>
-                                <tr><td class="player">A,9</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                                <tr><td class="player">A,8</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,7</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,6</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,5</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,4</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,3</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                                <tr><td class="player">A,2</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">Soft 17-</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">Soft 18</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">Soft 19+</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
                             </tbody>
                         </table>
                     </div>
@@ -140,14 +134,8 @@
                         <table id="historyTable" class="history-table">
                             <thead>
                                 <tr>
-                                    <th>開始時刻</th>
-                                    <th>終了時刻</th>
-                                    <th>初期資金</th>
-                                    <th>終了残高</th>
-                                    <th>損益</th>
-                                    <th>プレイ時間</th>
-                                    <th>最大連勝</th>
-                                    <th>最大連敗</th>
+                                    <th>開始時刻</th><th>終了時刻</th><th>初期資金</th><th>終了残高</th>
+                                    <th>損益</th><th>プレイ時間</th><th>最大連勝</th><th>最大連敗</th>
                                 </tr>
                             </thead>
                             <tbody></tbody>
