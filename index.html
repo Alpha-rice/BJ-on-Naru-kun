@@ -1,1 +1,170 @@
-<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><title>BlackjackGuide Enhanced</title><link rel="stylesheet" href="style.css"/></head><body><div class="container"><header class="app-header"><h1>BlackjackGuide</h1><nav class="tab-navigation"><button class="tab-btn active" data-tab="game">ゲーム</button><button class="tab-btn" data-tab="strategy">ストラテジー</button><button class="tab-btn" data-tab="history">履歴</button></nav></header><main><section id="game" class="tab-content active"><div class="card card-capital"><h2 class="section-title">資金管理</h2><div class="form-group"><label for="initialCapital" class="form-label">元金 (円)</label><input type="number" id="initialCapital" class="form-control" min="0"/><label><input type="checkbox" id="autoAdjustToggle" checked/> 自動ベット調整</label></div><div id="balanceDisplay" class="balance-display" style="display:none"><div class="balance-item"><span class="balance-label">現在残高</span><span id="currentBalance" class="balance-value">0円</span></div><div class="balance-item"><span class="balance-label">ベット額</span><span id="betAmount" class="bet-amount">0円</span><span id="betRate" class="bet-rate">0%</span></div><div class="balance-item"><span class="balance-label">勝利ストリーク</span><span id="winStreak" class="counter-value">0</span></div><div class="balance-item"><span class="balance-label">敗北ストリーク</span><span id="lossStreak" class="counter-value">0</span></div></div><div class="session-controls"><button id="startSession" class="btn btn--primary">セッション開始</button><button id="endSession" class="btn btn--error" style="display:none">セッション終了</button></div></div><div id="gameButtons" class="game-buttons" style="display:none"><button id="winButton" class="btn btn--success">勝利</button><button id="pushButton" class="btn btn--secondary">引き分け</button><button id="loseButton" class="btn btn--error">敗北</button></div><div id="counters" class="counters" style="display:none"><div class="counter-item"><span class="counter-label">利確目標</span><span id="winTarget" class="counter-value">0円</span></div><div class="counter-item"><span class="counter-label">損切り目標</span><span id="lossTarget" class="counter-value">0円</span></div></div><div id="floatingTimer" class="floating-timer" style="display:none"><div class="timer-body"><span class="timer-label">経過時間:</span><span id="timerValue" class="timer-value">00:00:00</span><button id="timerPauseBtn" class="timer-btn">⏸︎</button><button id="timerResetBtn" class="timer-btn">⟳</button></div></div></section><section id="strategy" class="tab-content"><h2 class="section-title strategy-title">基本ストラテジー</h2><div class="strategy-blocks"><div class="strategy-table-wrap"><table id="strategyTable" class="strategy-table"><thead><tr><th>Player \ Dealer</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>A</th></tr></thead><tbody><tr class="group"><td colspan="11">Hard Hands</td></tr><tr><td class="rowhdr">11</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">12</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">13</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">14</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">15</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">16</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">17+</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr><tr class="group"><td colspan="11">Soft Hands</td></tr><tr><td class="rowhdr">Soft 17-</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">Soft 18</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr><tr><td class="rowhdr">Soft 19+</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr></tbody></table></div></div></section><section id="history" class="tab-content"><h2 class="section-title">履歴</h2><table id="historyTable" class="history-table"><thead><tr><th>開始</th><th>終了</th><th>初期資金</th><th>終了残高</th><th>損益</th><th>時間</th><th>MaxWin</th><th>MaxLose</th></tr></thead><tbody></tbody></table></section></main></div><script src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BlackjackGuide - シンプル版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>BlackjackGuide</h1>
+            <p class="subtitle">実用的なブラックジャック支援ツール</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 資金管理セクション -->
+            <section class="money-section">
+                <h2>資金管理</h2>
+                <div class="money-controls">
+                    <div class="input-group">
+                        <label for="initialCapital">元金 (円)</label>
+                        <input type="number" id="initialCapital" min="1000" step="1000" placeholder="10000">
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="autoAdjustToggle" checked>
+                        <label for="autoAdjustToggle">自動ベット調整</label>
+                    </div>
+                </div>
+
+                <div id="balanceDisplay" class="balance-panel" style="display:none;">
+                    <div class="balance-grid">
+                        <div class="balance-item">
+                            <span class="label">現在残高</span>
+                            <span id="currentBalance" class="value">0円</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">ベット額</span>
+                            <span id="betAmount" class="value bet">0円</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">ベット率</span>
+                            <span id="betRate" class="value">0.0%</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">利確目標</span>
+                            <span id="winTarget" class="value">0円</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">損切目標</span>
+                            <span id="lossTarget" class="value">0円</span>
+                        </div>
+                        <div class="balance-item">
+                            <span class="label">連勝</span>
+                            <span id="winStreak" class="value">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-controls">
+                    <button id="startSession" class="btn btn-primary">セッション開始</button>
+                    <button id="endSession" class="btn btn-danger" style="display:none;">セッション終了</button>
+                </div>
+            </section>
+
+            <!-- ゲームボタン -->
+            <section id="gameButtons" class="game-section" style="display:none;">
+                <h2>ゲーム結果</h2>
+                <div class="game-buttons">
+                    <button id="winButton" class="btn btn-win">勝利 🎉</button>
+                    <button id="pushButton" class="btn btn-push">引分 ⚪</button>
+                    <button id="loseButton" class="btn btn-lose">敗北 ❌</button>
+                </div>
+            </section>
+
+            <!-- 戦略表セクション -->
+            <section class="strategy-section">
+                <h2>基本戦略表</h2>
+                <div class="strategy-container">
+                    <div class="table-wrapper">
+                        <table id="strategyTable" class="strategy-table">
+                            <thead>
+                                <tr>
+                                    <th class="corner">プレイヤー＼ディーラー</th>
+                                    <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                    <th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Hard Hands -->
+                                <tr class="section-header">
+                                    <td colspan="11">Hard Hands（ペア以外）</td>
+                                </tr>
+                                <tr><td class="player">21</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">20</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">19</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">18</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">17</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">16</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">15</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">14</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">13</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">12</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">11</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                
+                                <!-- Soft Hands -->
+                                <tr class="section-header">
+                                    <td colspan="11">Soft Hands（A含む）</td>
+                                </tr>
+                                <tr><td class="player">A,9</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
+                                <tr><td class="player">A,8</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,7</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,6</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,5</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,4</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,3</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                                <tr><td class="player">A,2</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="legend-color h">H</span>
+                            <span>Hit（カードを引く）</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color s">S</span>
+                            <span>Stand（カードを引かない）</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 履歴セクション -->
+            <section class="history-section">
+                <details>
+                    <summary><h2>セッション履歴</h2></summary>
+                    <div class="table-wrapper">
+                        <table id="historyTable" class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>開始時刻</th>
+                                    <th>終了時刻</th>
+                                    <th>初期資金</th>
+                                    <th>終了残高</th>
+                                    <th>損益</th>
+                                    <th>プレイ時間</th>
+                                    <th>最大連勝</th>
+                                    <th>最大連敗</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                </details>
+            </section>
+        </main>
+
+        <!-- タイマー -->
+        <div id="floatingTimer" class="timer" style="display:none;">
+            <span id="timerValue">00:00:00</span>
+            <button id="timerPauseBtn" class="timer-btn">⏸︎</button>
+            <button id="timerResetBtn" class="timer-btn">⟳</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
