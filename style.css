@@ -9,8 +9,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  color: #2c2c2c;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  color: #1a1a1a;
+  background: #ffffff;
   transition: all 0.3s ease;
 }
 
@@ -29,20 +29,18 @@ body {
 .app-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #000000;
   margin-bottom: 4px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: color 0.3s ease;
 }
 
-/* タブナビゲーション - 高級感 */
+/* タブナビゲーション */
 .tab-navigation {
   display: flex;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 8px;
+  background: #f8f9fa;
+  border-radius: 4px;
   padding: 3px;
   margin-bottom: 14px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  border: 1px solid #dee2e6;
 }
 
 .tab-btn {
@@ -50,32 +48,39 @@ body {
   padding: 10px 14px;
   border: none;
   background: transparent;
-  color: rgba(255,255,255,0.8);
+  color: #495057;
   font-size: 15px;
   font-weight: 600;
-  border-radius: 6px;
+  border-radius: 2px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
 }
 
 .tab-btn.active {
-  background: rgba(255,255,255,0.95);
-  color: #1a1a2e;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  background: #007bff;
+  color: #ffffff;
 }
 
 .tab-btn:hover:not(.active) {
-  background: rgba(255,255,255,0.15);
-  color: white;
+  background: #e9ecef;
+  color: #212529;
 }
 
-/* カード - 高級感 */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+/* カード */
 .card {
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+  background: #ffffff;
+  border-radius: 4px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.5);
+  border: 1px solid #dee2e6;
 }
 
 .card__body {
@@ -85,10 +90,9 @@ body {
 .section-title {
   font-size: 20px;
   font-weight: 700;
-  color: #1a1a2e;
+  color: #000000;
   margin-bottom: 12px;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 /* フォーム */
@@ -100,42 +104,38 @@ body {
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: #4a4a5c;
+  color: #212529;
   margin-bottom: 4px;
 }
 
 .form-control {
   width: 100%;
   padding: 8px 10px;
-  border: 2px solid #e1e5e9;
-  border-radius: 8px;
+  border: 2px solid #ced4da;
+  border-radius: 3px;
   font-size: 16px;
-  background: rgba(255,255,255,0.9);
-  color: #2c2c2c;
-  transition: all 0.3s ease;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+  background: #ffffff;
+  color: #212529;
+  transition: border-color 0.2s ease;
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #667eea;
-  box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  border-color: #007bff;
 }
 
-/* 資金管理 - padding圧縮 */
+/* 資金管理 - padding圧縮・高コントラスト */
 .money-management {
   max-width: 500px;
   margin: 0 auto;
 }
 
 .balance-display {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 12px;
+  background: #f8f9fa;
+  border: 2px solid #dee2e6;
+  border-radius: 4px;
   padding: 10px;
   margin-top: 12px;
-  color: white;
-  box-shadow: 0 4px 20px rgba(102,126,234,0.3);
 }
 
 .balance-item {
@@ -147,34 +147,32 @@ body {
 }
 
 .balance-label {
-  font-weight: 500;
-  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+  color: #495057;
   font-size: 13px;
 }
 
 .balance-value {
   font-size: 16px;
   font-weight: 700;
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  color: #000000;
 }
 
 .bet-amount {
   font-size: 18px;
   font-weight: 800;
-  color: #ffd700;
-  text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  color: #007bff;
 }
 
 .bet-rate {
   font-size: 14px;
   font-weight: 600;
-  color: #98fb98;
+  color: #28a745;
 }
 
 .auto-toggle {
   font-size: 12px;
-  color: rgba(255,255,255,0.9);
+  color: #495057;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -190,41 +188,51 @@ body {
 .target-item {
   text-align: center;
   padding: 6px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 3px;
+  border: 2px solid #dee2e6;
+  background: #ffffff;
+}
+
+.win-target {
+  border-color: #28a745;
+  background: #f8fff8;
+}
+
+.loss-target {
+  border-color: #dc3545;
+  background: #fff8f8;
 }
 
 .target-label {
   display: block;
   font-size: 11px;
-  color: rgba(255,255,255,0.8);
+  color: #6c757d;
   margin-bottom: 2px;
+  font-weight: 600;
 }
 
 .target-value {
   display: block;
   font-size: 13px;
-  font-weight: 600;
-  color: white;
+  font-weight: 700;
+  color: #000000;
 }
 
-/* 戦略テーブル - 転置・統一幅・高級配色 */
+/* 戦略テーブル - 転置・統一幅・シンプル配色 */
 .strategy-title {
   font-size: 16px;
   font-weight: 600;
   margin: 14px 0 8px;
   text-align: center;
-  color: #1a1a2e;
+  color: #000000;
 }
 
 .strategy-table-wrap {
   overflow-x: auto;
-  border: 2px solid #667eea;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fd 100%);
+  border: 2px solid #dee2e6;
+  border-radius: 3px;
+  background: #ffffff;
   max-width: 100%;
-  box-shadow: 0 4px 20px rgba(102,126,234,0.15);
 }
 
 .strategy-table {
@@ -232,7 +240,6 @@ body {
   min-width: 600px;
   border-collapse: collapse;
   font-size: 10px;
-  letter-spacing: 0.01em;
 }
 
 /* 転置テーブル: 全セルを28pxに統一 */
@@ -242,55 +249,48 @@ body {
   min-width: 28px !important;
   max-width: 28px !important;
   height: 28px !important;
-  border: 1px solid rgba(102,126,234,0.2);
+  border: 1px solid #dee2e6;
   padding: 1px !important;
   text-align: center;
   vertical-align: middle;
   font-size: 8px !important;
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1 !important;
 }
 
 .strategy-table thead th {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-weight: 700;
+  background: #495057;
+  color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 3;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .strategy-table .rowhdr {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  font-weight: 700;
+  background: #495057;
+  color: #ffffff;
   position: sticky;
   left: 0;
   z-index: 4;
   text-align: center;
-  overflow: hidden;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .strategy-table .group td {
-  background: linear-gradient(135deg, #4a4a5c 0%, #6c6c7c 100%);
-  color: white;
+  background: #6c757d;
+  color: #ffffff;
   font-weight: 700;
   text-align: center;
   font-size: 7px !important;
 }
 
 .strategy-table td.h {
-  background: linear-gradient(135deg, #8b0000 0%, #dc143c 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  background: #dc3545;
+  color: #ffffff;
 }
 
 .strategy-table td.s {
-  background: linear-gradient(135deg, #006400 0%, #228b22 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  background: #28a745;
+  color: #ffffff;
 }
 
 .legend {
@@ -298,93 +298,86 @@ body {
   gap: 4px;
   justify-content: center;
   padding: 6px;
-  background: rgba(102,126,234,0.05);
+  background: #f8f9fa;
 }
 
 .chip {
   padding: 2px 8px;
-  border-radius: 12px;
+  border-radius: 2px;
   font-size: 10px;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .chip-s {
-  background: linear-gradient(135deg, #228b22 0%, #32cd32 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: #28a745;
+  color: #ffffff;
 }
 
 .chip-h {
-  background: linear-gradient(135deg, #dc143c 0%, #ff6347 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  background: #dc3545;
+  color: #ffffff;
 }
 
-/* ボタン - 高級感 */
+/* ボタン - シンプル */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 8px 14px;
   border: none;
-  border-radius: 8px;
+  border-radius: 3px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   text-decoration: none;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  background: #007bff;
+  color: #ffffff;
 }
 
 .btn--primary:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+  background: #0056b3;
 }
 
 .btn--success {
-  background: linear-gradient(135deg, #00b894 0%, #00a085 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  background: #28a745;
+  color: #ffffff;
 }
 
 .btn--success:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(0,184,148,0.3);
+  background: #1e7e34;
 }
 
 .btn--error {
-  background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  background: #dc3545;
+  color: #ffffff;
 }
 
 .btn--error:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+  background: #c82333;
 }
 
 .btn--secondary {
-  background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-  color: white;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  background: #6c757d;
+  color: #ffffff;
+}
+
+.btn--secondary:hover {
+  background: #545b62;
 }
 
 .btn--outline {
-  background: transparent;
-  color: #667eea;
-  border: 2px solid #667eea;
-  box-shadow: none;
+  background: #ffffff;
+  color: #007bff;
+  border: 2px solid #007bff;
 }
 
 .btn--outline:hover {
-  background: #667eea;
-  color: white;
+  background: #007bff;
+  color: #ffffff;
 }
 
 .btn--full-width {
@@ -407,9 +400,9 @@ body {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding: 8px;
-  background: linear-gradient(135deg, #ffd700 0%, #ffed4a 100%);
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(255,215,0,0.3);
+  background: #fff3cd;
+  border: 2px solid #ffeaa7;
+  border-radius: 3px;
 }
 
 .counter-item {
@@ -419,7 +412,7 @@ body {
 .counter-label {
   display: block;
   font-size: 11px;
-  color: #8b6914;
+  color: #856404;
   margin-bottom: 2px;
   font-weight: 600;
 }
@@ -428,8 +421,31 @@ body {
   display: block;
   font-size: 24px;
   font-weight: 800;
-  color: #1a1a2e;
-  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+  color: #000000;
+}
+
+/* 履歴テーブル */
+.history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.history-table th,
+.history-table td {
+  border: 1px solid #dee2e6;
+  padding: 6px 4px;
+  text-align: center;
+}
+
+.history-table th {
+  background: #f8f9fa;
+  font-weight: 600;
+  color: #000000;
+}
+
+.history-table tbody tr:nth-child(even) {
+  background: #f8f9fa;
 }
 
 /* フローティングタイマー */
@@ -437,13 +453,12 @@ body {
   position: fixed;
   right: 10px;
   bottom: 10px;
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-  border: none;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  background: #343a40;
+  border: 2px solid #495057;
+  border-radius: 3px;
   padding: 6px 8px;
   z-index: 1000;
-  color: white;
+  color: #ffffff;
 }
 
 .timer-body {
@@ -454,36 +469,36 @@ body {
 
 .timer-label {
   font-size: 11px;
-  color: rgba(255,255,255,0.8);
-  font-weight: 500;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .timer-value {
   font-family: 'Courier New', monospace;
   font-size: 14px;
   font-weight: 700;
-  color: #ffd700;
+  color: #ffffff;
   min-width: 70px;
   text-align: center;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .timer-btn {
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
-  color: white;
-  border-radius: 4px;
+  border: 1px solid #6c757d;
+  background: #6c757d;
+  color: #ffffff;
+  border-radius: 2px;
   padding: 2px 4px;
   font-size: 12px;
   cursor: pointer;
-  transition: all 0.2s ease;
+  font-weight: 600;
+  transition: background 0.2s ease;
 }
 
 .timer-btn:hover {
-  background: rgba(255,255,255,0.2);
+  background: #495057;
 }
 
-/* アラート - 高級感 */
+/* アラート - シンプル・高コントラスト */
 .alert {
   position: fixed;
   top: 12px;
@@ -491,84 +506,156 @@ body {
   transform: translateX(-50%);
   z-index: 1001;
   padding: 8px 14px;
-  border-radius: 8px;
+  border-radius: 3px;
   font-weight: 600;
   max-width: 90%;
   text-align: center;
-  box-shadow: 0 6px 25px rgba(0,0,0,0.2);
-  backdrop-filter: blur(10px);
+  border: 2px solid;
 }
 
 .alert--success {
-  background: linear-gradient(135deg, rgba(0,184,148,0.9) 0%, rgba(0,160,133,0.9) 100%);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #d4edda;
+  color: #155724;
+  border-color: #28a745;
 }
 
 .alert--error {
-  background: linear-gradient(135deg, rgba(231,76,60,0.9) 0%, rgba(192,57,43,0.9) 100%);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #dc3545;
 }
 
 .alert--warning {
-  background: linear-gradient(135deg, rgba(255,193,7,0.9) 0%, rgba(255,143,0,0.9) 100%);
-  color: #1a1a2e;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffc107;
 }
 
 .alert--info {
-  background: linear-gradient(135deg, rgba(102,126,234,0.9) 0%, rgba(118,75,162,0.9) 100%);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.2);
+  background: #d1ecf1;
+  color: #0c5460;
+  border-color: #17a2b8;
 }
 
-/* ダークモード - さらに高級感を演出 */
+/* ダークモード - 高コントラスト */
 @media (prefers-color-scheme: dark) {
   body {
-    background: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
-    color: #e0e0e0;
+    background: #000000;
+    color: #ffffff;
   }
   
-  .app-header h1 {
-    color: #ffd700;
-    text-shadow: 0 2px 8px rgba(255,215,0,0.3);
+  .app-header h1,
+  .section-title,
+  .strategy-title {
+    color: #ffffff;
   }
   
-  .card {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2a2a2a 100%);
-    border: 1px solid rgba(255,215,0,0.1);
+  .card,
+  .form-control,
+  .floating-timer,
+  .strategy-table-wrap {
+    background: #1a1a1a;
+    border-color: #333333;
+    color: #ffffff;
   }
   
-  .section-title {
-    color: #ffd700;
+  .tab-navigation {
+    background: #2a2a2a;
+    border-color: #333333;
+  }
+  
+  .tab-btn {
+    color: #cccccc;
+  }
+  
+  .tab-btn.active {
+    background: #0d6efd;
+    color: #ffffff;
+  }
+  
+  .tab-btn:hover:not(.active) {
+    background: #333333;
+    color: #ffffff;
+  }
+  
+  .form-label,
+  .balance-label,
+  .target-label,
+  .counter-label,
+  .timer-label {
+    color: #cccccc;
+  }
+  
+  .balance-value,
+  .target-value,
+  .counter-value,
+  .timer-value {
+    color: #ffffff;
   }
   
   .balance-display {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    box-shadow: 0 4px 20px rgba(255,215,0,0.2);
+    background: #2a2a2a;
+    border-color: #333333;
   }
   
-  .strategy-table-wrap {
-    border-color: #ffd700;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-    box-shadow: 0 4px 20px rgba(255,215,0,0.15);
+  .target-item {
+    background: #1a1a1a;
+    border-color: #333333;
+  }
+  
+  .win-target {
+    border-color: #28a745;
+    background: #0f1f0f;
+  }
+  
+  .loss-target {
+    border-color: #dc3545;
+    background: #1f0f0f;
+  }
+  
+  .strategy-table,
+  .history-table {
+    color: #ffffff;
+  }
+  
+  .strategy-table th,
+  .strategy-table td,
+  .history-table th,
+  .history-table td {
+    border-color: #333333;
   }
   
   .strategy-table thead th,
   .strategy-table .rowhdr {
-    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-    color: #ffd700;
+    background: #333333;
+    color: #ffffff;
   }
   
   .strategy-table .group td {
-    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
-    color: #ffd700;
+    background: #2a2a2a;
+    color: #ffffff;
   }
   
-  .strategy-table th,
-  .strategy-table td {
-    border-color: rgba(255,215,0,0.2);
+  .history-table th {
+    background: #2a2a2a;
+    color: #ffffff;
+  }
+  
+  .history-table tbody tr:nth-child(even) {
+    background: #1a1a1a;
+  }
+  
+  .counters {
+    background: #2a2a00;
+    border-color: #444400;
+  }
+  
+  .counter-label {
+    color: #cccc00;
+  }
+  
+  .legend {
+    background: #2a2a2a;
   }
 }
 
