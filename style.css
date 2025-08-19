@@ -10,7 +10,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: #1a1a1a;
-  background: #f8f9fc;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   transition: all 0.3s ease;
 }
 
@@ -29,19 +29,20 @@ body {
 .app-header h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #2c3e50;
+  color: #000000;
   margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
-/* タブナビゲーション */
+/* タブナビゲーション - 黒白ベース */
 .tab-navigation {
   display: flex;
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f3f4 100%);
   border-radius: 4px;
   padding: 3px;
   margin-bottom: 14px;
-  border: 1px solid #e1e8ed;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  border: 2px solid #e8eaed;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .tab-btn {
@@ -49,7 +50,7 @@ body {
   padding: 10px 14px;
   border: none;
   background: transparent;
-  color: #657786;
+  color: #5f6368;
   font-size: 15px;
   font-weight: 600;
   border-radius: 2px;
@@ -58,13 +59,14 @@ body {
 }
 
 .tab-btn.active {
-  background: #1da1f2;
+  background: linear-gradient(135deg, #000000 0%, #434343 100%);
   color: #ffffff;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .tab-btn:hover:not(.active) {
-  background: #f7f9fa;
-  color: #14171a;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+  color: #202124;
 }
 
 .tab-content {
@@ -75,13 +77,13 @@ body {
   display: block;
 }
 
-/* カード */
+/* カード - 豊かな黒白表現 */
 .card {
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15), 0 1px 3px rgba(0,0,0,0.1);
   overflow: hidden;
-  border: 1px solid #e1e8ed;
+  border: 1px solid #dadce0;
 }
 
 .card__body {
@@ -91,9 +93,10 @@ body {
 .section-title {
   font-size: 20px;
   font-weight: 700;
-  color: #14171a;
+  color: #202124;
   margin-bottom: 12px;
   text-align: center;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 /* フォーム */
@@ -105,39 +108,42 @@ body {
   display: block;
   font-size: 13px;
   font-weight: 600;
-  color: #536471;
+  color: #3c4043;
   margin-bottom: 4px;
 }
 
 .form-control {
   width: 100%;
   padding: 8px 10px;
-  border: 2px solid #cfd9de;
+  border: 2px solid #dadce0;
   border-radius: 3px;
   font-size: 16px;
-  background: #ffffff;
-  color: #14171a;
-  transition: border-color 0.2s ease;
+  background: linear-gradient(135deg, #ffffff 0%, #fafbfc 100%);
+  color: #202124;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .form-control:focus {
   outline: none;
-  border-color: #1da1f2;
+  border-color: #4285f4;
+  box-shadow: 0 0 0 3px rgba(66,133,244,0.1), inset 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* 資金管理 - 豊かな色使い */
+/* 資金管理 - 黒白グラデーション */
 .money-management {
   max-width: 500px;
   margin: 0 auto;
 }
 
 .balance-display {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
+  border: 2px solid #434343;
   border-radius: 4px;
   padding: 10px;
   margin-top: 12px;
   color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
 .balance-item {
@@ -150,7 +156,7 @@ body {
 
 .balance-label {
   font-weight: 600;
-  color: rgba(255,255,255,0.9);
+  color: #cccccc;
   font-size: 13px;
 }
 
@@ -158,23 +164,25 @@ body {
   font-size: 16px;
   font-weight: 700;
   color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .bet-amount {
   font-size: 18px;
   font-weight: 800;
-  color: #ffd700;
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.5);
 }
 
 .bet-rate {
   font-size: 14px;
   font-weight: 600;
-  color: #98fb98;
+  color: #e8eaed;
 }
 
 .auto-toggle {
   font-size: 12px;
-  color: rgba(255,255,255,0.9);
+  color: #cccccc;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -191,14 +199,15 @@ body {
   text-align: center;
   padding: 6px;
   border-radius: 3px;
-  border: 1px solid rgba(255,255,255,0.3);
-  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
 }
 
 .target-label {
   display: block;
   font-size: 11px;
-  color: rgba(255,255,255,0.8);
+  color: #cccccc;
   margin-bottom: 2px;
   font-weight: 600;
 }
@@ -210,22 +219,22 @@ body {
   color: #ffffff;
 }
 
-/* 戦略テーブル - 完全統一サイズ・豊かな色使い */
+/* 戦略テーブル - 1列目長方形・他正方形・黒白豊かな表現 */
 .strategy-title {
   font-size: 16px;
   font-weight: 600;
   margin: 14px 0 8px;
   text-align: center;
-  color: #14171a;
+  color: #202124;
 }
 
 .strategy-table-wrap {
   overflow-x: auto;
-  border: 2px solid #1da1f2;
+  border: 3px solid #000000;
   border-radius: 3px;
-  background: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
   max-width: 100%;
-  box-shadow: 0 2px 8px rgba(29,161,242,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.5);
 }
 
 .strategy-table {
@@ -235,16 +244,33 @@ body {
   font-size: 9px;
 }
 
-/* 完全統一: すべてのセル（th, td, rowhdr含む）を18pxに統一 */
-.strategy-table th,
-.strategy-table td,
+/* 1列目（プレイヤーハンド）- 長方形 */
 .strategy-table .rowhdr,
 .strategy-table thead th:first-child {
-  width: 18px !important;
-  min-width: 18px !important;
-  max-width: 18px !important;
-  height: 18px !important;
-  border: 1px solid #e1e8ed;
+  width: 45px !important;
+  min-width: 45px !important;
+  max-width: 45px !important;
+  height: 20px !important;
+  border: 1px solid #5f6368;
+  padding: 0px !important;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 7px !important;
+  font-weight: 700;
+  line-height: 1 !important;
+  background: linear-gradient(135deg, #000000 0%, #434343 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+/* 2列目以降（ディーラーカード・データセル）- 正方形 */
+.strategy-table th:not(:first-child),
+.strategy-table td {
+  width: 20px !important;
+  min-width: 20px !important;
+  max-width: 20px !important;
+  height: 20px !important;
+  border: 1px solid #5f6368;
   padding: 0px !important;
   text-align: center;
   vertical-align: middle;
@@ -253,44 +279,52 @@ body {
   line-height: 1 !important;
 }
 
-/* 列見出し（ディーラーカード） */
-.strategy-table thead th {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
+/* 列見出し（ディーラーカード）- 正方形 */
+.strategy-table thead th:not(:first-child) {
+  background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+  color: #000000;
   position: sticky;
   top: 0;
   z-index: 3;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border: 2px solid #000000;
 }
 
-/* 行見出し（プレイヤーハンド） - 列見出しと同じスタイル */
+/* 行見出し（プレイヤーハンド）- 長方形・固定 */
 .strategy-table .rowhdr {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  color: #ffffff;
   position: sticky;
   left: 0;
   z-index: 4;
   text-align: center;
+  border: 2px solid #000000;
 }
 
-/* グループ行（Hard/Soft区分） */
+/* グループ行（Hard/Soft区分）- 長方形 */
 .strategy-table .group td {
-  background: linear-gradient(135deg, #36d1dc 0%, #5b86e5 100%);
+  background: linear-gradient(135deg, #5f6368 0%, #3c4043 100%);
   color: #ffffff;
   font-weight: 700;
   text-align: center;
   font-size: 6px !important;
+  width: 45px !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
 }
 
-/* Hit セル */
+/* Hit セル - 正方形・黒系 */
 .strategy-table td.h {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
   color: #ffffff;
+  text-shadow: 0 0 4px rgba(255,255,255,0.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), 0 1px 2px rgba(0,0,0,0.2);
 }
 
-/* Stand セル */
+/* Stand セル - 正方形・白系 */
 .strategy-table td.s {
-  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+  color: #000000;
+  text-shadow: 0 1px 0 rgba(255,255,255,0.8);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.1);
+  border: 1px solid #000000;
 }
 
 .legend {
@@ -298,7 +332,8 @@ body {
   gap: 3px;
   justify-content: center;
   padding: 4px;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
+  border-top: 1px solid #dadce0;
 }
 
 .chip {
@@ -306,19 +341,22 @@ body {
   border-radius: 2px;
   font-size: 9px;
   font-weight: 700;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .chip-s {
-  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+  color: #000000;
+  border: 1px solid #5f6368;
 }
 
 .chip-h {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
   color: #ffffff;
+  border: 1px solid #000000;
 }
 
-/* ボタン - 豊かな色使い */
+/* ボタン - 黒白豊かな表現 */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -331,52 +369,63 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, #1da1f2 0%, #1991db 100%);
+  background: linear-gradient(135deg, #000000 0%, #434343 100%);
   color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(135deg, #1991db 0%, #1472a4 100%);
+  background: linear-gradient(135deg, #434343 0%, #666666 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .btn--success {
-  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  color: #000000;
+  border: 2px solid #2c2c2c;
 }
 
 .btn--success:hover {
-  background: linear-gradient(135deg, #20bf6b 0%, #1dd1a1 100%);
+  background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 .btn--error {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  background: linear-gradient(135deg, #5f6368 0%, #3c4043 100%);
   color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 .btn--error:hover {
-  background: linear-gradient(135deg, #ee5a24 0%, #d63031 100%);
+  background: linear-gradient(135deg, #3c4043 0%, #2c2c2c 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .btn--secondary {
-  background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #e8eaed 0%, #dadce0 100%);
+  color: #3c4043;
+  border: 1px solid #5f6368;
 }
 
 .btn--secondary:hover {
-  background: linear-gradient(135deg, #6c5ce7 0%, #5f3dc4 100%);
+  background: linear-gradient(135deg, #dadce0 0%, #bdc1c6 100%);
 }
 
 .btn--outline {
-  background: #ffffff;
-  color: #1da1f2;
-  border: 2px solid #1da1f2;
+  background: transparent;
+  color: #000000;
+  border: 2px solid #000000;
 }
 
 .btn--outline:hover {
-  background: #1da1f2;
+  background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
   color: #ffffff;
 }
 
@@ -394,15 +443,16 @@ body {
   margin-top: 10px;
 }
 
-/* カウンター */
+/* カウンター - 黒白グラデーション */
 .counters {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding: 8px;
-  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
-  border: 2px solid #fd9644;
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+  border: 2px solid #5f6368;
   border-radius: 3px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .counter-item {
@@ -412,7 +462,7 @@ body {
 .counter-label {
   display: block;
   font-size: 11px;
-  color: #8b4513;
+  color: #3c4043;
   margin-bottom: 2px;
   font-weight: 600;
 }
@@ -421,31 +471,8 @@ body {
   display: block;
   font-size: 24px;
   font-weight: 800;
-  color: #2d3436;
-}
-
-/* 履歴テーブル */
-.history-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 14px;
-}
-
-.history-table th,
-.history-table td {
-  border: 1px solid #e1e8ed;
-  padding: 6px 4px;
-  text-align: center;
-}
-
-.history-table th {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  font-weight: 600;
-  color: #14171a;
-}
-
-.history-table tbody tr:nth-child(even) {
-  background: #f8f9fc;
+  color: #000000;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.5);
 }
 
 /* フローティングタイマー */
@@ -453,52 +480,26 @@ body {
   position: fixed;
   right: 10px;
   bottom: 10px;
-  background: linear-gradient(135deg, #2d3436 0%, #636e72 100%);
-  border: 2px solid #74b9ff;
+  background: linear-gradient(135deg, #000000 0%, #2c2c2c 100%);
+  border: 2px solid #ffffff;
   border-radius: 3px;
   padding: 6px 8px;
   z-index: 1000;
   color: #ffffff;
-}
-
-.timer-body {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.timer-label {
-  font-size: 11px;
-  color: #ddd;
-  font-weight: 600;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.4);
 }
 
 .timer-value {
   font-family: 'Courier New', monospace;
   font-size: 14px;
   font-weight: 700;
-  color: #74b9ff;
+  color: #ffffff;
   min-width: 70px;
   text-align: center;
+  text-shadow: 0 0 4px rgba(255,255,255,0.3);
 }
 
-.timer-btn {
-  border: 1px solid #74b9ff;
-  background: rgba(116,185,255,0.2);
-  color: #ffffff;
-  border-radius: 2px;
-  padding: 2px 4px;
-  font-size: 12px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.2s ease;
-}
-
-.timer-btn:hover {
-  background: rgba(116,185,255,0.4);
-}
-
-/* アラート */
+/* アラート - 黒白ベース */
 .alert {
   position: fixed;
   top: 12px;
@@ -511,67 +512,65 @@ body {
   max-width: 90%;
   text-align: center;
   border: 2px solid;
-  color: #ffffff;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
 }
 
 .alert--success {
-  background: linear-gradient(135deg, #26de81 0%, #20bf6b 100%);
-  border-color: #00b894;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f3f4 100%);
+  color: #000000;
+  border-color: #2c2c2c;
 }
 
 .alert--error {
-  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-  border-color: #d63031;
+  background: linear-gradient(135deg, #2c2c2c 0%, #000000 100%);
+  color: #ffffff;
+  border-color: #000000;
 }
 
 .alert--warning {
-  background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
-  border-color: #f39c12;
-  color: #2d3436;
+  background: linear-gradient(135deg, #e8eaed 0%, #dadce0 100%);
+  color: #3c4043;
+  border-color: #5f6368;
 }
 
 .alert--info {
-  background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-  border-color: #3742fa;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  color: #202124;
+  border-color: #5f6368;
 }
 
-/* ダークモード */
+/* ダークモード - より豊かな黒白表現 */
 @media (prefers-color-scheme: dark) {
   body {
-    background: #15202b;
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
     color: #ffffff;
   }
   
-  .app-header h1,
-  .section-title,
-  .strategy-title {
-    color: #ffffff;
+  .card {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2c2c2c 100%);
+    border-color: #434343;
+    box-shadow: 0 4px 12px rgba(255,255,255,0.05), 0 1px 3px rgba(255,255,255,0.02);
   }
   
-  .card,
-  .form-control,
-  .strategy-table-wrap {
-    background: #192734;
-    border-color: #38444d;
-    color: #ffffff;
+  .balance-display {
+    background: linear-gradient(135deg, #ffffff 0%, #e8eaed 100%);
+    color: #000000;
+    border-color: #ffffff;
+    box-shadow: 0 4px 16px rgba(255,255,255,0.2), inset 0 1px 0 rgba(0,0,0,0.1);
   }
   
-  .tab-navigation {
-    background: #192734;
-    border-color: #38444d;
+  .balance-label {
+    color: #5f6368;
   }
   
-  .tab-btn {
-    color: #8899a6;
+  .balance-value, .target-value {
+    color: #000000;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.5);
   }
   
-  .tab-btn:hover:not(.active) {
-    background: #253341;
-    color: #ffffff;
-  }
-  
-  .history-table tbody tr:nth-child(even) {
-    background: #253341;
+  .bet-amount {
+    color: #000000;
+    text-shadow: 0 0 8px rgba(0,0,0,0.5);
   }
 }
 
@@ -585,19 +584,27 @@ body {
     min-width: 400px;
   }
   
-  /* モバイルでもすべて統一サイズ維持 */
-  .strategy-table th,
-  .strategy-table td,
+  /* 1列目は長方形維持、他は正方形縮小 */
   .strategy-table .rowhdr,
   .strategy-table thead th:first-child {
-    width: 16px !important;
-    min-width: 16px !important;
-    max-width: 16px !important;
-    height: 16px !important;
+    width: 40px !important;
+    min-width: 40px !important;
+    max-width: 40px !important;
+    height: 18px !important;
+    font-size: 6px !important;
+  }
+  
+  .strategy-table th:not(:first-child),
+  .strategy-table td {
+    width: 18px !important;
+    min-width: 18px !important;
+    max-width: 18px !important;
+    height: 18px !important;
     font-size: 6px !important;
   }
   
   .strategy-table .group td {
+    width: 40px !important;
     font-size: 5px !important;
   }
 }
