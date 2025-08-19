@@ -1,6 +1,7 @@
-// BlackjackGuide - シンプル版
+// BlackjackGuide - ダークモード対応版
 const STATE_KEY = 'bjState';
 const HISTORY_KEY = 'bjHistory';
+const THEME_KEY = 'bjTheme';
 
 class BlackjackGuide {
     constructor() {
@@ -23,10 +24,40 @@ class BlackjackGuide {
     }
     
     init() {
+        this.setupTheme();
         this.bindEvents();
         this.loadState();
         this.setupAutoSave();
-        console.log('BlackjackGuide Simple 起動完了');
+        console.log('BlackjackGuide Compact 起動完了');
+    }
+    
+    // ダークモード設定
+    setupTheme() {
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        this.setTheme(theme);
+        
+        // ダークモード切り替えボタン
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+                const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+                this.setTheme(newTheme);
+            });
+        }
+    }
+    
+    setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem(THEME_KEY, theme);
+        
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+            themeToggle.textContent = theme === 'light' ? '🌙 Dark' : '☀️ Light';
+        }
     }
     
     bindEvents() {
@@ -213,7 +244,7 @@ class BlackjackGuide {
         }
     }
     
-    // タイマー機能
+    // タイマー機能（簡素化）
     resumeTimer() {
         if (this.timerRunning) return;
         
@@ -261,7 +292,7 @@ class BlackjackGuide {
     saveHistory(record) {
         const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
         history.push(record);
-        if (history.length > 100) history.shift(); // 最大100件
+        if (history.length > 100) history.shift();
         localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
     }
     
