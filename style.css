@@ -1,4 +1,4 @@
-/* BlackjackGuide - ダークモード対応・コンパクト版 */
+/* BlackjackGuide - デバイス幅対応版 */
 :root {
     /* ライトモード */
     --bg-primary: #ffffff;
@@ -15,7 +15,7 @@
     --shadow: 0 1px 2px rgba(0,0,0,0.1);
     --radius: 2px;
     
-    /* 戦略表専用カラー（前版復活） */
+    /* 戦略表専用カラー */
     --sage: #6b7c32;
     --amber: #c49356;
     --charcoal: #2a2d34;
@@ -37,8 +37,6 @@
         --warning-color: #fd7e14;
         --info-color: #0dcaf0;
         --shadow: 0 1px 2px rgba(0,0,0,0.3);
-        
-        /* ダークモード戦略表 */
         --sage: #8fb543;
         --amber: #d4a574;
         --charcoal: #f4f5f7;
@@ -46,7 +44,6 @@
     }
 }
 
-/* 手動ダークモード切り替え用 */
 [data-theme="dark"] {
     --bg-primary: #1a1a1a;
     --bg-secondary: #2d2d2d;
@@ -81,50 +78,52 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
+/* デバイス幅対応コンテナ */
 .container {
-    max-width: 1100px;
+    width: 100%;
+    max-width: min(95vw, 800px); /* ビューポート幅の95%、最大800px */
     margin: 0 auto;
-    padding: 10px;
+    padding: 8px;
 }
 
 /* ダークモード切り替えボタン */
 .theme-toggle {
     position: fixed;
-    top: 10px;
-    right: 10px;
+    top: 8px;
+    right: 8px;
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
-    padding: 4px 8px;
+    padding: 3px 6px;
     border-radius: var(--radius);
     cursor: pointer;
-    font-size: 12px;
+    font-size: 11px;
     z-index: 1001;
 }
 
 /* ヘッダー */
 .header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 10px;
+    padding-bottom: 8px;
 }
 
 .header h1 {
-    font-size: 1.6rem;
+    font-size: clamp(1.2rem, 4vw, 1.6rem);
     color: var(--text-primary);
     margin-bottom: 4px;
 }
 
 .subtitle {
     color: var(--text-secondary);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 /* メインコンテンツ */
 .main-content {
     display: grid;
-    gap: 15px;
+    gap: 12px;
 }
 
 /* セクション共通 */
@@ -132,23 +131,29 @@ section {
     background: var(--bg-secondary);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 12px;
+    padding: 10px;
 }
 
 section h2 {
     color: var(--text-primary);
-    margin-bottom: 10px;
-    font-size: 1.1rem;
+    margin-bottom: 8px;
+    font-size: clamp(1rem, 3vw, 1.1rem);
     border-bottom: 1px solid var(--border-color);
-    padding-bottom: 4px;
+    padding-bottom: 3px;
 }
 
 /* 資金管理 */
 .money-controls {
     display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* デバイス幅に応じてレイアウト調整 */
+@media (min-width: 480px) {
+    .money-controls {
+        grid-template-columns: 2fr 1fr;
+    }
 }
 
 .input-group {
@@ -160,16 +165,17 @@ section h2 {
 .input-group label {
     font-weight: 600;
     color: var(--text-primary);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .input-group input {
     padding: 6px 8px;
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     background: var(--bg-primary);
     color: var(--text-primary);
+    width: 100%;
 }
 
 .input-group input:focus {
@@ -181,36 +187,52 @@ section h2 {
     display: flex;
     align-items: center;
     gap: 6px;
-    margin-top: 12px;
+    margin-top: 8px;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .checkbox-group input[type="checkbox"] {
     width: 16px;
     height: 16px;
+    flex-shrink: 0;
 }
 
-/* 残高表示 */
+/* 残高表示 - デバイス幅対応 */
 .balance-panel {
     background: var(--bg-primary);
     border: 1px solid var(--border-color);
     border-radius: var(--radius);
-    padding: 12px;
-    margin-bottom: 12px;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
 .balance-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 8px;
+    grid-template-columns: 1fr;
+    gap: 6px;
+}
+
+/* 幅が十分ある場合は2列に */
+@media (min-width: 400px) {
+    .balance-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* さらに幅がある場合は3列に */
+@media (min-width: 600px) {
+    .balance-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 .balance-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 0;
+    padding: 4px 0;
     border-bottom: 1px solid var(--border-color);
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
 }
 
 .balance-item:last-child {
@@ -230,16 +252,16 @@ section h2 {
 
 .balance-item .value.bet {
     color: var(--primary-color);
-    font-size: 1rem;
+    font-size: clamp(0.9rem, 3vw, 1rem);
 }
 
 /* ボタン */
 .btn {
-    padding: 8px 16px;
+    padding: 8px 12px;
     border: none;
     border-radius: var(--radius);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: clamp(0.8rem, 2.5vw, 0.9rem);
     cursor: pointer;
     transition: all 0.2s;
     text-decoration: none;
@@ -247,6 +269,7 @@ section h2 {
     align-items: center;
     justify-content: center;
     min-height: 36px;
+    width: 100%;
 }
 
 .btn:hover {
@@ -271,7 +294,6 @@ section h2 {
 .btn-win {
     background: var(--success-color);
     color: white;
-    font-size: 1rem;
 }
 
 .btn-push {
@@ -290,36 +312,47 @@ section h2 {
     justify-content: center;
 }
 
-/* ゲームボタン */
+/* ゲームボタン - デバイス幅対応 */
 .game-buttons {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 8px;
 }
 
-/* 戦略表（前版スタイル復活） */
+/* 横幅が十分ある場合のみ横並び */
+@media (min-width: 500px) {
+    .game-buttons {
+        grid-template-columns: 2fr 1fr 1fr;
+    }
+}
+
+/* 戦略表 - 完全デバイス対応 */
 .strategy-container {
     overflow: hidden;
 }
 
 .strategy-table-wrap {
-    --tbl-scale: 1;
-    transform: scale(var(--tbl-scale));
+    --cell-size: clamp(8px, 1.5vw, 12px);
+    --header-width: clamp(20px, 4vw, 28px);
+    
     transform-origin: top left;
     overflow-x: auto;
     border: 2px solid var(--sage);
-    border-radius: 3px;
+    border-radius: var(--radius);
     background: var(--pearl);
-    max-width: 100%;
-    box-shadow: 0 2px 8px rgba(107,124,50,0.15);
-    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(107,124,50,0.15);
+    margin-bottom: 8px;
+    
+    /* 横スクロールを滑らかに */
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
 }
 
 .strategy-table {
     width: 100%;
-    min-width: 600px;
+    min-width: max(350px, 100%);
     border-collapse: collapse;
-    font-size: calc(6px + 0.2vw);
+    font-size: clamp(5px, 1.2vw, 7px);
     position: relative;
     user-select: none;
 }
@@ -333,35 +366,37 @@ section h2 {
     padding: 0;
     text-align: center;
     font-weight: 700;
-    line-height: 20px;
+    line-height: var(--cell-size);
     border: 1px solid var(--sage);
     position: relative;
     transition: all 0.15s ease;
+    height: var(--cell-size);
 }
 
-/* 1列目（プレイヤーハンド） */
+/* プレイヤー列（左端） */
 .strategy-table thead th:first-child,
-.strategy-table .rowhdr {
-    width: 26px !important;
-    min-width: 26px !important;
-    max-width: 26px !important;
-    height: 22px !important;
+.strategy-table .player {
+    width: var(--header-width) !important;
+    min-width: var(--header-width) !important;
+    max-width: var(--header-width) !important;
     background: var(--sage);
     color: var(--pearl);
-    font-size: 6px !important;
+    font-size: clamp(4px, 1vw, 6px) !important;
+    position: sticky;
+    left: 0;
+    z-index: 4;
 }
 
-/* 2列目以降 */
+/* 通常のセル */
 .strategy-table th:not(:first-child),
 .strategy-table td {
-    width: 11px !important;
-    min-width: 11px !important;
-    max-width: 11px !important;
-    height: 22px !important;
-    font-size: 6px !important;
+    width: var(--cell-size) !important;
+    min-width: var(--cell-size) !important;
+    max-width: var(--cell-size) !important;
+    font-size: clamp(4px, 1vw, 6px) !important;
 }
 
-/* 列見出し（ディーラー） */
+/* ディーラー列見出し */
 .strategy-table thead th:not(:first-child) {
     background: var(--amber);
     color: var(--pearl);
@@ -370,18 +405,11 @@ section h2 {
     z-index: 3;
 }
 
-.strategy-table .rowhdr {
-    position: sticky;
-    left: 0;
-    z-index: 4;
-}
-
-/* グループ行 */
+/* セクションヘッダー */
 .strategy-table .section-header td {
-    width: 26px !important;
     background: rgba(107,124,50,0.8);
     color: var(--pearl);
-    font-size: 5px !important;
+    font-size: clamp(4px, 0.8vw, 5px) !important;
 }
 
 /* Hit/Stand セル */
@@ -395,59 +423,52 @@ section h2 {
     color: var(--charcoal);
 }
 
-/* プレイヤー列 */
-.strategy-table .player {
-    background: var(--sage);
-    color: var(--pearl);
-    font-weight: 700;
-    position: sticky;
-    left: 0;
-    z-index: 4;
-}
-
-/* ホバー効果 */
-.strategy-table tbody tr:hover td:first-child,
-.strategy-table tbody td:hover {
-    background: var(--amber) !important;
-    color: var(--pearl) !important;
-    font-weight: 800;
-    transform: scale(1.05);
-    z-index: 10;
-    box-shadow: 0 2px 8px rgba(196,147,86,0.4);
-    border-radius: 2px;
-}
-
-.strategy-table tbody tr:hover {
-    background: rgba(196,147,86,0.1);
+/* ホバー効果 - デバイスサイズに応じて調整 */
+@media (hover: hover) {
+    .strategy-table tbody tr:hover td:first-child,
+    .strategy-table tbody td:hover {
+        background: var(--amber) !important;
+        color: var(--pearl) !important;
+        font-weight: 800;
+        transform: scale(1.02);
+        z-index: 10;
+        box-shadow: 0 1px 4px rgba(196,147,86,0.4);
+        border-radius: 1px;
+    }
+    
+    .strategy-table tbody tr:hover {
+        background: rgba(196,147,86,0.1);
+    }
 }
 
 /* 凡例 */
 .legend {
     display: flex;
-    gap: 15px;
+    gap: 10px;
     justify-content: center;
     align-items: center;
     padding: 6px;
     background: var(--bg-primary);
     border-radius: var(--radius);
+    flex-wrap: wrap;
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     font-weight: 600;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
 }
 
 .legend-color {
     display: inline-block;
-    padding: 2px 6px;
+    padding: 2px 4px;
     border-radius: var(--radius);
     color: white;
     font-weight: 700;
-    min-width: 20px;
-    font-size: 0.7rem;
+    min-width: 16px;
+    font-size: clamp(0.6rem, 1.8vw, 0.7rem);
 }
 
 .legend-color.h {
@@ -469,7 +490,7 @@ section h2 {
     outline: none;
     border-bottom: 1px solid var(--border-color);
     padding-bottom: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .history-section summary h2 {
@@ -488,9 +509,9 @@ section h2 {
 
 .history-table {
     width: 100%;
-    min-width: 600px;
+    min-width: max(400px, 100%);
     border-collapse: collapse;
-    font-size: 0.8rem;
+    font-size: clamp(0.7rem, 2vw, 0.8rem);
 }
 
 .history-table th,
@@ -498,12 +519,14 @@ section h2 {
     border: 1px solid var(--border-color);
     padding: 4px 6px;
     text-align: center;
+    white-space: nowrap;
 }
 
 .history-table th {
     background: var(--bg-tertiary);
     font-weight: 600;
     color: var(--text-primary);
+    font-size: clamp(0.6rem, 1.8vw, 0.7rem);
 }
 
 .history-table tbody tr:nth-child(even) {
@@ -513,19 +536,19 @@ section h2 {
 /* タイマー */
 .timer {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 10px;
+    right: 10px;
     background: var(--text-primary);
     color: var(--bg-primary);
-    padding: 6px 10px;
+    padding: 4px 8px;
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: 4px;
     font-family: 'Courier New', monospace;
     font-weight: 700;
-    font-size: 0.8rem;
+    font-size: clamp(0.6rem, 2vw, 0.8rem);
     z-index: 1000;
 }
 
@@ -536,7 +559,7 @@ section h2 {
     padding: 2px 4px;
     border-radius: var(--radius);
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: clamp(0.6rem, 1.8vw, 0.7rem);
 }
 
 .timer-btn:hover {
@@ -544,118 +567,54 @@ section h2 {
     color: var(--text-primary);
 }
 
-/* レスポンシブ対応 */
-@media (max-width: 768px) {
+/* 詳細レスポンシブ対応 */
+@media (max-width: 360px) {
     .container {
-        padding: 8px;
+        padding: 4px;
     }
     
-    .money-controls {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-    
-    .balance-grid {
-        grid-template-columns: 1fr;
-        gap: 6px;
-    }
-    
-    .game-buttons {
-        grid-template-columns: 1fr;
-        gap: 8px;
-    }
-    
-    .strategy-table-wrap {
-        --tbl-scale: 0.9;
-    }
-    
-    .legend {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .timer {
-        bottom: 10px;
-        right: 10px;
-        font-size: 0.7rem;
-        padding: 4px 6px;
-    }
-    
-    .theme-toggle {
-        top: 8px;
-        right: 8px;
-        font-size: 11px;
-        padding: 3px 6px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 5px;
-    }
-    
-    .header h1 {
-        font-size: 1.3rem;
-    }
-    
-    .btn {
-        padding: 6px 12px;
-        font-size: 0.8rem;
-        min-height: 32px;
+    section {
+        padding: 6px;
     }
     
     .balance-item {
         flex-direction: column;
         align-items: flex-start;
         gap: 2px;
-        padding: 4px 0;
     }
     
     .strategy-table-wrap {
-        --tbl-scale: 0.8;
+        --cell-size: clamp(6px, 2vw, 8px);
+        --header-width: clamp(16px, 5vw, 20px);
     }
     
-    section {
-        padding: 8px;
+    .legend {
+        gap: 6px;
     }
     
-    section h2 {
-        font-size: 1rem;
-        margin-bottom: 8px;
+    .legend-item {
+        gap: 3px;
     }
 }
 
-@media (max-width: 360px) {
-    .strategy-table-wrap {
-        --tbl-scale: 0.7;
+@media (min-width: 768px) {
+    .container {
+        max-width: min(90vw, 700px);
     }
     
-    .strategy-table {
-        min-width: 400px;
-        font-size: 5px;
-    }
-    
-    .strategy-table thead th:first-child,
-    .strategy-table .rowhdr {
-        width: 22px !important;
-        line-height: 18px;
-    }
-    
-    .strategy-table th:not(:first-child),
-    .strategy-table td {
-        width: 9px !important;
-        height: 20px !important;
-    }
-    
-    .strategy-table .section-header td {
-        width: 22px !important;
-        font-size: 4px !important;
+    .balance-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
     }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 1024px) {
+    .container {
+        max-width: min(85vw, 800px);
+    }
+    
     .strategy-table-wrap {
-        --tbl-scale: 1.1;
+        --cell-size: 14px;
+        --header-width: 32px;
     }
 }
 
@@ -668,16 +627,18 @@ section h2 {
         display: none !important;
     }
     
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
     .strategy-table-wrap {
-        --tbl-scale: 1;
+        --cell-size: 12px;
+        --header-width: 28px;
     }
     
     .table-wrapper {
         overflow: visible;
-    }
-    
-    .strategy-table {
-        min-width: auto;
     }
 }
 
@@ -714,5 +675,52 @@ section h2 {
     
     .strategy-table tbody td:hover {
         transform: none;
+    }
+}
+
+/* 横向きスマートフォン対応 */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        margin-bottom: 8px;
+    }
+    
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .subtitle {
+        font-size: 0.8rem;
+    }
+    
+    section {
+        padding: 6px;
+    }
+    
+    .timer {
+        bottom: 5px;
+        right: 5px;
+        font-size: 0.6rem;
+    }
+}
+
+/* 超小型デバイス対応 */
+@media (max-width: 280px) {
+    .strategy-table {
+        min-width: 250px;
+    }
+    
+    .history-table {
+        min-width: 300px;
+    }
+    
+    .legend {
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .btn {
+        font-size: 0.7rem;
+        min-height: 32px;
+        padding: 6px 8px;
     }
 }
