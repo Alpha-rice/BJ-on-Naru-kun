@@ -1,1 +1,352 @@
-const STATE_KEY='bjState';const HISTORY_KEY='bjHistory';class BlackjackGuide{constructor(){this.initialCapital=0;this.currentBalance=0;this.betRate=0.02;this.betAmount=0;this.winStreak=0;this.lossStreak=0;this.sessionActive=false;this.sessionStart=null;this.autoBetAdjust=true;this.timerIntervalId=null;this.timerStartEpoch=null;this.timerOffsetMs=0;this.timerRunning=false;this.breakAlerted=false;this.initializeApp();this.bindEvents();this.loadState();this.saveTicker()}initializeApp(){this.initializeTabs();this.decorateStrategyTable();setTimeout(()=>{this.initializeUIEnhancements()},100)}initializeTabs(){const buttons=document.querySelectorAll('.tab-btn');const contents=document.querySelectorAll('.tab-content');buttons.forEach(btn=>{btn.addEventListener('click',()=>{buttons.forEach(b=>b.classList.remove('active'));contents.forEach(c=>c.classList.remove('active'));btn.classList.add('active');const id=btn.getAttribute('data-tab');const target=document.getElementById(id);if(target)target.classList.add('active');if(id==='history')this.renderHistory()})})}bindEvents(){const ic=document.getElementById('initialCapital');ic?.addEventListener('input',()=>this.updateCapital());document.getElementById('startSession')?.addEventListener('click',()=>this.startSession());document.getElementById('endSession')?.addEventListener('click',()=>this.endSession());document.getElementById('winButton')?.addEventListener('click',()=>this.handleGameResult('win'));document.getElementById('pushButton')?.addEventListener('click',()=>this.handleGameResult('push'));document.getElementById('loseButton')?.addEventListener('click',()=>this.handleGameResult('lose'));document.getElementById('timerPauseBtn')?.addEventListener('click',()=>{this.timerRunning?this.pauseTimer():this.resumeTimer()});document.getElementById('timerResetBtn')?.addEventListener('click',()=>this.resetTimer());document.getElementById('autoAdjustToggle')?.addEventListener('change',(e)=>{this.autoBetAdjust=e.target.checked;this.updateDisplay()})}decorateStrategyTable(){const tbl=document.getElementById('strategyTable');if(!tbl)return;tbl.querySelectorAll('tbody tr').forEach(tr=>{if(tr.classList.contains('group'))return;tr.querySelectorAll('td').forEach(td=>{const t=td.textContent.trim().toUpperCase();td.classList.toggle('h',t==='H');td.classList.toggle('s',t==='S')})});tbl.setAttribute('data-highlight-mode','active')}updateCapital(){const val=Math.max(0,Math.floor(+document.getElementById('initialCapital').value||0));this.initialCapital=val;this.currentBalance=val;this.betRate=0.02;this.showBalanceDisplay(val>0);this.updateDisplay()}showBalanceDisplay(show){const el=document.getElementById('balanceDisplay');if(el)el.style.display=show?'block':'none'}calcBetRate(){if(!this.autoBetAdjust)return this.betRate;let rate=0.02;if(this.winStreak>0)rate+=Math.min(this.winStreak*0.001,0.01);if(this.lossStreak>0)rate-=Math.min(this.lossStreak*0.002,0.01);if(this.initialCapital>0){const r=(this.currentBalance-this.initialCapital)/this.initialCapital;if(r>=0.20)rate+=0.0025;if(r<=-0.20)rate-=0.0025}rate=Math.min(0.03,Math.max(0.01,rate));rate=(this.betRate+rate)/2;return rate}updateBetAmount(){this.betRate=this.calcBetRate();this.betAmount=Math.floor(this.currentBalance*this.betRate)}updateDisplay(){document.getElementById('currentBalance').textContent=`${Math.floor(this.currentBalance).toLocaleString()}円`;this.updateBetAmount();document.getElementById('betAmount').textContent=`${this.betAmount.toLocaleString()}円`;document.getElementById('betRate').textContent=`${(this.betRate*100).toFixed(1)}%`;if(this.initialCapital>0){document.getElementById('winTarget').textContent=`${Math.floor(this.initialCapital*1.25).toLocaleString()}円`;document.getElementById('lossTarget').textContent=`${Math.floor(this.initialCapital*0.75).toLocaleString()}円`}document.getElementById('winStreak').textContent=this.winStreak;document.getElementById('lossStreak').textContent=this.lossStreak;if(window.uiEnhancer){window.uiEnhancer.updateButtonValues(this.betAmount)}}startSession(){if(this.initialCapital<=0){this.alert('元金を入力してください','warning');return}this.sessionActive=true;this.sessionStart=new Date();this.winStreak=this.lossStreak=0;this.breakAlerted=false;document.getElementById('startSession').style.display='none';document.getElementById('endSession').style.display='block';document.getElementById('gameButtons').style.display='grid';document.getElementById('counters').style.display='grid';this.resetTimer();this.resumeTimer();this.updateDisplay();this.alert('セッションを開始しました','success');if(window.uiEnhancer){window.uiEnhancer.enhanceGameButtons()}}endSession(){if(!this.sessionActive)return;this.sessionActive=false;document.getElementById('startSession').style.display='block';document.getElementById('endSession').style.display='none';document.getElementById('gameButtons').style.display='none';document.getElementById('counters').style.display='none';this.pauseTimer(true);const profit=this.currentBalance-this.initialCapital;const rate=this.initialCapital?(profit/this.initialCapital*100).toFixed(1):'0.0';this.alert(`セッション終了：${profit>=0?'+':''}${Math.floor(profit).toLocaleString()}円 (${rate}%)`,profit>=0?'success':'error');this.saveHistory({startAt:this.sessionStart?.toISOString()||'',endAt:new Date().toISOString(),initCap:this.initialCapital,finalBal:this.currentBalance,profit:profit,playSec:Math.floor(this.timerOffsetMs/1000),maxWin:this.winStreak,maxLose:this.lossStreak});this.renderHistory();this.timerOffsetMs=0;this.timerRunning=false}handleGameResult(result){if(!this.sessionActive){this.alert('セッション未開始','warning');return}const previousBalance=this.currentBalance;switch(result){case'win':this.currentBalance+=this.betAmount*2;this.winStreak++;this.lossStreak=0;this.alert(`勝利 +${(this.betAmount*2).toLocaleString()}円`,'success');break;case'lose':this.currentBalance-=this.betAmount;this.lossStreak++;this.winStreak=0;this.alert(`敗北 -${this.betAmount.toLocaleString()}円`,'error');if(this.lossStreak>=5&&!this.breakAlerted){this.breakAlerted=true;this.alert('5連敗！休憩を推奨','warning')}break;case'push':this.alert('引き分け ±0円','info');this.winStreak=this.lossStreak=0;break}if(this.currentBalance<0)this.currentBalance=0;if(window.animationController){window.animationController.triggerBalanceAnimation(this.currentBalance>previousBalance?'profit':this.currentBalance<previousBalance?'loss':'neutral')}this.updateDisplay();if(this.betAmount<=0){this.alert('資金が尽きました','error');this.endSession()}if(this.sessionActive){if(this.currentBalance>=this.initialCapital*1.25)this.alert('🎉 利確目標達成！','success');if(this.currentBalance<=this.initialCapital*0.75)this.alert('⚠️ 損切り目標到達！','error')}}resumeTimer(){if(this.timerRunning)return;this.timerStartEpoch=Date.now();this.timerRunning=true;document.getElementById('floatingTimer').style.display='block';document.getElementById('timerPauseBtn').textContent='⏸︎';this.tickTimer();this.timerIntervalId=setInterval(()=>this.tickTimer(),1000)}pauseTimer(hide=false){if(!this.timerRunning)return;clearInterval(this.timerIntervalId);this.timerIntervalId=null;this.timerOffsetMs+=Date.now()-this.timerStartEpoch;this.timerRunning=false;document.getElementById('timerPauseBtn').textContent='▶︎';if(hide)document.getElementById('floatingTimer').style.display='none'}resetTimer(){this.timerOffsetMs=0;this.tickTimer(0)}tickTimer(forceMs){const ms=forceMs!==undefined?forceMs:(Date.now()-this.timerStartEpoch)+this.timerOffsetMs;document.getElementById('timerValue').textContent=this.formatHMS(ms)}formatHMS(ms){const s=Math.floor(ms/1000);const h=String(Math.floor(s/3600)).padStart(2,'0');const m=String(Math.floor((s%3600)/60)).padStart(2,'0');const sec=String(s%60).padStart(2,'0');return`${h}:${m}:${sec}`}saveHistory(rec){const arr=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]');arr.push(rec);localStorage.setItem(HISTORY_KEY,JSON.stringify(arr))}renderHistory(){const tbody=document.getElementById('historyTable').querySelector('tbody');tbody.innerHTML='';const arr=JSON.parse(localStorage.getItem(HISTORY_KEY)||'[]').slice(-100).reverse();arr.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${new Date(r.startAt).toLocaleDateString()}</td><td>${new Date(r.endAt).toLocaleDateString()}</td><td>${r.initCap.toLocaleString()}円</td><td>${r.finalBal.toLocaleString()}円</td><td style="color:${r.profit>=0?'var(--success-green)':'var(--danger-red)'}">${r.profit>=0?'+':''}${r.profit.toLocaleString()}円</td><td>${Math.floor(r.playSec/60)}:${String(r.playSec%60).padStart(2,'0')}</td><td>${r.maxWin}</td><td>${r.maxLose}</td>`;tbody.appendChild(tr)})}saveState(){const state={initialCapital:this.initialCapital,currentBalance:this.currentBalance,betRate:this.betRate,winStreak:this.winStreak,lossStreak:this.lossStreak,sessionActive:this.sessionActive,sessionStart:this.sessionStart?.toISOString(),timerOffsetMs:this.timerOffsetMs,autoBetAdjust:this.autoBetAdjust};localStorage.setItem(STATE_KEY,JSON.stringify(state))}loadState(){const saved=localStorage.getItem(STATE_KEY);if(!saved)return;try{const state=JSON.parse(saved);this.initialCapital=state.initialCapital||0;this.currentBalance=state.currentBalance||0;this.betRate=state.betRate||0.02;this.winStreak=state.winStreak||0;this.lossStreak=state.lossStreak||0;this.sessionActive=state.sessionActive||false;this.sessionStart=state.sessionStart?new Date(state.sessionStart):null;this.timerOffsetMs=state.timerOffsetMs||0;this.autoBetAdjust=state.autoBetAdjust!==undefined?state.autoBetAdjust:true;document.getElementById('initialCapital').value=this.initialCapital;document.getElementById('autoAdjustToggle').checked=this.autoBetAdjust;if(this.sessionActive){document.getElementById('startSession').style.display='none';document.getElementById('endSession').style.display='block';document.getElementById('gameButtons').style.display='grid';document.getElementById('counters').style.display='grid'}this.showBalanceDisplay(this.initialCapital>0);this.updateDisplay();this.tickTimer()}catch(e){console.warn('状態復元に失敗:',e)}}saveTicker(){setInterval(()=>this.saveState(),5000)}alert(message,type='info'){if(window.toastManager){window.toastManager.show(message,type)}else{window.alert(message)}}initializeUIEnhancements(){try{window.toastManager=new ToastManager();window.uiEnhancer=new UIEnhancer();window.animationController=new AnimationController();console.log('✅ UI Enhancement システム初期化完了')}catch(error){console.warn('⚠️ UI Enhancement初期化で問題が発生:',error)}}}class ToastManager{constructor(){this.container=null;this.activeToasts=new Set();this.init()}init(){this.container=document.createElement('div');this.container.className='toast-container';document.body.appendChild(this.container)}show(message,type='info',options={}){const config={title:this.getDefaultTitle(type),duration:4000,closable:true,icon:this.getDefaultIcon(type),...options};const toast=this.createToastElement(message,type,config);this.container.appendChild(toast);this.activeToasts.add(toast);if(config.duration>0){setTimeout(()=>this.remove(toast),config.duration)}if(this.activeToasts.size>5){const oldestToast=this.container.firstElementChild;this.remove(oldestToast)}return toast}createToastElement(message,type,config){const toast=document.createElement('div');toast.className=`toast toast--${type}`;toast.innerHTML=`<div class="toast-icon">${config.icon}</div><div class="toast-content"><div class="toast-title">${config.title}</div><div class="toast-message">${message}</div></div>${config.closable?'<button class="toast-close" aria-label="閉じる">×</button>':''}<div class="toast-progress"></div>`;if(config.closable){const closeBtn=toast.querySelector('.toast-close');closeBtn.addEventListener('click',()=>this.remove(toast))}return toast}remove(toast){if(!this.activeToasts.has(toast))return;toast.style.animation='slideOutToast 0.3s cubic-bezier(0.4,0,1,0.2) forwards';setTimeout(()=>{if(toast.parentNode){toast.parentNode.removeChild(toast)}this.activeToasts.delete(toast)},300)}getDefaultTitle(type){const titles={success:'成功',error:'エラー',warning:'警告',info:'情報'};return titles[type]||'通知'}getDefaultIcon(type){const icons={success:'✅',error:'❌',warning:'⚠️',info:'ℹ️'};return icons[type]||'ℹ️'}}class UIEnhancer{constructor(){this.initialized=false;this.init()}init(){this.setupButtonValueUpdates()}enhanceGameButtons(){const gameButtons=document.getElementById('gameButtons');if(gameButtons){gameButtons.classList.add('enhanced')}}updateButtonValues(betAmount){const winBtn=document.getElementById('winButton');const loseBtn=document.getElementById('loseButton');if(winBtn&&!winBtn.querySelector('.btn-value')){winBtn.innerHTML=`<span class="btn-icon">🎉</span><span class="btn-text">勝利</span><span class="btn-value">+${(betAmount*2).toLocaleString()}円</span>`}if(loseBtn&&!loseBtn.querySelector('.btn-value')){loseBtn.innerHTML=`<span class="btn-text">敗北</span><span class="btn-value">-${betAmount.toLocaleString()}円</span>`}const winValue=winBtn?.querySelector('.btn-value');const loseValue=loseBtn?.querySelector('.btn-value');if(winValue)winValue.textContent=`+${(betAmount*2).toLocaleString()}円`;if(loseValue)loseValue.textContent=`-${betAmount.toLocaleString()}円`}setupButtonValueUpdates(){const betElement=document.getElementById('betAmount');if(!betElement)return;const observer=new MutationObserver(()=>{const betText=betElement.textContent||'';const betAmount=parseInt(betText.replace(/[^\d]/g,''))||0;if(betAmount>0){this.updateButtonValues(betAmount)}});observer.observe(betElement,{childList:true,subtree:true,characterData:true})}}class AnimationController{constructor(){this.counters=new Map();this.previousValues=new Map();this.init()}init(){this.setupCounterAnimations();this.setupPerformanceMonitoring()}setupCounterAnimations(){const counterElements=[{id:'currentBalance',key:'balance'},{id:'betAmount',key:'bet'},{id:'winStreak',key:'winStreak'},{id:'lossStreak',key:'lossStreak'}];counterElements.forEach(({id,key})=>{const element=document.getElementById(id);if(!element)return;element.classList.add('counter-animate');const observer=new MutationObserver(()=>{this.animateCounterUpdate(element,key)});observer.observe(element,{childList:true,subtree:true,characterData:true});this.counters.set(key,{element,observer})})}animateCounterUpdate(element,key){const currentText=element.textContent;const currentValue=this.parseNumericValue(currentText);const previousValue=this.previousValues.get(key)||currentValue;if(currentValue!==previousValue){element.classList.remove('updating');requestAnimationFrame(()=>{element.classList.add('updating');setTimeout(()=>{element.classList.remove('updating')},600)});this.previousValues.set(key,currentValue)}}triggerBalanceAnimation(type){const balanceElement=document.getElementById('currentBalance');if(!balanceElement)return;balanceElement.classList.remove('profit-pulse','loss-pulse');requestAnimationFrame(()=>{if(type==='profit'){balanceElement.classList.add('profit-pulse')}else if(type==='loss'){balanceElement.classList.add('loss-pulse')}setTimeout(()=>{balanceElement.classList.remove('profit-pulse','loss-pulse')},1200)})}parseNumericValue(text){const matches=text.match(/[\d,]+/);return matches?parseInt(matches[0].replace(/,/g,'')):0}setupPerformanceMonitoring(){let frameCount=0;let lastTime=performance.now();const measureFPS=(currentTime)=>{frameCount++;if(currentTime>=lastTime+1000){const fps=Math.round((frameCount*1000)/(currentTime-lastTime));if(fps<30){document.body.classList.add('low-performance-mode')}frameCount=0;lastTime=currentTime}requestAnimationFrame(measureFPS)};requestAnimationFrame(measureFPS)}}document.addEventListener('DOMContentLoaded',()=>{window.app=new BlackjackGuide();console.log('🎉 BlackjackGuide Enhanced Edition 起動完了')});
+// BlackjackGuide - シンプル版
+const STATE_KEY = 'bjState';
+const HISTORY_KEY = 'bjHistory';
+
+class BlackjackGuide {
+    constructor() {
+        this.initialCapital = 0;
+        this.currentBalance = 0;
+        this.betRate = 0.02;
+        this.betAmount = 0;
+        this.winStreak = 0;
+        this.lossStreak = 0;
+        this.sessionActive = false;
+        this.sessionStart = null;
+        this.autoBetAdjust = true;
+        this.timerIntervalId = null;
+        this.timerStartEpoch = null;
+        this.timerOffsetMs = 0;
+        this.timerRunning = false;
+        this.breakAlerted = false;
+        
+        this.init();
+    }
+    
+    init() {
+        this.bindEvents();
+        this.loadState();
+        this.setupAutoSave();
+        console.log('BlackjackGuide Simple 起動完了');
+    }
+    
+    bindEvents() {
+        // 資金管理
+        const ic = document.getElementById('initialCapital');
+        ic?.addEventListener('input', () => this.updateCapital());
+        
+        // セッション制御
+        document.getElementById('startSession')?.addEventListener('click', () => this.startSession());
+        document.getElementById('endSession')?.addEventListener('click', () => this.endSession());
+        
+        // ゲーム結果
+        document.getElementById('winButton')?.addEventListener('click', () => this.handleGameResult('win'));
+        document.getElementById('pushButton')?.addEventListener('click', () => this.handleGameResult('push'));
+        document.getElementById('loseButton')?.addEventListener('click', () => this.handleGameResult('lose'));
+        
+        // タイマー
+        document.getElementById('timerPauseBtn')?.addEventListener('click', () => {
+            this.timerRunning ? this.pauseTimer() : this.resumeTimer();
+        });
+        document.getElementById('timerResetBtn')?.addEventListener('click', () => this.resetTimer());
+        
+        // 自動調整
+        document.getElementById('autoAdjustToggle')?.addEventListener('change', (e) => {
+            this.autoBetAdjust = e.target.checked;
+            this.updateDisplay();
+        });
+    }
+    
+    updateCapital() {
+        const val = Math.max(0, Math.floor(+document.getElementById('initialCapital').value || 0));
+        this.initialCapital = val;
+        this.currentBalance = val;
+        this.betRate = 0.02;
+        
+        this.showBalanceDisplay(val > 0);
+        this.updateDisplay();
+    }
+    
+    showBalanceDisplay(show) {
+        const el = document.getElementById('balanceDisplay');
+        if (el) el.style.display = show ? 'block' : 'none';
+    }
+    
+    calcBetRate() {
+        if (!this.autoBetAdjust) return this.betRate;
+        
+        let rate = 0.02; // ベース2%
+        
+        // 連勝/連敗調整
+        if (this.winStreak > 0) rate += Math.min(this.winStreak * 0.001, 0.01);
+        if (this.lossStreak > 0) rate -= Math.min(this.lossStreak * 0.002, 0.01);
+        
+        // 損益調整
+        if (this.initialCapital > 0) {
+            const profitRate = (this.currentBalance - this.initialCapital) / this.initialCapital;
+            if (profitRate >= 0.20) rate += 0.0025;
+            if (profitRate <= -0.20) rate -= 0.0025;
+        }
+        
+        return Math.min(0.03, Math.max(0.01, rate));
+    }
+    
+    updateBetAmount() {
+        this.betRate = this.calcBetRate();
+        this.betAmount = Math.floor(this.currentBalance * this.betRate);
+    }
+    
+    updateDisplay() {
+        this.updateBetAmount();
+        
+        document.getElementById('currentBalance').textContent = `${Math.floor(this.currentBalance).toLocaleString()}円`;
+        document.getElementById('betAmount').textContent = `${this.betAmount.toLocaleString()}円`;
+        document.getElementById('betRate').textContent = `${(this.betRate * 100).toFixed(1)}%`;
+        
+        if (this.initialCapital > 0) {
+            document.getElementById('winTarget').textContent = `${Math.floor(this.initialCapital * 1.25).toLocaleString()}円`;
+            document.getElementById('lossTarget').textContent = `${Math.floor(this.initialCapital * 0.75).toLocaleString()}円`;
+        }
+        
+        document.getElementById('winStreak').textContent = this.winStreak;
+    }
+    
+    startSession() {
+        if (this.initialCapital <= 0) {
+            alert('元金を入力してください');
+            return;
+        }
+        
+        this.sessionActive = true;
+        this.sessionStart = new Date();
+        this.winStreak = this.lossStreak = 0;
+        this.breakAlerted = false;
+        
+        document.getElementById('startSession').style.display = 'none';
+        document.getElementById('endSession').style.display = 'block';
+        document.getElementById('gameButtons').style.display = 'block';
+        
+        this.resetTimer();
+        this.resumeTimer();
+        this.updateDisplay();
+        
+        console.log('セッション開始');
+    }
+    
+    endSession() {
+        if (!this.sessionActive) return;
+        
+        this.sessionActive = false;
+        document.getElementById('startSession').style.display = 'block';
+        document.getElementById('endSession').style.display = 'none';
+        document.getElementById('gameButtons').style.display = 'none';
+        
+        this.pauseTimer(true);
+        
+        const profit = this.currentBalance - this.initialCapital;
+        const rate = this.initialCapital ? (profit / this.initialCapital * 100).toFixed(1) : '0.0';
+        
+        alert(`セッション終了\n損益: ${profit >= 0 ? '+' : ''}${Math.floor(profit).toLocaleString()}円 (${rate}%)`);
+        
+        this.saveHistory({
+            startAt: this.sessionStart?.toISOString() || '',
+            endAt: new Date().toISOString(),
+            initCap: this.initialCapital,
+            finalBal: this.currentBalance,
+            profit: profit,
+            playSec: Math.floor(this.timerOffsetMs / 1000),
+            maxWin: this.winStreak,
+            maxLose: this.lossStreak
+        });
+        
+        this.renderHistory();
+    }
+    
+    handleGameResult(result) {
+        if (!this.sessionActive) {
+            alert('セッション未開始です');
+            return;
+        }
+        
+        switch (result) {
+            case 'win':
+                this.currentBalance += this.betAmount * 2;
+                this.winStreak++;
+                this.lossStreak = 0;
+                console.log(`勝利 +${(this.betAmount * 2).toLocaleString()}円`);
+                break;
+                
+            case 'lose':
+                this.currentBalance -= this.betAmount;
+                this.lossStreak++;
+                this.winStreak = 0;
+                console.log(`敗北 -${this.betAmount.toLocaleString()}円`);
+                
+                if (this.lossStreak >= 5 && !this.breakAlerted) {
+                    this.breakAlerted = true;
+                    alert('5連敗です。休憩を推奨します。');
+                }
+                break;
+                
+            case 'push':
+                console.log('引き分け');
+                break;
+        }
+        
+        if (this.currentBalance < 0) this.currentBalance = 0;
+        this.updateDisplay();
+        
+        // 資金チェック
+        if (this.betAmount <= 0) {
+            alert('資金が不足しています');
+            this.endSession();
+            return;
+        }
+        
+        // 目標チェック
+        if (this.sessionActive) {
+            if (this.currentBalance >= this.initialCapital * 1.25) {
+                alert('🎉 利確目標達成！');
+            }
+            if (this.currentBalance <= this.initialCapital * 0.75) {
+                alert('⚠️ 損切り目標到達');
+            }
+        }
+    }
+    
+    // タイマー機能
+    resumeTimer() {
+        if (this.timerRunning) return;
+        
+        this.timerStartEpoch = Date.now();
+        this.timerRunning = true;
+        
+        document.getElementById('floatingTimer').style.display = 'flex';
+        document.getElementById('timerPauseBtn').textContent = '⏸︎';
+        
+        this.tickTimer();
+        this.timerIntervalId = setInterval(() => this.tickTimer(), 1000);
+    }
+    
+    pauseTimer(hide = false) {
+        if (!this.timerRunning) return;
+        
+        clearInterval(this.timerIntervalId);
+        this.timerIntervalId = null;
+        this.timerOffsetMs += Date.now() - this.timerStartEpoch;
+        this.timerRunning = false;
+        
+        document.getElementById('timerPauseBtn').textContent = '▶︎';
+        if (hide) document.getElementById('floatingTimer').style.display = 'none';
+    }
+    
+    resetTimer() {
+        this.timerOffsetMs = 0;
+        this.tickTimer(0);
+    }
+    
+    tickTimer(forceMs) {
+        const ms = forceMs !== undefined ? forceMs : (Date.now() - this.timerStartEpoch) + this.timerOffsetMs;
+        document.getElementById('timerValue').textContent = this.formatHMS(ms);
+    }
+    
+    formatHMS(ms) {
+        const s = Math.floor(ms / 1000);
+        const h = String(Math.floor(s / 3600)).padStart(2, '0');
+        const m = String(Math.floor((s % 3600) / 60)).padStart(2, '0');
+        const sec = String(s % 60).padStart(2, '0');
+        return `${h}:${m}:${sec}`;
+    }
+    
+    // 履歴機能
+    saveHistory(record) {
+        const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
+        history.push(record);
+        if (history.length > 100) history.shift(); // 最大100件
+        localStorage.setItem(HISTORY_KEY, JSON.stringify(history));
+    }
+    
+    renderHistory() {
+        const tbody = document.getElementById('historyTable').querySelector('tbody');
+        tbody.innerHTML = '';
+        
+        const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]').reverse();
+        
+        history.forEach(r => {
+            const tr = document.createElement('tr');
+            tr.innerHTML = `
+                <td>${new Date(r.startAt).toLocaleString()}</td>
+                <td>${new Date(r.endAt).toLocaleString()}</td>
+                <td>${r.initCap.toLocaleString()}円</td>
+                <td>${r.finalBal.toLocaleString()}円</td>
+                <td style="color:${r.profit >= 0 ? 'var(--success-color)' : 'var(--danger-color)'}">${r.profit >= 0 ? '+' : ''}${r.profit.toLocaleString()}円</td>
+                <td>${Math.floor(r.playSec / 60)}:${String(r.playSec % 60).padStart(2, '0')}</td>
+                <td>${r.maxWin}</td>
+                <td>${r.maxLose}</td>
+            `;
+            tbody.appendChild(tr);
+        });
+    }
+    
+    // 状態保存・復元
+    saveState() {
+        const state = {
+            initialCapital: this.initialCapital,
+            currentBalance: this.currentBalance,
+            betRate: this.betRate,
+            winStreak: this.winStreak,
+            lossStreak: this.lossStreak,
+            sessionActive: this.sessionActive,
+            sessionStart: this.sessionStart?.toISOString(),
+            timerOffsetMs: this.timerOffsetMs,
+            autoBetAdjust: this.autoBetAdjust
+        };
+        localStorage.setItem(STATE_KEY, JSON.stringify(state));
+    }
+    
+    loadState() {
+        const saved = localStorage.getItem(STATE_KEY);
+        if (!saved) return;
+        
+        try {
+            const state = JSON.parse(saved);
+            this.initialCapital = state.initialCapital || 0;
+            this.currentBalance = state.currentBalance || 0;
+            this.betRate = state.betRate || 0.02;
+            this.winStreak = state.winStreak || 0;
+            this.lossStreak = state.lossStreak || 0;
+            this.sessionActive = state.sessionActive || false;
+            this.sessionStart = state.sessionStart ? new Date(state.sessionStart) : null;
+            this.timerOffsetMs = state.timerOffsetMs || 0;
+            this.autoBetAdjust = state.autoBetAdjust !== undefined ? state.autoBetAdjust : true;
+            
+            // UI復元
+            document.getElementById('initialCapital').value = this.initialCapital;
+            document.getElementById('autoAdjustToggle').checked = this.autoBetAdjust;
+            
+            if (this.sessionActive) {
+                document.getElementById('startSession').style.display = 'none';
+                document.getElementById('endSession').style.display = 'block';
+                document.getElementById('gameButtons').style.display = 'block';
+            }
+            
+            this.showBalanceDisplay(this.initialCapital > 0);
+            this.updateDisplay();
+            this.renderHistory();
+            
+            if (this.sessionActive) {
+                this.tickTimer();
+            }
+        } catch (e) {
+            console.warn('状態復元に失敗:', e);
+        }
+    }
+    
+    setupAutoSave() {
+        setInterval(() => this.saveState(), 5000);
+    }
+}
+
+// アプリ起動
+document.addEventListener('DOMContentLoaded', () => {
+    window.app = new BlackjackGuide();
+});
