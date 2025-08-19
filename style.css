@@ -1,4 +1,4 @@
-/* リセット & ベース - 3色構成 + 黒白グラデーション */
+/* リセット & ベース - 3色構成・グラデーション撤回 */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -16,7 +16,7 @@ body {
   font-size: 16px;
   line-height: 1.6;
   color: var(--soft-black);
-  background: linear-gradient(135deg, #f8f8f8 0%, var(--soft-white) 50%, #f0f0f0 100%);
+  background: var(--soft-white);
   transition: all 0.3s ease;
 }
 
@@ -37,18 +37,16 @@ body {
   font-weight: 700;
   color: var(--soft-black);
   margin-bottom: 4px;
-  text-shadow: 0 1px 2px rgba(245, 245, 245, 0.5);
 }
 
-/* タブナビゲーション - グラデーション */
+/* タブナビゲーション */
 .tab-navigation {
   display: flex;
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f0f0f0 100%);
+  background: var(--soft-white);
   border-radius: 4px;
   padding: 3px;
   margin-bottom: 14px;
   border: 2px solid var(--accent-olive);
-  box-shadow: 0 2px 4px rgba(44, 44, 44, 0.1);
 }
 
 .tab-btn {
@@ -65,13 +63,12 @@ body {
 }
 
 .tab-btn.active {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
-  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .tab-btn:hover:not(.active) {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.1) 0%, rgba(107, 142, 35, 0.05) 100%);
+  background: rgba(107, 142, 35, 0.1);
   color: var(--soft-black);
 }
 
@@ -83,11 +80,11 @@ body {
   display: block;
 }
 
-/* カード - グラデーション */
+/* カード */
 .card {
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f8f8f8 100%);
+  background: var(--soft-white);
   border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.1), 0 1px 3px rgba(44, 44, 44, 0.05);
+  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.1);
   overflow: hidden;
   border: 1px solid var(--accent-olive);
 }
@@ -102,7 +99,6 @@ body {
   color: var(--soft-black);
   margin-bottom: 12px;
   text-align: center;
-  text-shadow: 0 1px 1px rgba(245, 245, 245, 0.8);
 }
 
 /* フォーム */
@@ -124,32 +120,30 @@ body {
   border: 2px solid var(--accent-olive);
   border-radius: 3px;
   font-size: 16px;
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f8f8f8 100%);
+  background: var(--soft-white);
   color: var(--soft-black);
   transition: all 0.2s ease;
-  box-shadow: inset 0 1px 2px rgba(44, 44, 44, 0.05);
 }
 
 .form-control:focus {
   outline: none;
   border-color: var(--accent-olive);
-  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.2), inset 0 1px 2px rgba(44, 44, 44, 0.05);
+  box-shadow: 0 0 0 3px rgba(107, 142, 35, 0.2);
 }
 
-/* 資金管理 - 黒白グラデーション */
+/* 資金管理 */
 .money-management {
   max-width: 500px;
   margin: 0 auto;
 }
 
 .balance-display {
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 50%, var(--soft-black) 100%);
+  background: var(--soft-black);
   border: 2px solid var(--accent-olive);
   border-radius: 4px;
   padding: 10px;
   margin-top: 12px;
   color: var(--soft-white);
-  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.2), inset 0 1px 0 rgba(245, 245, 245, 0.1);
 }
 
 .balance-item {
@@ -162,7 +156,7 @@ body {
 
 .balance-label {
   font-weight: 600;
-  color: rgba(245, 245, 245, 0.8);
+  color: #d0d0d0;
   font-size: 13px;
 }
 
@@ -170,25 +164,23 @@ body {
   font-size: 16px;
   font-weight: 700;
   color: var(--soft-white);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .bet-amount {
   font-size: 18px;
   font-weight: 800;
   color: var(--soft-white);
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
 .bet-rate {
   font-size: 14px;
   font-weight: 600;
-  color: rgba(245, 245, 245, 0.9);
+  color: #e0e0e0;
 }
 
 .auto-toggle {
   font-size: 12px;
-  color: rgba(245, 245, 245, 0.8);
+  color: #d0d0d0;
   display: flex;
   align-items: center;
   gap: 4px;
@@ -206,14 +198,13 @@ body {
   padding: 6px;
   border-radius: 3px;
   border: 1px solid rgba(245, 245, 245, 0.3);
-  background: linear-gradient(135deg, rgba(245, 245, 245, 0.1) 0%, rgba(245, 245, 245, 0.05) 100%);
-  box-shadow: inset 0 1px 0 rgba(245, 245, 245, 0.1);
+  background: rgba(245, 245, 245, 0.1);
 }
 
 .target-label {
   display: block;
   font-size: 11px;
-  color: rgba(245, 245, 245, 0.8);
+  color: #c0c0c0;
   margin-bottom: 2px;
   font-weight: 600;
 }
@@ -225,7 +216,7 @@ body {
   color: var(--soft-white);
 }
 
-/* 戦略テーブル - 横幅大幅圧縮 + グラデーション */
+/* 戦略テーブル - 横幅拡張・縦幅圧縮 */
 .strategy-title {
   font-size: 16px;
   font-weight: 600;
@@ -238,64 +229,61 @@ body {
   overflow-x: auto;
   border: 2px solid var(--accent-olive);
   border-radius: 3px;
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f8f8f8 100%);
+  background: var(--soft-white);
   max-width: 100%;
-  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.1);
 }
 
 .strategy-table {
   width: 100%;
-  min-width: 350px; /* 500px → 350px に大幅圧縮 */
+  min-width: 550px; /* 350px → 550px 横幅拡張 */
   border-collapse: collapse;
-  font-size: 8px; /* 9px → 8px */
+  font-size: 10px; /* 8px → 10px 視認性向上 */
 }
 
-/* 1列目（プレイヤーハンド）- 長方形・さらに圧縮 */
+/* 1列目（プレイヤーハンド）- より幅広く・高さ圧縮 */
 .strategy-table .rowhdr,
 .strategy-table thead th:first-child {
-  width: 32px !important; /* 45px → 32px */
-  min-width: 32px !important;
-  max-width: 32px !important;
-  height: 16px !important; /* 20px → 16px */
+  width: 55px !important; /* 32px → 55px 横幅拡張 */
+  min-width: 55px !important;
+  max-width: 55px !important;
+  height: 12px !important; /* 16px → 12px 縦幅圧縮 */
   border: 1px solid var(--accent-olive);
   padding: 0px !important;
   text-align: center;
   vertical-align: middle;
-  font-size: 6px !important; /* 7px → 6px */
+  font-size: 7px !important; /* 6px → 7px */
   font-weight: 700;
   line-height: 1 !important;
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* 2列目以降（ディーラーカード・データセル）- 正方形・圧縮 */
+/* 2列目以降（ディーラーカード・データセル）- 横幅拡張・高さ圧縮 */
 .strategy-table th:not(:first-child),
 .strategy-table td {
-  width: 16px !important; /* 20px → 16px */
-  min-width: 16px !important;
-  max-width: 16px !important;
-  height: 16px !important;
+  width: 24px !important; /* 16px → 24px 横幅拡張 */
+  min-width: 24px !important;
+  max-width: 24px !important;
+  height: 12px !important; /* 16px → 12px 縦幅圧縮 */
   border: 1px solid var(--accent-olive);
   padding: 0px !important;
   text-align: center;
   vertical-align: middle;
-  font-size: 6px !important; /* 7px → 6px */
+  font-size: 7px !important; /* 6px → 7px */
   font-weight: 700;
   line-height: 1 !important;
 }
 
-/* 列見出し（ディーラーカード）- 正方形・グラデーション */
+/* 列見出し（ディーラーカード）- 横幅拡張・高さ圧縮 */
 .strategy-table thead th:not(:first-child) {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
   position: sticky;
   top: 0;
   z-index: 3;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-/* 行見出し（プレイヤーハンド）- 長方形・固定 */
+/* 行見出し（プレイヤーハンド）- 横幅拡張・高さ圧縮・固定 */
 .strategy-table .rowhdr {
   position: sticky;
   left: 0;
@@ -303,32 +291,27 @@ body {
   text-align: center;
 }
 
-/* グループ行（Hard/Soft区分）- 長方形・グラデーション */
+/* グループ行（Hard/Soft区分）- 横幅拡張・高さ圧縮 */
 .strategy-table .group td {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.7) 0%, rgba(107, 142, 35, 0.5) 100%);
+  background: rgba(107, 142, 35, 0.7);
   color: var(--soft-white);
   font-weight: 700;
   text-align: center;
-  font-size: 5px !important; /* 6px → 5px */
-  width: 32px !important; /* 45px → 32px */
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  font-size: 6px !important; /* 5px → 6px */
+  width: 55px !important; /* 32px → 55px 横幅拡張 */
 }
 
-/* Hit セル - 正方形・黒グラデーション */
+/* Hit セル - 横幅拡張・高さ圧縮・背景に合わせた文字色 */
 .strategy-table td.h {
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 50%, var(--soft-black) 100%);
-  color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  background: var(--soft-black);
+  color: #e8e8e8; /* より柔らかい白で背景に調和 */
 }
 
-/* Stand セル - 正方形・白グラデーション */
+/* Stand セル - 横幅拡張・高さ圧縮・背景に合わせた文字色 */
 .strategy-table td.s {
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f8f8f8 50%, #f0f0f0 100%);
-  color: var(--soft-black);
+  background: var(--soft-white);
+  color: #333333; /* より柔らかい黒で背景に調和 */
   border: 1px solid var(--accent-olive);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
 .legend {
@@ -336,30 +319,28 @@ body {
   gap: 3px;
   justify-content: center;
   padding: 4px;
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.1) 0%, rgba(107, 142, 35, 0.05) 100%);
+  background: rgba(107, 142, 35, 0.1);
 }
 
 .chip {
-  padding: 1px 6px;
+  padding: 2px 8px; /* 1px 6px → 2px 8px 横幅に合わせて拡張 */
   border-radius: 2px;
-  font-size: 8px; /* 9px → 8px */
+  font-size: 9px; /* 8px → 9px */
   font-weight: 700;
-  box-shadow: 0 1px 2px rgba(44, 44, 44, 0.1);
 }
 
 .chip-s {
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f0f0f0 100%);
-  color: var(--soft-black);
+  background: var(--soft-white);
+  color: #333333; /* 背景に合わせた色 */
   border: 1px solid var(--accent-olive);
 }
 
 .chip-h {
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 100%);
-  color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background: var(--soft-black);
+  color: #e8e8e8; /* 背景に合わせた色 */
 }
 
-/* ボタン - グラデーション */
+/* ボタン */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -372,51 +353,43 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
   text-decoration: none;
-  box-shadow: 0 1px 3px rgba(44, 44, 44, 0.1);
 }
 
 .btn--primary {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.9) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .btn--primary:hover {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.9) 0%, rgba(107, 142, 35, 0.8) 100%);
-  transform: translateY(-1px);
-  box-shadow: 0 2px 6px rgba(44, 44, 44, 0.15);
+  background: rgba(107, 142, 35, 0.9);
 }
 
 .btn--success {
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f0f0f0 100%);
+  background: var(--soft-white);
   color: var(--soft-black);
   border: 2px solid var(--accent-olive);
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 .btn--success:hover {
-  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
-  transform: translateY(-1px);
+  background: rgba(245, 245, 245, 0.9);
 }
 
 .btn--error {
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 100%);
-  color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
+  background: var(--soft-black);
+  color: #e8e8e8; /* 背景に合わせた色 */
 }
 
 .btn--error:hover {
-  background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
-  transform: translateY(-1px);
+  background: rgba(44, 44, 44, 0.9);
 }
 
 .btn--secondary {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.2) 0%, rgba(107, 142, 35, 0.1) 100%);
+  background: rgba(107, 142, 35, 0.2);
   color: var(--soft-black);
 }
 
 .btn--secondary:hover {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.3) 0%, rgba(107, 142, 35, 0.2) 100%);
+  background: rgba(107, 142, 35, 0.3);
 }
 
 .btn--outline {
@@ -426,7 +399,7 @@ body {
 }
 
 .btn--outline:hover {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.9) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
 }
 
@@ -444,16 +417,15 @@ body {
   margin-top: 10px;
 }
 
-/* カウンター - グラデーション */
+/* カウンター */
 .counters {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   padding: 8px;
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.1) 0%, rgba(107, 142, 35, 0.05) 100%);
+  background: rgba(107, 142, 35, 0.1);
   border: 2px solid var(--accent-olive);
   border-radius: 3px;
-  box-shadow: 0 1px 3px rgba(44, 44, 44, 0.1);
 }
 
 .counter-item {
@@ -473,7 +445,6 @@ body {
   font-size: 24px;
   font-weight: 800;
   color: var(--soft-black);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
 }
 
 /* 履歴テーブル */
@@ -491,28 +462,26 @@ body {
 }
 
 .history-table th {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   font-weight: 600;
   color: var(--soft-white);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 .history-table tbody tr:nth-child(even) {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.05) 0%, rgba(107, 142, 35, 0.02) 100%);
+  background: rgba(107, 142, 35, 0.05);
 }
 
-/* フローティングタイマー - グラデーション */
+/* フローティングタイマー */
 .floating-timer {
   position: fixed;
   right: 10px;
   bottom: 10px;
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 100%);
+  background: var(--soft-black);
   border: 2px solid var(--accent-olive);
   border-radius: 3px;
   padding: 6px 8px;
   z-index: 1000;
-  color: var(--soft-white);
-  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.2);
+  color: #e8e8e8; /* 背景に合わせた色 */
 }
 
 .timer-body {
@@ -523,7 +492,7 @@ body {
 
 .timer-label {
   font-size: 11px;
-  color: var(--soft-white);
+  color: #d0d0d0; /* 背景に合わせた色 */
   font-weight: 600;
 }
 
@@ -531,30 +500,28 @@ body {
   font-family: 'Courier New', monospace;
   font-size: 14px;
   font-weight: 700;
-  color: var(--soft-white);
+  color: #e8e8e8; /* 背景に合わせた色 */
   min-width: 70px;
   text-align: center;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
 
 .timer-btn {
   border: 1px solid var(--accent-olive);
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
   border-radius: 2px;
   padding: 2px 4px;
   font-size: 12px;
   cursor: pointer;
   font-weight: 600;
-  transition: all 0.2s ease;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+  transition: background 0.2s ease;
 }
 
 .timer-btn:hover {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.8) 0%, rgba(107, 142, 35, 0.9) 100%);
+  background: rgba(107, 142, 35, 0.8);
 }
 
-/* アラート - グラデーション */
+/* アラート */
 .alert {
   position: fixed;
   top: 12px;
@@ -567,86 +534,125 @@ body {
   max-width: 90%;
   text-align: center;
   border: 2px solid;
-  box-shadow: 0 2px 8px rgba(44, 44, 44, 0.15);
 }
 
 .alert--success {
-  background: linear-gradient(135deg, var(--soft-white) 0%, #f8f8f8 100%);
-  color: var(--soft-black);
+  background: var(--soft-white);
+  color: #333333; /* 背景に合わせた色 */
   border-color: var(--accent-olive);
 }
 
 .alert--error {
-  background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 100%);
-  color: var(--soft-white);
+  background: var(--soft-black);
+  color: #e8e8e8; /* 背景に合わせた色 */
   border-color: var(--accent-olive);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
 }
 
 .alert--warning {
-  background: linear-gradient(135deg, rgba(107, 142, 35, 0.2) 0%, rgba(107, 142, 35, 0.1) 100%);
+  background: rgba(107, 142, 35, 0.2);
   color: var(--soft-black);
   border-color: var(--accent-olive);
 }
 
 .alert--info {
-  background: linear-gradient(135deg, var(--accent-olive) 0%, rgba(107, 142, 35, 0.8) 100%);
+  background: var(--accent-olive);
   color: var(--soft-white);
   border-color: var(--soft-black);
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-/* ダークモード - グラデーション反転 */
+/* ダークモード */
 @media (prefers-color-scheme: dark) {
   body {
-    background: linear-gradient(135deg, #1a1a1a 0%, var(--soft-black) 50%, #3a3a3a 100%);
-    color: var(--soft-white);
+    background: var(--soft-black);
+    color: #e8e8e8; /* 背景に合わせた色 */
   }
   
-  .card {
-    background: linear-gradient(135deg, var(--soft-black) 0%, #3a3a3a 100%);
+  .app-header h1,
+  .section-title,
+  .strategy-title {
+    color: #e8e8e8; /* 背景に合わせた色 */
+  }
+  
+  .card,
+  .form-control,
+  .strategy-table-wrap {
+    background: var(--soft-black);
     border-color: var(--accent-olive);
-    box-shadow: 0 2px 8px rgba(255, 255, 255, 0.05);
+    color: #e8e8e8; /* 背景に合わせた色 */
   }
   
   .balance-display {
-    background: linear-gradient(135deg, var(--soft-white) 0%, #f0f0f0 100%);
-    color: var(--soft-black);
+    background: var(--soft-white);
+    color: #333333; /* 背景に合わせた色 */
+  }
+  
+  .balance-label,
+  .target-label {
+    color: #666666; /* 背景に合わせた色 */
+  }
+  
+  .balance-value,
+  .target-value {
+    color: #333333; /* 背景に合わせた色 */
+  }
+  
+  .bet-amount {
+    color: #333333; /* 背景に合わせた色 */
+  }
+  
+  .strategy-table td.h {
+    background: var(--soft-white);
+    color: #333333; /* 背景に合わせた色 */
+  }
+  
+  .strategy-table td.s {
+    background: var(--soft-black);
+    color: #e8e8e8; /* 背景に合わせた色 */
+  }
+  
+  .floating-timer {
+    background: var(--soft-white);
+    color: #333333; /* 背景に合わせた色 */
+  }
+  
+  .timer-label,
+  .timer-value {
+    color: #333333; /* 背景に合わせた色 */
   }
 }
 
-/* レスポンシブ - さらに圧縮 */
+/* レスポンシブ - 横幅拡張版 */
 @media (max-width: 600px) {
   .container {
     padding: 6px;
   }
   
   .strategy-table {
-    min-width: 300px; /* 350px → 300px */
-    font-size: 7px; /* 8px → 7px */
+    min-width: 480px; /* 300px → 480px 横幅維持 */
+    font-size: 9px; /* 7px → 9px */
   }
   
-  /* 1列目は長方形維持、さらに圧縮 */
+  /* 1列目は幅広・高さ圧縮維持 */
   .strategy-table .rowhdr,
   .strategy-table thead th:first-child {
-    width: 28px !important; /* 32px → 28px */
-    min-width: 28px !important;
-    max-width: 28px !important;
-    height: 14px !important; /* 16px → 14px */
-    font-size: 5px !important; /* 6px → 5px */
+    width: 50px !important; /* 28px → 50px 横幅拡張維持 */
+    min-width: 50px !important;
+    max-width: 50px !important;
+    height: 10px !important; /* 14px → 10px 縦幅さらに圧縮 */
+    font-size: 6px !important; /* 5px → 6px */
   }
   
   .strategy-table th:not(:first-child),
   .strategy-table td {
-    width: 14px !important; /* 16px → 14px */
-    min-width: 14px !important;
-    max-width: 14px !important;
-    height: 14px !important;
-    font-size: 5px !important; /* 6px → 5px */
+    width: 22px !important; /* 14px → 22px 横幅拡張維持 */
+    min-width: 22px !important;
+    max-width: 22px !important;
+    height: 10px !important; /* 14px → 10px 縦幅さらに圧縮 */
+    font-size: 6px !important; /* 5px → 6px */
   }
   
   .strategy-table .group td {
-    width: 28px !important; /* 32px → 28px */
-    font-size: 4px !important; /* 5px → 4px */
+    width: 50px !important; /* 28px → 50px 横幅拡張維持 */
+    font-size: 5px !important; /* 4px → 5px */
   }
 }
