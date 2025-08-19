@@ -623,3 +623,61 @@ body {
     color: #e1e1e1;
   }
 }
+
+/* ── 戦略テーブル：倍率＝1×、列幅さらに圧縮、行見出しと列見出しを同幅に ── */
+
+/* 1) 以前の transform:scale(0.9) を無効化 */
+.strategy-table-wrap {
+  transform: none !important;
+}
+
+/* 2) 全セルを 32 px に統一（行・列を“入れ替え”＝見出しセルも同幅） */
+.strategy-table th,
+.strategy-table td,
+.strategy-table .rowhdr,
+.strategy-table thead th:first-child {
+  width: 32px !important;
+  min-width: 32px !important;
+  max-width: 32px !important;
+  padding: 2px 2px !important;
+  font-size: 9px !important;
+  line-height: 1.1 !important;
+  text-align: center;
+}
+
+/* 3) 固定ヘッダーのスタイルはそのまま維持 */
+.strategy-table thead th {
+  background: #f0f0f0;
+  font-weight: 600;
+  color: #444;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+/* 4) 行見出し（プレイヤー側）も同幅で圧縮 */
+.strategy-table .rowhdr {
+  background: #f0f0f0;
+  font-weight: 600;
+  position: sticky;
+  left: 0;
+  z-index: 4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: left;
+  padding-left: 2px !important;
+}
+
+/* 5) グループ行（Hard／Soft 区分）を同幅で表示 */
+.strategy-table .group td {
+  background: #e1e1e1;
+  font-weight: 600;
+  padding-left: 2px !important;
+  width: 32px !important;
+  min-width: 32px !important;
+}
+
+/* 6) H / S セル着色は変更なし */
+.strategy-table td.h { background: #ffe6e6; color: #d63333; }
+.strategy-table td.s { background: #e6f7e6; color: #1f7a1f; }
