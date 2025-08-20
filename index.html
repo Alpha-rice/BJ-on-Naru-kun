@@ -1,84 +1,841 @@
-<!-- 戦略表セクション（詳細版） -->
-<section class="strategy-section">
-    <h2>基本戦略表</h2>
-    <div class="strategy-container">
-        <div class="strategy-table-wrap">
-            <table id="strategyTable" class="strategy-table" data-highlight-mode="active">
-                <thead>
-                    <tr>
-                        <th>Player \ Dealer</th>
-                        <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
-                        <th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Hard Hands -->
-                    <tr class="section-header">
-                        <td colspan="11">Hard Hands</td>
-                    </tr>
-                    <tr><td class="player">21</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">20</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">19</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">18</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">17</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">16</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">15</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">14</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">13</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">12</td><td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">11</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">10</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">9</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">8</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">7</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">6</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">5</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="プロフェッショナル向けブラックジャック戦略ガイド。資金管理、基本戦略表、セッション履歴を統合した実用ツール">
+    <meta name="keywords" content="ブラックジャック,戦略,資金管理,カジノ,基本戦略,ベット管理">
+    <meta name="author" content="BlackjackGuide">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="BlackjackGuide - 実用的なブラックジャック支援ツール">
+    <meta property="og:description" content="プロレベルの資金管理と戦略表を統合したブラックジャック支援アプリ">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary">
+    <meta property="twitter:title" content="BlackjackGuide">
+    <meta property="twitter:description" content="実用的なブラックジャック支援ツール">
+    
+    <!-- iOS Safari -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="BlackjackGuide">
+    
+    <!-- Android Chrome -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#007bff">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="style.css" as="style">
+    <link rel="preload" href="app.js" as="script">
+    
+    <title>BlackjackGuide - 実用的なブラックジャック支援ツール</title>
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E♠%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+    <!-- ダークモード切り替えボタン -->
+    <button class="theme-toggle" 
+            id="themeToggle" 
+            aria-label="ダークモード切り替え"
+            title="テーマ切り替え">
+        <span id="themeIcon">🌙</span>
+        <span id="themeText">Dark</span>
+    </button>
+
+    <div class="container">
+        <header class="header" role="banner">
+            <h1>BlackjackGuide</h1>
+            <p class="subtitle">実用的なブラックジャック支援ツール</p>
+        </header>
+
+        <main class="main-content" role="main">
+            <!-- 資金管理セクション -->
+            <section class="money-section" aria-labelledby="money-heading">
+                <h2 id="money-heading">💰 資金管理</h2>
+                
+                <div class="money-controls">
+                    <div class="input-group">
+                        <label for="initialCapital">元金 (円)</label>
+                        <input type="number" 
+                               id="initialCapital" 
+                               class="form-control"
+                               min="1000" 
+                               step="1000" 
+                               placeholder="10000"
+                               aria-describedby="capital-help">
+                        <div id="capital-help" class="sr-only">
+                            1000円以上の元金を入力してください
+                        </div>
+                    </div>
                     
-                    <!-- Soft Hands -->
-                    <tr class="section-header">
-                        <td colspan="11">Soft Hands</td>
-                    </tr>
-                    <tr><td class="player">A,10</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">A,9</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">A,8</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,7</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,6</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,5</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,4</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,3</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">A,2</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
+                    <div class="checkbox-group">
+                        <input type="checkbox" 
+                               id="autoAdjustToggle" 
+                               checked
+                               aria-describedby="auto-help">
+                        <label for="autoAdjustToggle">自動ベット調整</label>
+                        <div id="auto-help" class="sr-only">
+                            連勝・連敗に応じてベット額を自動調整します
+                        </div>
+                    </div>
+                </div>
+
+                <div id="balanceDisplay" 
+                     class="balance-panel" 
+                     style="display:none;"
+                     role="region"
+                     aria-labelledby="balance-heading">
+                    <div id="balance-heading" class="sr-only">残高情報</div>
                     
-                    <!-- Pair Hands (ペア分割) -->
-                    <tr class="section-header">
-                        <td colspan="11">Pair Hands</td>
-                    </tr>
-                    <tr><td class="player">A,A</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td></tr>
-                    <tr><td class="player">10,10</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">9,9</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">S</td><td class="s">P</td><td class="s">P</td><td class="s">S</td><td class="s">S</td></tr>
-                    <tr><td class="player">8,8</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td></tr>
-                    <tr><td class="player">7,7</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">6,6</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">5,5</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">4,4</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="s">P</td><td class="s">P</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">3,3</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                    <tr><td class="player">2,2</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="s">P</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td></tr>
-                </tbody>
-            </table>
-        </div>
-        
-        <div class="legend">
-            <div class="legend-item">
-                <span class="legend-color h">H</span>
-                <span>Hit（カードを引く）</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color s">S</span>
-                <span>Stand（カードを引かない）</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color s">P</span>
-                <span>Pair Split（ペア分割）</span>
-            </div>
+                    <div class="balance-grid">
+                        <div class="balance-item">
+                            <span class="label">現在残高</span>
+                            <span id="currentBalance" 
+                                  class="value"
+                                  aria-live="polite">0円</span>
+                        </div>
+                        
+                        <div class="balance-item">
+                            <span class="label">ベット額</span>
+                            <span id="betAmount" 
+                                  class="value bet"
+                                  aria-live="polite">0円</span>
+                        </div>
+                        
+                        <div class="balance-item">
+                            <span class="label">ベット率</span>
+                            <span id="betRate" 
+                                  class="value"
+                                  aria-live="polite">0.0%</span>
+                        </div>
+                        
+                        <div class="balance-item">
+                            <span class="label">利確目標</span>
+                            <span id="winTarget" class="value">0円</span>
+                        </div>
+                        
+                        <div class="balance-item">
+                            <span class="label">損切目標</span>
+                            <span id="lossTarget" class="value">0円</span>
+                        </div>
+                        
+                        <div class="balance-item">
+                            <span class="label">連勝記録</span>
+                            <span id="winStreak" 
+                                  class="value"
+                                  aria-live="polite">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="session-controls" role="group" aria-label="セッション制御">
+                    <button id="startSession" 
+                            class="btn btn-primary"
+                            aria-describedby="start-help">
+                        <span aria-hidden="true">▶️</span>
+                        セッション開始
+                    </button>
+                    <div id="start-help" class="sr-only">
+                        新しいプレイセッションを開始します
+                    </div>
+                    
+                    <button id="endSession" 
+                            class="btn btn-danger" 
+                            style="display:none;"
+                            aria-describedby="end-help">
+                        <span aria-hidden="true">⏹️</span>
+                        セッション終了
+                    </button>
+                    <div id="end-help" class="sr-only">
+                        現在のセッションを終了し、結果を記録します
+                    </div>
+                </div>
+            </section>
+
+            <!-- ゲームボタンセクション -->
+            <section id="gameButtons" 
+                     class="game-section" 
+                     style="display:none;"
+                     role="region"
+                     aria-labelledby="game-heading">
+                <h2 id="game-heading">🎮 ゲーム結果入力</h2>
+                
+                <div class="game-buttons" 
+                     role="group" 
+                     aria-label="ゲーム結果ボタン"
+                     aria-describedby="game-help">
+                    <button id="winButton" 
+                            class="btn btn-win"
+                            aria-describedby="win-help">
+                        <span class="btn-icon" aria-hidden="true">🎉</span>
+                        <span class="btn-text">勝利</span>
+                    </button>
+                    <div id="win-help" class="sr-only">
+                        勝利した場合にクリック。ベット額の2倍を獲得
+                    </div>
+                    
+                    <button id="pushButton" 
+                            class="btn btn-push"
+                            aria-describedby="push-help">
+                        <span class="btn-icon" aria-hidden="true">⚪</span>
+                        <span class="btn-text">引分</span>
+                    </button>
+                    <div id="push-help" class="sr-only">
+                        引き分けの場合にクリック。ベット額は変動なし
+                    </div>
+                    
+                    <button id="loseButton" 
+                            class="btn btn-lose"
+                            aria-describedby="lose-help">
+                        <span class="btn-icon" aria-hidden="true">❌</span>
+                        <span class="btn-text">敗北</span>
+                    </button>
+                    <div id="lose-help" class="sr-only">
+                        敗北した場合にクリック。ベット額を失います
+                    </div>
+                </div>
+                
+                <div id="game-help" class="sr-only">
+                    各ハンドの結果に応じてボタンをクリックしてください
+                </div>
+            </section>
+
+            <!-- 戦略表セクション -->
+            <section class="strategy-section" 
+                     aria-labelledby="strategy-heading">
+                <h2 id="strategy-heading">📊 基本戦略表</h2>
+                
+                <div class="strategy-container">
+                    <div class="strategy-table-wrap" 
+                         role="region" 
+                         aria-labelledby="table-caption"
+                         tabindex="0">
+                        <div id="table-caption" class="sr-only">
+                            ブラックジャック基本戦略表。プレイヤーの手札とディーラーのアップカードの組み合わせに応じた最適なアクションを示しています。
+                        </div>
+                        
+                        <table id="strategyTable" 
+                               class="strategy-table" 
+                               data-highlight-mode="active"
+                               role="table">
+                            <caption class="sr-only">
+                                ブラックジャック基本戦略表 - H: Hit（カードを引く）、S: Stand（カードを引かない）、P: Pair Split（ペア分割）
+                            </caption>
+                            
+                            <thead role="rowgroup">
+                                <tr role="row">
+                                    <th role="columnheader" 
+                                        scope="col"
+                                        aria-label="プレイヤーハンド対ディーラーアップカード">
+                                        Player＼Dealer
+                                    </th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー2">2</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー3">3</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー4">4</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー5">5</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー6">6</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー7">7</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー8">8</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー9">9</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラー10">10</th>
+                                    <th role="columnheader" scope="col" aria-label="ディーラーA">A</th>
+                                </tr>
+                            </thead>
+                            
+                            <tbody role="rowgroup">
+                                <!-- Hard Hands -->
+                                <tr class="section-header" role="row">
+                                    <td colspan="11" 
+                                        role="columnheader" 
+                                        scope="colgroup"
+                                        aria-label="ハードハンド（Aを含まないハンド）">
+                                        Hard Hands
+                                    </td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー21">21</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー20">20</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー19">19</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー18">18</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー17">17</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー16">16</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー15">15</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー14">14</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー13">13</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー12">12</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー11">11</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー10">10</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー9">9</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー8以下">8-</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <!-- Soft Hands -->
+                                <tr class="section-header" role="row">
+                                    <td colspan="11" 
+                                        role="columnheader" 
+                                        scope="colgroup"
+                                        aria-label="ソフトハンド（Aを含むハンド）">
+                                        Soft Hands
+                                    </td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと10">A,10</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと9">A,9</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと8">A,8</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと7">A,7</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと6">A,6</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと5">A,5</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと4">A,4</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと3">A,3</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースと2">A,2</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <!-- Pair Hands -->
+                                <tr class="section-header" role="row">
+                                    <td colspan="11" 
+                                        role="columnheader" 
+                                        scope="colgroup"
+                                        aria-label="ペアハンド（同じ数字2枚）">
+                                        Pair Hands
+                                    </td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="エースペア">A,A</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="10ペア">10,10</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="9ペア">9,9</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                    <td class="s" role="gridcell" aria-label="スタンド">S</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="8ペア">8,8</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="7ペア">7,7</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="6ペア">6,6</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="5ペア">5,5</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="4ペア">4,4</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="3ペア">3,3</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                                
+                                <tr role="row">
+                                    <td class="player" role="rowheader" scope="row" aria-label="2ペア">2,2</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="p" role="gridcell" aria-label="ペア分割">P</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                    <td class="h" role="gridcell" aria-label="ヒット">H</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="legend" role="group" aria-label="戦略表凡例">
+                        <div class="legend-item">
+                            <span class="legend-color h" aria-hidden="true">H</span>
+                            <span>Hit（カードを引く）</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color s" aria-hidden="true">S</span>
+                            <span>Stand（カードを引かない）</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color p" aria-hidden="true">P</span>
+                            <span>Pair Split（ペア分割）</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 履歴セクション -->
+            <section class="history-section" aria-labelledby="history-heading">
+                <details>
+                    <summary>
+                        <h2 id="history-heading">📈 セッション履歴</h2>
+                    </summary>
+                    
+                    <div class="table-wrapper" 
+                         role="region" 
+                         aria-label="セッション履歴テーブル"
+                         tabindex="0">
+                        <table id="historyTable" 
+                               class="history-table"
+                               role="table">
+                            <caption class="sr-only">
+                                プレイセッションの履歴。開始・終了時刻、資金の変動、プレイ時間、連勝・連敗記録を表示
+                            </caption>
+                            
+                            <thead role="rowgroup">
+                                <tr role="row">
+                                    <th role="columnheader" scope="col">開始時刻</th>
+                                    <th role="columnheader" scope="col">終了時刻</th>
+                                    <th role="columnheader" scope="col">初期資金</th>
+                                    <th role="columnheader" scope="col">終了残高</th>
+                                    <th role="columnheader" scope="col">損益</th>
+                                    <th role="columnheader" scope="col">プレイ時間</th>
+                                    <th role="columnheader" scope="col">最大連勝</th>
+                                    <th role="columnheader" scope="col">最大連敗</th>
+                                </tr>
+                            </thead>
+                            <tbody role="rowgroup">
+                                <!-- 動的に履歴が挿入されます -->
+                            </tbody>
+                        </table>
+                    </div>
+                </details>
+            </section>
+        </main>
+
+        <!-- フローティングタイマー -->
+        <div id="floatingTimer" 
+             class="timer" 
+             style="display:none;"
+             role="timer"
+             aria-label="プレイ時間タイマー">
+            <span id="timerValue" 
+                  aria-live="polite"
+                  aria-label="経過時間">00:00:00</span>
+            <button id="timerPauseBtn" 
+                    class="timer-btn"
+                    aria-label="タイマー一時停止・再開">
+                ⏸︎
+            </button>
+            <button id="timerResetBtn" 
+                    class="timer-btn"
+                    aria-label="タイマーリセット">
+                ⟳
+            </button>
         </div>
     </div>
-</section>
+
+    <!-- サービスワーカー登録（オフライン対応） -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
