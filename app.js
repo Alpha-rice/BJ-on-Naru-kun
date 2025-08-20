@@ -1,87 +1,7 @@
-// BlackjackGuide - 即座実行版
+// BlackjackGuide - シンプル版（テーブル生成なし）
 const STATE_KEY = 'bjState';
 const HISTORY_KEY = 'bjHistory';
 const THEME_KEY = 'bjTheme';
-
-// 基本戦略データ（修正版）
-const STRATEGY_DATA = {
-    dealerCards: ['2','3','4','5','6','7','8','9','10','A'],
-    hardHands: {
-        '17+': ['S','S','S','S','S','S','S','S','S','S'],
-        '16':  ['S','S','S','S','S','H','H','H','H','H'],
-        '15':  ['S','S','S','S','S','H','H','H','H','H'],
-        '14':  ['S','S','S','S','S','H','H','H','H','H'],
-        '13':  ['S','S','S','S','S','H','H','H','H','H'],
-        '12':  ['H','H','S','S','S','H','H','H','H','H'],
-        '11-': ['H','H','H','H','H','H','H','H','H','H']
-    },
-    softHands: {
-        'A,9+': ['S','S','S','S','S','S','S','S','S','S'],
-        'A,8':  ['S','S','S','S','S','S','S','H','H','H'],
-        'A,7':  ['S','S','S','S','S','S','H','H','H','H'],
-        'A,6-': ['H','H','H','H','H','H','H','H','H','H']
-    }
-};
-
-// 即座に戦略表を生成（DOM読み込み待ちなし）
-function generateStrategyTableNow() {
-    console.log('🚀 即座に戦略表生成開始');
-    
-    const table = document.getElementById('strategyTable');
-    if (!table) {
-        console.error('❌ strategyTable要素が見つかりません');
-        // 少し待ってもう一度試す
-        setTimeout(() => {
-            const table2 = document.getElementById('strategyTable');
-            if (table2) {
-                generateStrategyTableNow();
-            }
-        }, 500);
-        return;
-    }
-    
-    // テーブル生成
-    table.innerHTML = `
-        <thead role="rowgroup">
-            <tr role="row">
-                <th role="columnheader" scope="col" aria-label="プレイヤーハンド対ディーラーアップカード">Player＼Dealer</th>
-                ${STRATEGY_DATA.dealerCards.map(card => 
-                    `<th role="columnheader" scope="col" aria-label="ディーラー${card}">${card}</th>`
-                ).join('')}
-            </tr>
-        </thead>
-        <tbody role="rowgroup">
-            <!-- Hard Hands -->
-            <tr class="section-header" role="row">
-                <td colspan="11" role="columnheader" scope="colgroup" aria-label="ハードハンド">Hard Hands</td>
-            </tr>
-            ${Object.entries(STRATEGY_DATA.hardHands).map(([hand, actions]) => `
-                <tr role="row">
-                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー${hand}">${hand}</td>
-                    ${actions.map((action, index) => 
-                        `<td class="${action.toLowerCase()}" role="gridcell" aria-label="${action === 'H' ? 'ヒット' : 'スタンド'}">${action}</td>`
-                    ).join('')}
-                </tr>
-            `).join('')}
-            
-            <!-- Soft Hands -->
-            <tr class="section-header" role="row">
-                <td colspan="11" role="columnheader" scope="colgroup" aria-label="ソフトハンド">Soft Hands</td>
-            </tr>
-            ${Object.entries(STRATEGY_DATA.softHands).map(([hand, actions]) => `
-                <tr role="row">
-                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー${hand}">${hand}</td>
-                    ${actions.map((action, index) => 
-                        `<td class="${action.toLowerCase()}" role="gridcell" aria-label="${action === 'H' ? 'ヒット' : 'スタンド'}">${action}</td>`
-                    ).join('')}
-                </tr>
-            `).join('')}
-        </tbody>
-    `;
-    
-    table.setAttribute('data-highlight-mode', 'active');
-    console.log('✅ 戦略表生成完了');
-}
 
 class BlackjackGuide {
     constructor() {
@@ -104,14 +24,11 @@ class BlackjackGuide {
     }
     
     init() {
-        console.log('🎯 BlackjackGuide初期化開始');
-        
         this.setupTheme();
         this.bindEvents();
         this.loadState();
         this.setupAutoSave();
-        
-        console.log('✅ BlackjackGuide初期化完了');
+        console.log('✅ BlackjackGuide シンプル版 起動完了');
     }
     
     setupTheme() {
@@ -187,7 +104,6 @@ class BlackjackGuide {
         if (!this.autoBetAdjust) return this.betRate;
         
         let rate = 0.02;
-        
         if (this.winStreak > 0) rate += Math.min(this.winStreak * 0.001, 0.01);
         if (this.lossStreak > 0) rate -= Math.min(this.lossStreak * 0.002, 0.01);
         
@@ -321,6 +237,7 @@ class BlackjackGuide {
         }
     }
     
+    // タイマー機能
     resumeTimer() {
         if (this.timerRunning) return;
         
@@ -364,6 +281,7 @@ class BlackjackGuide {
         return `${h}:${m}:${sec}`;
     }
     
+    // 履歴機能
     saveHistory(record) {
         const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
         history.push(record);
@@ -395,6 +313,7 @@ class BlackjackGuide {
         });
     }
     
+    // 状態管理
     saveState() {
         const state = {
             initialCapital: this.initialCapital,
@@ -457,43 +376,8 @@ class BlackjackGuide {
     }
 }
 
-// 複数のタイミングで確実にテーブル生成
-console.log('📋 戦略表生成スケジュール開始');
-
-// 1. 即座に実行
-generateStrategyTableNow();
-
-// 2. DOM読み込み後
+// アプリケーション起動
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('🎯 DOMContentLoaded - テーブル生成');
-    generateStrategyTableNow();
-    
-    // アプリ初期化
-    try {
-        window.app = new BlackjackGuide();
-        console.log('✅ アプリケーション起動成功');
-    } catch (error) {
-        console.error('❌ アプリケーション起動エラー:', error);
-    }
+    window.app = new BlackjackGuide();
+    console.log('🎉 BlackjackGuide 起動成功');
 });
-
-// 3. ページ完全読み込み後
-window.addEventListener('load', () => {
-    console.log('🚀 Window load - 最終チェック');
-    setTimeout(() => {
-        const table = document.getElementById('strategyTable');
-        if (table && table.innerHTML.trim() === '') {
-            console.log('🆘 最終フォールバック実行');
-            generateStrategyTableNow();
-        }
-    }, 100);
-});
-
-// 4. 1秒後のセーフティネット
-setTimeout(() => {
-    console.log('🔄 1秒後チェック');
-    generateStrategyTableNow();
-}, 1000);
-
-// デバッグ用
-window.forceGenerateTable = generateStrategyTableNow;
