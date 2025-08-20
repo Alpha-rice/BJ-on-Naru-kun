@@ -621,7 +621,7 @@ section h2::before {
     width: 100%;
     min-width: max(320px, 100%);
     border-collapse: collapse;
-    font-size: clamp(5px, 1.3vw, 8px);
+    font-size: clamp(6px, 1.3vw, 8px);
     position: relative;
     user-select: none;
     font-weight: var(--font-weight-bold);
