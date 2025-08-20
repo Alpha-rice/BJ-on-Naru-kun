@@ -1,47 +1,87 @@
-// BlackjackGuide - 表生成修正版
+// BlackjackGuide - 即座実行版
 const STATE_KEY = 'bjState';
 const HISTORY_KEY = 'bjHistory';
 const THEME_KEY = 'bjTheme';
 
-// 基本戦略データ（2次元配列）
-// 基本戦略データ（2025-08-20 最終版）
+// 基本戦略データ（修正版）
 const STRATEGY_DATA = {
-    // ディーラーアップカード
     dealerCards: ['2','3','4','5','6','7','8','9','10','A'],
-
-    // ハードハンド
     hardHands: {
-        /* 17 以上は常に Stand */
-        '17+':  ['S','S','S','S','S','S','S','S','S','S'],
-
-        /* 16-13 は 2-6 Stand ／ 7-A Hit（K＝10 に統合）*/
-        '16':   ['S','S','S','S','S','H','H','H','H','H'],
-        '15':   ['S','S','S','S','S','H','H','H','H','H'],
-        '14':   ['S','S','S','S','S','H','H','H','H','H'],
-        '13':   ['S','S','S','S','S','H','H','H','H','H'],
-
-        /* 12 は 4-6 Stand ／ それ以外 Hit */
-        '12':   ['H','H','S','S','S','H','H','H','H','H'],
-
-        /* 11 以下はすべて Hit */
-        '11-':  ['H','H','H','H','H','H','H','H','H','H']
+        '17+': ['S','S','S','S','S','S','S','S','S','S'],
+        '16':  ['S','S','S','S','S','H','H','H','H','H'],
+        '15':  ['S','S','S','S','S','H','H','H','H','H'],
+        '14':  ['S','S','S','S','S','H','H','H','H','H'],
+        '13':  ['S','S','S','S','S','H','H','H','H','H'],
+        '12':  ['H','H','S','S','S','H','H','H','H','H'],
+        '11-': ['H','H','H','H','H','H','H','H','H','H']
     },
-
-    // ソフトハンド
     softHands: {
-        /* A,9(20)+ は常に Stand */
         'A,9+': ['S','S','S','S','S','S','S','S','S','S'],
-
-        /* A,8(19): 2-8 Stand ／ 9-A Hit */
         'A,8':  ['S','S','S','S','S','S','S','H','H','H'],
-
-        /* A,7(18): 2-7 Stand ／ 8-A Hit */
         'A,7':  ['S','S','S','S','S','S','H','H','H','H'],
-
-        /* A,6 以下は常に Hit */
         'A,6-': ['H','H','H','H','H','H','H','H','H','H']
     }
 };
+
+// 即座に戦略表を生成（DOM読み込み待ちなし）
+function generateStrategyTableNow() {
+    console.log('🚀 即座に戦略表生成開始');
+    
+    const table = document.getElementById('strategyTable');
+    if (!table) {
+        console.error('❌ strategyTable要素が見つかりません');
+        // 少し待ってもう一度試す
+        setTimeout(() => {
+            const table2 = document.getElementById('strategyTable');
+            if (table2) {
+                generateStrategyTableNow();
+            }
+        }, 500);
+        return;
+    }
+    
+    // テーブル生成
+    table.innerHTML = `
+        <thead role="rowgroup">
+            <tr role="row">
+                <th role="columnheader" scope="col" aria-label="プレイヤーハンド対ディーラーアップカード">Player＼Dealer</th>
+                ${STRATEGY_DATA.dealerCards.map(card => 
+                    `<th role="columnheader" scope="col" aria-label="ディーラー${card}">${card}</th>`
+                ).join('')}
+            </tr>
+        </thead>
+        <tbody role="rowgroup">
+            <!-- Hard Hands -->
+            <tr class="section-header" role="row">
+                <td colspan="11" role="columnheader" scope="colgroup" aria-label="ハードハンド">Hard Hands</td>
+            </tr>
+            ${Object.entries(STRATEGY_DATA.hardHands).map(([hand, actions]) => `
+                <tr role="row">
+                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー${hand}">${hand}</td>
+                    ${actions.map((action, index) => 
+                        `<td class="${action.toLowerCase()}" role="gridcell" aria-label="${action === 'H' ? 'ヒット' : 'スタンド'}">${action}</td>`
+                    ).join('')}
+                </tr>
+            `).join('')}
+            
+            <!-- Soft Hands -->
+            <tr class="section-header" role="row">
+                <td colspan="11" role="columnheader" scope="colgroup" aria-label="ソフトハンド">Soft Hands</td>
+            </tr>
+            ${Object.entries(STRATEGY_DATA.softHands).map(([hand, actions]) => `
+                <tr role="row">
+                    <td class="player" role="rowheader" scope="row" aria-label="プレイヤー${hand}">${hand}</td>
+                    ${actions.map((action, index) => 
+                        `<td class="${action.toLowerCase()}" role="gridcell" aria-label="${action === 'H' ? 'ヒット' : 'スタンド'}">${action}</td>`
+                    ).join('')}
+                </tr>
+            `).join('')}
+        </tbody>
+    `;
+    
+    table.setAttribute('data-highlight-mode', 'active');
+    console.log('✅ 戦略表生成完了');
+}
 
 class BlackjackGuide {
     constructor() {
@@ -64,249 +104,16 @@ class BlackjackGuide {
     }
     
     init() {
-        console.log('🚀 BlackjackGuide 初期化開始');
+        console.log('🎯 BlackjackGuide初期化開始');
         
-        try {
-            this.setupTheme();
-            console.log('✅ テーマ設定完了');
-            
-            // DOM読み込み完了後にテーブル生成
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => {
-                    this.generateStrategyTable();
-                });
-            } else {
-                this.generateStrategyTable();
-            }
-            
-            this.bindEvents();
-            console.log('✅ イベント設定完了');
-            
-            this.loadState();
-            console.log('✅ 状態復元完了');
-            
-            this.setupAutoSave();
-            console.log('✅ 自動保存設定完了');
-            
-            console.log('🎉 BlackjackGuide 初期化完了');
-            
-        } catch (error) {
-            console.error('❌ 初期化エラー:', error);
-            this.createFallbackTable(); // フォールバック
-        }
+        this.setupTheme();
+        this.bindEvents();
+        this.loadState();
+        this.setupAutoSave();
+        
+        console.log('✅ BlackjackGuide初期化完了');
     }
     
-    // 戦略表を動的生成（エラーハンドリング強化）
-    generateStrategyTable() {
-        console.log('📊 戦略表生成開始');
-        
-        const table = document.getElementById('strategyTable');
-        if (!table) {
-            console.error('❌ strategyTable要素が見つかりません');
-            return false;
-        }
-        
-        try {
-            // テーブルクリア
-            table.innerHTML = '';
-            console.log('🧹 テーブルクリア完了');
-            
-            // ヘッダー生成
-            const thead = this.createTableHeader();
-            table.appendChild(thead);
-            console.log('📋 ヘッダー生成完了');
-            
-            // ボディ生成
-            const tbody = this.createTableBody();
-            table.appendChild(tbody);
-            console.log('📝 ボディ生成完了');
-            
-            // アクセシビリティ設定
-            setTimeout(() => this.decorateStrategyTable(), 100);
-            
-            console.log('✅ 戦略表生成成功');
-            return true;
-            
-        } catch (error) {
-            console.error('❌ 戦略表生成エラー:', error);
-            this.createFallbackTable();
-            return false;
-        }
-    }
-    
-    // テーブルヘッダー生成
-    createTableHeader() {
-        const thead = document.createElement('thead');
-        thead.setAttribute('role', 'rowgroup');
-        
-        const headerRow = document.createElement('tr');
-        headerRow.setAttribute('role', 'row');
-        
-        // コーナーセル
-        const cornerHeader = document.createElement('th');
-        cornerHeader.setAttribute('role', 'columnheader');
-        cornerHeader.setAttribute('scope', 'col');
-        cornerHeader.setAttribute('aria-label', 'プレイヤーハンド対ディーラーアップカード');
-        cornerHeader.textContent = 'Player＼Dealer';
-        headerRow.appendChild(cornerHeader);
-        
-        // ディーラーカードヘッダー
-        STRATEGY_DATA.dealerCards.forEach(card => {
-            const th = document.createElement('th');
-            th.setAttribute('role', 'columnheader');
-            th.setAttribute('scope', 'col');
-            th.setAttribute('aria-label', `ディーラー${card}`);
-            th.textContent = card;
-            headerRow.appendChild(th);
-        });
-        
-        thead.appendChild(headerRow);
-        return thead;
-    }
-    
-    // テーブルボディ生成
-    createTableBody() {
-        const tbody = document.createElement('tbody');
-        tbody.setAttribute('role', 'rowgroup');
-        
-        // Hard Hands セクション
-        this.addSectionHeader(tbody, 'Hard Hands', 'ハードハンド（Aを含まないハンド）');
-        this.addStrategyRows(tbody, STRATEGY_DATA.hardHands);
-        
-        // Soft Hands セクション
-        this.addSectionHeader(tbody, 'Soft Hands', 'ソフトハンド（Aを含むハンド）');
-        this.addStrategyRows(tbody, STRATEGY_DATA.softHands);
-        
-        return tbody;
-    }
-    
-    // セクションヘッダー追加
-    addSectionHeader(tbody, title, ariaLabel) {
-        const row = document.createElement('tr');
-        row.className = 'section-header';
-        row.setAttribute('role', 'row');
-        
-        const td = document.createElement('td');
-        td.setAttribute('colspan', '11');
-        td.setAttribute('role', 'columnheader');
-        td.setAttribute('scope', 'colgroup');
-        td.setAttribute('aria-label', ariaLabel);
-        td.textContent = title;
-        
-        row.appendChild(td);
-        tbody.appendChild(row);
-    }
-    
-    // 戦略行追加
-    addStrategyRows(tbody, handsData) {
-        Object.entries(handsData).forEach(([hand, actions]) => {
-            const row = document.createElement('tr');
-            row.setAttribute('role', 'row');
-            
-            // プレイヤーハンドセル
-            const playerCell = document.createElement('td');
-            playerCell.className = 'player';
-            playerCell.setAttribute('role', 'rowheader');
-            playerCell.setAttribute('scope', 'row');
-            playerCell.setAttribute('aria-label', `プレイヤー${hand}`);
-            playerCell.textContent = hand;
-            row.appendChild(playerCell);
-            
-            // アクションセル
-            actions.forEach((action, index) => {
-                const actionCell = document.createElement('td');
-                actionCell.className = action.toLowerCase();
-                actionCell.setAttribute('role', 'gridcell');
-                actionCell.setAttribute('aria-label', action === 'H' ? 'ヒット' : 'スタンド');
-                actionCell.textContent = action;
-                row.appendChild(actionCell);
-            });
-            
-            tbody.appendChild(row);
-        });
-    }
-    
-    // フォールバックテーブル（静的HTML）
-    createFallbackTable() {
-        console.log('🔄 フォールバックテーブル生成');
-        
-        const table = document.getElementById('strategyTable');
-        if (!table) return;
-        
-        table.innerHTML = `
-            <thead role="rowgroup">
-                <tr role="row">
-                    <th role="columnheader" scope="col">Player＼Dealer</th>
-                    <th role="columnheader" scope="col">2</th>
-                    <th role="columnheader" scope="col">3</th>
-                    <th role="columnheader" scope="col">4</th>
-                    <th role="columnheader" scope="col">5</th>
-                    <th role="columnheader" scope="col">6</th>
-                    <th role="columnheader" scope="col">7</th>
-                    <th role="columnheader" scope="col">8</th>
-                    <th role="columnheader" scope="col">9</th>
-                    <th role="columnheader" scope="col">10</th>
-                    <th role="columnheader" scope="col">A</th>
-                </tr>
-            </thead>
-            <tbody role="rowgroup">
-                <tr class="section-header">
-                    <td colspan="11" role="columnheader" scope="colgroup">Hard Hands</td>
-                </tr>
-                <tr>
-                    <td class="player">17+</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                </tr>
-                <tr>
-                    <td class="player">13-16</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                </tr>
-                <tr>
-                    <td class="player">12</td>
-                    <td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                </tr>
-                <tr>
-                    <td class="player">11-</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                </tr>
-                <tr class="section-header">
-                    <td colspan="11" role="columnheader" scope="colgroup">Soft Hands</td>
-                </tr>
-                <tr>
-                    <td class="player">A,8+</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                </tr>
-                <tr>
-                    <td class="player">A,7</td>
-                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                    <td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                </tr>
-                <tr>
-                    <td class="player">A,6-</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                </tr>
-            </tbody>
-        `;
-        
-        console.log('✅ フォールバックテーブル生成完了');
-    }
-    
-    // 戦略表のアクセシビリティ強化
-    decorateStrategyTable() {
-        const table = document.getElementById('strategyTable');
-        if (!table) return;
-        
-        table.setAttribute('data-highlight-mode', 'active');
-        console.log('✅ 戦略表アクセシビリティ設定完了');
-    }
-    
-    // ダークモード設定
     setupTheme() {
         const savedTheme = localStorage.getItem(THEME_KEY);
         const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -340,26 +147,21 @@ class BlackjackGuide {
     }
     
     bindEvents() {
-        // 資金管理
         const ic = document.getElementById('initialCapital');
         ic?.addEventListener('input', () => this.updateCapital());
         
-        // セッション制御
         document.getElementById('startSession')?.addEventListener('click', () => this.startSession());
         document.getElementById('endSession')?.addEventListener('click', () => this.endSession());
         
-        // ゲーム結果
         document.getElementById('winButton')?.addEventListener('click', () => this.handleGameResult('win'));
         document.getElementById('pushButton')?.addEventListener('click', () => this.handleGameResult('push'));
         document.getElementById('loseButton')?.addEventListener('click', () => this.handleGameResult('lose'));
         
-        // タイマー
         document.getElementById('timerPauseBtn')?.addEventListener('click', () => {
             this.timerRunning ? this.pauseTimer() : this.resumeTimer();
         });
         document.getElementById('timerResetBtn')?.addEventListener('click', () => this.resetTimer());
         
-        // 自動調整
         document.getElementById('autoAdjustToggle')?.addEventListener('change', (e) => {
             this.autoBetAdjust = e.target.checked;
             this.updateDisplay();
@@ -519,7 +321,6 @@ class BlackjackGuide {
         }
     }
     
-    // タイマー機能
     resumeTimer() {
         if (this.timerRunning) return;
         
@@ -563,7 +364,6 @@ class BlackjackGuide {
         return `${h}:${m}:${sec}`;
     }
     
-    // 履歴機能
     saveHistory(record) {
         const history = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]');
         history.push(record);
@@ -572,7 +372,7 @@ class BlackjackGuide {
     }
     
     renderHistory() {
-        const tbody = document.getElementById('historyTable').querySelector('tbody');
+        const tbody = document.getElementById('historyTable')?.querySelector('tbody');
         if (!tbody) return;
         
         tbody.innerHTML = '';
@@ -595,7 +395,6 @@ class BlackjackGuide {
         });
     }
     
-    // 状態保存・復元
     saveState() {
         const state = {
             initialCapital: this.initialCapital,
@@ -658,34 +457,43 @@ class BlackjackGuide {
     }
 }
 
-// アプリ起動（エラーハンドリング強化）
+// 複数のタイミングで確実にテーブル生成
+console.log('📋 戦略表生成スケジュール開始');
+
+// 1. 即座に実行
+generateStrategyTableNow();
+
+// 2. DOM読み込み後
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('🎯 DOMContentLoaded - テーブル生成');
+    generateStrategyTableNow();
+    
+    // アプリ初期化
     try {
         window.app = new BlackjackGuide();
-        console.log('🎉 アプリケーション起動成功');
+        console.log('✅ アプリケーション起動成功');
     } catch (error) {
         console.error('❌ アプリケーション起動エラー:', error);
-        
-        // 緊急時フォールバック
-        setTimeout(() => {
-            const table = document.getElementById('strategyTable');
-            if (table && table.innerHTML.trim() === '') {
-                console.log('🆘 緊急フォールバック実行');
-                new BlackjackGuide().createFallbackTable();
-            }
-        }, 1000);
     }
 });
 
-// デバッグ用グローバル関数
-window.debugBlackjack = function() {
-    console.log('🔍 デバッグ情報:');
-    console.log('app:', window.app);
-    console.log('strategyTable:', document.getElementById('strategyTable'));
-    console.log('DOM ready:', document.readyState);
-    
-    if (window.app) {
-        console.log('テーブル再生成試行...');
-        window.app.generateStrategyTable();
-    }
-};
+// 3. ページ完全読み込み後
+window.addEventListener('load', () => {
+    console.log('🚀 Window load - 最終チェック');
+    setTimeout(() => {
+        const table = document.getElementById('strategyTable');
+        if (table && table.innerHTML.trim() === '') {
+            console.log('🆘 最終フォールバック実行');
+            generateStrategyTableNow();
+        }
+    }, 100);
+});
+
+// 4. 1秒後のセーフティネット
+setTimeout(() => {
+    console.log('🔄 1秒後チェック');
+    generateStrategyTableNow();
+}, 1000);
+
+// デバッグ用
+window.forceGenerateTable = generateStrategyTableNow;
