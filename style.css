@@ -666,7 +666,7 @@ section h2::before {
     min-width: var(--cell-size) !important;
     max-width: var(--cell-size) !important;
     height: var(--cell-height) !important;
-    font-size: clamp(4px, 1.1vw, 7px) !important;
+    font-size: clamp(6px, 1.1vw, 8px) !important;
 }
 
 /* ディーラー列見出し */
