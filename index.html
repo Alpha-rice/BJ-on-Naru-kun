@@ -4,278 +4,226 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="プロフェッショナル向けブラックジャック戦略ガイド。資金管理、基本戦略表、セッション履歴を統合した実用ツール">
-    <meta name="keywords" content="ブラックジャック,戦略,資金管理,カジノ,基本戦略,ベット管理">
-    <meta name="author" content="BlackjackGuide">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="BlackjackGuide - 実用的なブラックジャック支援ツール">
-    <meta property="og:description" content="プロレベルの資金管理と戦略表を統合したブラックジャック支援アプリ">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary">
-    <meta property="twitter:title" content="BlackjackGuide">
-    <meta property="twitter:description" content="実用的なブラックジャック支援ツール">
-    
-    <!-- iOS Safari -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="apple-mobile-web-app-title" content="BlackjackGuide">
-    
-    <!-- Android Chrome -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#007bff">
-    
-    <!-- Preload critical resources -->
-    <link rel="preload" href="style.css" as="style">
-    <link rel="preload" href="app.js" as="script">
-    
     <title>BlackjackGuide - 実用的なブラックジャック支援ツール</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Ctext y='20' font-size='20'%3E♠%3C/text%3E%3C/svg%3E">
 </head>
 <body>
     <!-- ダークモード切り替えボタン -->
-    <button class="theme-toggle" 
-            id="themeToggle" 
-            aria-label="ダークモード切り替え"
-            title="テーマ切り替え">
+    <button class="theme-toggle" id="themeToggle" aria-label="ダークモード切り替え">
         <span id="themeIcon">🌙</span>
         <span id="themeText">Dark</span>
     </button>
 
     <div class="container">
-        <header class="header" role="banner">
+        <header class="header">
             <h1>BlackjackGuide</h1>
             <p class="subtitle">実用的なブラックジャック支援ツール</p>
         </header>
 
-        <main class="main-content" role="main">
+        <main class="main-content">
             <!-- 資金管理セクション -->
-            <section class="money-section" aria-labelledby="money-heading">
-                <h2 id="money-heading">💰 資金管理</h2>
+            <section class="money-section">
+                <h2>💰 資金管理</h2>
                 
                 <div class="money-controls">
                     <div class="input-group">
                         <label for="initialCapital">元金 (円)</label>
-                        <input type="number" 
-                               id="initialCapital" 
-                               class="form-control"
-                               min="1000" 
-                               step="1000" 
-                               placeholder="10000"
-                               aria-describedby="capital-help">
-                        <div id="capital-help" class="sr-only">
-                            1000円以上の元金を入力してください
-                        </div>
+                        <input type="number" id="initialCapital" min="1000" step="1000" placeholder="10000">
                     </div>
                     
                     <div class="checkbox-group">
-                        <input type="checkbox" 
-                               id="autoAdjustToggle" 
-                               checked
-                               aria-describedby="auto-help">
+                        <input type="checkbox" id="autoAdjustToggle" checked>
                         <label for="autoAdjustToggle">自動ベット調整</label>
-                        <div id="auto-help" class="sr-only">
-                            連勝・連敗に応じてベット額を自動調整します
-                        </div>
                     </div>
                 </div>
 
-                <div id="balanceDisplay" 
-                     class="balance-panel" 
-                     style="display:none;"
-                     role="region"
-                     aria-labelledby="balance-heading">
-                    <div id="balance-heading" class="sr-only">残高情報</div>
-                    
+                <div id="balanceDisplay" class="balance-panel" style="display:none;">
                     <div class="balance-grid">
                         <div class="balance-item">
                             <span class="label">現在残高</span>
-                            <span id="currentBalance" 
-                                  class="value"
-                                  aria-live="polite">0円</span>
+                            <span id="currentBalance" class="value">0円</span>
                         </div>
-                        
                         <div class="balance-item">
                             <span class="label">ベット額</span>
-                            <span id="betAmount" 
-                                  class="value bet"
-                                  aria-live="polite">0円</span>
+                            <span id="betAmount" class="value bet">0円</span>
                         </div>
-                        
                         <div class="balance-item">
                             <span class="label">ベット率</span>
-                            <span id="betRate" 
-                                  class="value"
-                                  aria-live="polite">0.0%</span>
+                            <span id="betRate" class="value">0.0%</span>
                         </div>
-                        
                         <div class="balance-item">
                             <span class="label">利確目標</span>
                             <span id="winTarget" class="value">0円</span>
                         </div>
-                        
                         <div class="balance-item">
                             <span class="label">損切目標</span>
                             <span id="lossTarget" class="value">0円</span>
                         </div>
-                        
                         <div class="balance-item">
                             <span class="label">連勝記録</span>
-                            <span id="winStreak" 
-                                  class="value"
-                                  aria-live="polite">0</span>
+                            <span id="winStreak" class="value">0</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="session-controls" role="group" aria-label="セッション制御">
-                    <button id="startSession" 
-                            class="btn btn-primary"
-                            aria-describedby="start-help">
-                        <span aria-hidden="true">▶️</span>
-                        セッション開始
+                <div class="session-controls">
+                    <button id="startSession" class="btn btn-primary">
+                        <span>▶️</span> セッション開始
                     </button>
-                    <div id="start-help" class="sr-only">
-                        新しいプレイセッションを開始します
-                    </div>
-                    
-                    <button id="endSession" 
-                            class="btn btn-danger" 
-                            style="display:none;"
-                            aria-describedby="end-help">
-                        <span aria-hidden="true">⏹️</span>
-                        セッション終了
+                    <button id="endSession" class="btn btn-danger" style="display:none;">
+                        <span>⏹️</span> セッション終了
                     </button>
-                    <div id="end-help" class="sr-only">
-                        現在のセッションを終了し、結果を記録します
-                    </div>
                 </div>
             </section>
 
             <!-- ゲームボタンセクション -->
-            <section id="gameButtons" 
-                     class="game-section" 
-                     style="display:none;"
-                     role="region"
-                     aria-labelledby="game-heading">
-                <h2 id="game-heading">🎮 ゲーム結果入力</h2>
+            <section id="gameButtons" class="game-section" style="display:none;">
+                <h2>🎮 ゲーム結果入力</h2>
                 
-                <div class="game-buttons" 
-                     role="group" 
-                     aria-label="ゲーム結果ボタン"
-                     aria-describedby="game-help">
-                    <button id="winButton" 
-                            class="btn btn-win"
-                            aria-describedby="win-help">
-                        <span class="btn-icon" aria-hidden="true">🎉</span>
+                <div class="game-buttons">
+                    <button id="winButton" class="btn btn-win">
+                        <span class="btn-icon">🎉</span>
                         <span class="btn-text">勝利</span>
                     </button>
-                    <div id="win-help" class="sr-only">
-                        勝利した場合にクリック。ベット額の2倍を獲得
-                    </div>
-                    
-                    <button id="pushButton" 
-                            class="btn btn-push"
-                            aria-describedby="push-help">
-                        <span class="btn-icon" aria-hidden="true">⚪</span>
+                    <button id="pushButton" class="btn btn-push">
+                        <span class="btn-icon">⚪</span>
                         <span class="btn-text">引分</span>
                     </button>
-                    <div id="push-help" class="sr-only">
-                        引き分けの場合にクリック。ベット額は変動なし
-                    </div>
-                    
-                    <button id="loseButton" 
-                            class="btn btn-lose"
-                            aria-describedby="lose-help">
-                        <span class="btn-icon" aria-hidden="true">❌</span>
+                    <button id="loseButton" class="btn btn-lose">
+                        <span class="btn-icon">❌</span>
                         <span class="btn-text">敗北</span>
                     </button>
-                    <div id="lose-help" class="sr-only">
-                        敗北した場合にクリック。ベット額を失います
-                    </div>
-                </div>
-                
-                <div id="game-help" class="sr-only">
-                    各ハンドの結果に応じてボタンをクリックしてください
                 </div>
             </section>
 
-            <!-- 戦略表セクション -->
-<section class="strategy-section" aria-labelledby="strategy-heading">
-    <h2 id="strategy-heading">📊 基本戦略表</h2>
-    
-    <div class="strategy-container">
-        <div class="strategy-table-wrap" 
-             role="region" 
-             aria-labelledby="table-caption"
-             tabindex="0">
-            <div id="table-caption" class="sr-only">
-                ブラックジャック基本戦略表。プレイヤーの手札とディーラーのアップカードの組み合わせに応じた最適なアクションを示しています。
-            </div>
-            
-            <!-- 動的生成されるテーブル -->
-            <table id="strategyTable" 
-                   class="strategy-table" 
-                   data-highlight-mode="active"
-                   role="table">
-                <caption class="sr-only">
-                    ブラックジャック基本戦略表 - H: Hit（カードを引く）、S: Stand（カードを引かない）
-                </caption>
-                <!-- JavaScriptで動的に生成されます -->
-            </table>
-        </div>
-        
-        <div class="legend" role="group" aria-label="戦略表凡例">
-            <div class="legend-item">
-                <span class="legend-color h" aria-hidden="true">H</span>
-                <span>Hit（カードを引く）</span>
-            </div>
-            <div class="legend-item">
-                <span class="legend-color s" aria-hidden="true">S</span>
-                <span>Stand（カードを引かない）</span>
-            </div>
-        </div>
-    </div>
-</section>
-
-            <!-- 履歴セクション -->
-            <section class="history-section" aria-labelledby="history-heading">
-                <details>
-                    <summary>
-                        <h2 id="history-heading">📈 セッション履歴</h2>
-                    </summary>
-                    
-                    <div class="table-wrapper" 
-                         role="region" 
-                         aria-label="セッション履歴テーブル"
-                         tabindex="0">
-                        <table id="historyTable" 
-                               class="history-table"
-                               role="table">
+            <!-- 戦略表セクション（静的HTML） -->
+            <section class="strategy-section">
+                <h2>📊 基本戦略表</h2>
+                
+                <div class="strategy-container">
+                    <div class="strategy-table-wrap">
+                        <table id="strategyTable" class="strategy-table" data-highlight-mode="active">
                             <caption class="sr-only">
-                                プレイセッションの履歴。開始・終了時刻、資金の変動、プレイ時間、連勝・連敗記録を表示
+                                ブラックジャック基本戦略表 - H: Hit（カードを引く）、S: Stand（カードを引かない）
                             </caption>
                             
-                            <thead role="rowgroup">
-                                <tr role="row">
-                                    <th role="columnheader" scope="col">開始時刻</th>
-                                    <th role="columnheader" scope="col">終了時刻</th>
-                                    <th role="columnheader" scope="col">初期資金</th>
-                                    <th role="columnheader" scope="col">終了残高</th>
-                                    <th role="columnheader" scope="col">損益</th>
-                                    <th role="columnheader" scope="col">プレイ時間</th>
-                                    <th role="columnheader" scope="col">最大連勝</th>
-                                    <th role="columnheader" scope="col">最大連敗</th>
+                            <thead>
+                                <tr>
+                                    <th>Player＼Dealer</th>
+                                    <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th>
+                                    <th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
                                 </tr>
                             </thead>
-                            <tbody role="rowgroup">
-                                <!-- 動的に履歴が挿入されます -->
+                            
+                            <tbody>
+                                <!-- Hard Hands -->
+                                <tr class="section-header">
+                                    <td colspan="11">Hard Hands</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">17+</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">16</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">15</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">14</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">13</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">12</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">11-</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <!-- Soft Hands -->
+                                <tr class="section-header">
+                                    <td colspan="11">Soft Hands</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">A,9+</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">A,8</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">A,7</td>
+                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+                                    <td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="player">A,6-</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+                                </tr>
                             </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="legend">
+                        <div class="legend-item">
+                            <span class="legend-color h">H</span>
+                            <span>Hit（カードを引く）</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color s">S</span>
+                            <span>Stand（カードを引かない）</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 履歴セクション -->
+            <section class="history-section">
+                <details>
+                    <summary>
+                        <h2>📈 セッション履歴</h2>
+                    </summary>
+                    
+                    <div class="table-wrapper">
+                        <table id="historyTable" class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>開始時刻</th><th>終了時刻</th><th>初期資金</th><th>終了残高</th>
+                                    <th>損益</th><th>プレイ時間</th><th>最大連勝</th><th>最大連敗</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
                         </table>
                     </div>
                 </details>
@@ -283,41 +231,12 @@
         </main>
 
         <!-- フローティングタイマー -->
-        <div id="floatingTimer" 
-             class="timer" 
-             style="display:none;"
-             role="timer"
-             aria-label="プレイ時間タイマー">
-            <span id="timerValue" 
-                  aria-live="polite"
-                  aria-label="経過時間">00:00:00</span>
-            <button id="timerPauseBtn" 
-                    class="timer-btn"
-                    aria-label="タイマー一時停止・再開">
-                ⏸︎
-            </button>
-            <button id="timerResetBtn" 
-                    class="timer-btn"
-                    aria-label="タイマーリセット">
-                ⟳
-            </button>
+        <div id="floatingTimer" class="timer" style="display:none;">
+            <span id="timerValue">00:00:00</span>
+            <button id="timerPauseBtn" class="timer-btn">⏸︎</button>
+            <button id="timerResetBtn" class="timer-btn">⟳</button>
         </div>
     </div>
-
-    <!-- サービスワーカー登録（オフライン対応） -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => {
-                        console.log('SW registered: ', registration);
-                    })
-                    .catch(registrationError => {
-                        console.log('SW registration failed: ', registrationError);
-                    });
-            });
-        }
-    </script>
 
     <script src="app.js"></script>
 </body>
