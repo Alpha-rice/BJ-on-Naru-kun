@@ -589,7 +589,7 @@ section h2::before {
     /* 動的サイズ調整 */
     --cell-size: clamp(10px, 2vw, 16px);
     --header-width: clamp(24px, 5vw, 36px);
-    --cell-height: clamp(14px, 3vw, 24px);
+    --cell-height: clamp(18px, 3.2vw, 26px);
     
     transform-origin: top left;
     overflow-x: auto;
