@@ -78,7 +78,7 @@
 
             <!-- ゲームボタンセクション -->
             <section id="gameButtons" class="game-section" style="display:none;">
-                <h2>🎮 ゲーム結果入力</h2>
+                <h2>ゲーム結果入力</h2>
                 
                 <div class="game-buttons">
                     <button id="winButton" class="btn btn-win">
@@ -98,7 +98,7 @@
 
             <!-- 戦略表セクション（静的HTML） -->
             <section class="strategy-section">
-                <h2>📊 基本戦略表</h2>
+                <h2>基本戦略表</h2>
                 
                 <div class="strategy-container">
                     <div class="strategy-table-wrap">
@@ -116,82 +116,65 @@
                             </thead>
                             
                             <tbody>
-                                <!-- Hard Hands -->
-                                <tr class="section-header">
-                                    <td colspan="11">Hard Hands</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">17+</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">16</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">15</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">14</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">13</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">12</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">11-</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <!-- Soft Hands -->
-                                <tr class="section-header">
-                                    <td colspan="11">Soft Hands</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">A,9+</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">A,8</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">A,7</td>
-                                    <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
-                                    <td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                                
-                                <tr>
-                                    <td class="player">A,6-</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                    <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
-                                </tr>
-                            </tbody>
+    <!-- Hard Hands -->
+    <tr class="section-header">
+        <td colspan="11">Hard Hands</td>
+    </tr>
+
+    <!-- 17 以上 -->
+    <tr>
+        <td class="player">17+</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+    </tr>
+
+    <!-- 13-16 -->
+    <tr>
+        <td class="player">13-16</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+    </tr>
+
+    <!-- 12 -->
+    <tr>
+        <td class="player">12</td>
+        <td class="h">H</td><td class="h">H</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+    </tr>
+
+    <!-- 11 以下 -->
+    <tr>
+        <td class="player">11-</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+    </tr>
+
+    <!-- Soft Hands -->
+    <tr class="section-header">
+        <td colspan="11">Soft Hands</td>
+    </tr>
+
+    <!-- 19 以上 (A,9+) -->
+    <tr>
+        <td class="player">A,9+</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+    </tr>
+
+    <!-- 18 (A,8) -->
+    <tr>
+        <td class="player">A,8</td>
+        <td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td><td class="s">S</td>
+        <td class="s">S</td><td class="s">S</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+    </tr>
+
+    <!-- 17 以下 (A,6-) -->
+    <tr>
+        <td class="player">A,6-</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+        <td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td><td class="h">H</td>
+    </tr>
+</tbody>
                         </table>
                     </div>
                     
