@@ -652,7 +652,7 @@ section h2::before {
     height: var(--cell-height) !important;
     background: var(--sage);
     color: var(--pearl);
-    font-size: clamp(4px, 1.1vw, 7px) !important;
+    font-size: clamp(6px, 1.3vw, 12px) !important;
     position: sticky;
     left: 0;
     z-index: var(--z-sticky);
