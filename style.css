@@ -59,7 +59,22 @@ h1{font-size:clamp(1.6rem,5vw,2.1rem);margin-bottom:var(--sp)}
 h2{font-size:clamp(1.15rem,4vw,1.4rem);margin-bottom:calc(var(--sp)/2)}
 img,svg{max-width:100%;display:block}
 
-/* ---------- 2. layout ---------- */
+/* ---------- 2. theme toggle button ---------- */
+.theme-toggle{
+  position:fixed;top:var(--sp);right:var(--sp);z-index:1000;
+  background:var(--surf);border:1px solid var(--border);color:var(--txt);
+  padding:6px 10px;border-radius:var(--r);cursor:pointer;
+  font-size:.75rem;font-weight:500;
+  box-shadow:var(--sh-s);
+  transition:all .2s;user-select:none;touch-action:manipulation;
+}
+.theme-toggle:hover{
+  background:var(--surf-2);box-shadow:var(--sh-m);
+  transform:translateY(-1px);
+}
+.theme-toggle:active{transform:translateY(0)}
+
+/* ---------- 3. layout ---------- */
 .container{width:100%;max-width:800px;display:flex;flex-direction:column;gap:var(--sp)}
 section{
   background:
@@ -73,7 +88,7 @@ section{
 section:hover{box-shadow:var(--sh-m);transform:translateY(-2px)}
 p.subtle{color:var(--txt-2);font-size:.9rem;margin-top:4px}
 
-/* ---------- 3. button ---------- */
+/* ---------- 4. button ---------- */
 .btn{
   display:inline-flex;justify-content:center;align-items:center;
   width:100%;min-height:42px;padding:10px 18px;
@@ -96,7 +111,7 @@ p.subtle{color:var(--txt-2);font-size:.9rem;margin-top:4px}
 .btn.bad:hover{background:color-mix(in srgb,var(--bad) 85%,#000)}
 .btn.warn:hover{background:color-mix(in srgb,var(--warn) 85%,#000)}
 
-/* ---------- 4. table ---------- */
+/* ---------- 5. table ---------- */
 .table-wrap{overflow:auto;border:1px solid var(--border);border-radius:var(--r)}
 table{
   width:100%;border-collapse:collapse;
@@ -113,17 +128,18 @@ tbody tr:hover{background:color-mix(in srgb,var(--accent) 10%,var(--surf))}
   background:var(--surf-2);
 }
 
-/* ---------- 5. scrollbar (webkit) ---------- */
+/* ---------- 6. scrollbar (webkit) ---------- */
 ::-webkit-scrollbar{width:6px;height:6px}
 ::-webkit-scrollbar-track{background:var(--surf-2)}
 ::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--accent-h)}
 
-/* ---------- 6. responsive ---------- */
+/* ---------- 7. responsive ---------- */
 @media(max-width:480px){
   body{padding:calc(var(--sp)/2)}
   .container{gap:calc(var(--sp)/2)}
   section{padding:calc(var(--sp)*.75)}
   table{font-size:.72rem}
   h1{font-size:1.5rem}
+  .theme-toggle{top:calc(var(--sp)/2);right:calc(var(--sp)/2);font-size:.7rem}
 }
