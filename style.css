@@ -1,95 +1,108 @@
-/* ==========  Neo-Monochrome Blackjack CSS  ========== */
+/* ==========  Graphite Elegance CSS (Light & Dark)  ========== */
 
-/* ---------- Tokens ---------- */
+/* ---------- 0. 基本トークン ---------- */
 :root{
-  /* Base */
-  --bg:#0a0a0a;          /* almost black */
-  --surface:#121212;     /* card background */
-  --surface-alt:#1e1e1e; /* hover surface */
-  --border:#2e2e2e;
-  --txt:#e4e4e4;
-  --txt-muted:#7a7a7a;
-
-  /* Neon accent (switch here to change entire mood) */
-  --neon:#17f9ff;        /* cyan glow */
-
-  /* Sizing */
-  --radius:8px;
-  --space:clamp(8px,2vw,14px);
-  --shadow:0 4px 16px rgba(0,0,0,.6);
+  /* Surfaces */
+  --g-s1:#ffffff;   /* 最背面 */
+  --g-s2:#f4f4f6;   /* セクション背景 */
+  --g-s3:#e6e8ea;   /* テーブル欄外・ボーダ */
+  /* Text */
+  --g-t1:#2e2f33;   /* 本文 */
+  --g-t2:#65666b;   /* 補足 */
+  /* Accent (控えめなティール) */
+  --g-ac:#008c9e;
+  --g-ac-h:#006f7d;
+  /* Feedback */
+  --g-good:#227a46; --g-bad:#9d2734; --g-warn:#986700;
+  /* Size / Radius / Shadow */
+  --g-r:6px;
+  --g-sp:clamp(8px,2vw,14px);
+  --g-sh-sm:0 1px 2px rgba(0,0,0,.04);
+  --g-sh-md:0 2px 6px rgba(0,0,0,.08);
 }
+@media(prefers-color-scheme:dark){
+  :root{
+    --g-s1:#121214;
+    --g-s2:#1c1d1f;
+    --g-s3:#2c2e30;
+    --g-t1:#e8e9ea;
+    --g-t2:#a1a2a6;
+    --g-ac:#26b0c4;
+    --g-ac-h:#1590a0;
+    --g-sh-sm:0 1px 3px rgba(0,0,0,.6);
+    --g-sh-md:0 3px 8px rgba(0,0,0,.65);
+  }
+}
+/* 手動トグル */
+[data-theme="dark"]{@media(prefers-color-scheme:light){:root{color-scheme:dark;}}}
 
-/* ---------- Reset & Base ---------- */
-*,
-*::before,
-*::after{box-sizing:border-box;margin:0;padding:0}
+/* ---------- 1. リセット＆ベース ---------- */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 body{
-  font-family:'JetBrains Mono',Menlo,Consolas,monospace;
-  background:var(--bg);color:var(--txt);min-height:100vh;
-  display:flex;flex-direction:column;align-items:center;padding:var(--space);
+  font-family:"Roboto","Noto Sans JP",system-ui,sans-serif;
+  background:var(--g-s1);color:var(--g-t1);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;
+  padding:var(--g-sp);
+  transition:background .3s,color .3s;
 }
-h1,h2,button{letter-spacing:-.02em}
-h1{font-size:clamp(1.4rem,5vw,2rem);margin-bottom:var(--space)}
-h2{font-size:clamp(1.1rem,4vw,1.4rem);margin-bottom:calc(var(--space)/2)}
+h1,h2,button{letter-spacing:-.015em;font-weight:600}
+h1{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:var(--g-sp)}
+h2{font-size:clamp(1.1rem,4vw,1.35rem);margin-bottom:calc(var(--g-sp)/2)}
 
-/* ---------- Container & Section Cards ---------- */
-.container{width:100%;max-width:720px;display:flex;flex-direction:column;gap:var(--space)}
+/* ---------- 2. レイアウト ---------- */
+.container{width:100%;max-width:780px;display:flex;flex-direction:column;gap:var(--g-sp)}
 section{
-  background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);padding:var(--space);box-shadow:var(--shadow);
-  transition:background .25s;
+  background:var(--g-s2);border:1px solid var(--g-s3);border-radius:var(--g-r);
+  padding:var(--g-sp);box-shadow:var(--g-sh-sm);
+  transition:box-shadow .25s,background .25s;
 }
-section:hover{background:var(--surface-alt)}
+section:hover{box-shadow:var(--g-sh-md)}
+.subtle{color:var(--g-t2);font-size:.875rem}
 
-/* ---------- Neon Button ---------- */
+/* ---------- 3. ボタン ---------- */
 .btn{
-  all:unset;cursor:pointer;width:100%;text-align:center;
-  padding:var(--space);font-weight:600;border-radius:var(--radius);
-  color:var(--bg);background:var(--neon);
-  box-shadow:0 0 8px var(--neon),0 0 16px var(--neon);
-  transition:transform .2s,box-shadow .3s;
+  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
+  padding:10px 18px;border:none;border-radius:var(--g-r);font-weight:600;
+  font-size:clamp(.9rem,3.5vw,1rem);user-select:none;touch-action:manipulation;
+  transition:background .2s,transform .2s;
+  background:var(--g-ac);color:#fff;min-height:42px;
 }
-.btn:hover{transform:translateY(-3px);box-shadow:0 0 12px var(--neon),0 0 24px var(--neon)}
-.btn:active{transform:none;box-shadow:0 0 6px var(--neon),0 0 12px var(--neon)}
+.btn:hover{background:var(--g-ac-h);transform:translateY(-2px);box-shadow:var(--g-sh-md)}
+.btn:active{transform:none}
+.btn.good{background:var(--g-good)}
+.btn.bad {background:var(--g-bad)}
+.btn.warn{background:var(--g-warn);color:#fff}
 
-/* ---------- Tables (Fixed 7-seg style) ---------- */
-.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:var(--radius)}
+/* ---------- 4. テーブル (Sticky＆コンパクト) ---------- */
+.table-wrap{overflow:auto;border:1px solid var(--g-s3);border-radius:var(--g-r)}
 table{
-  width:100%;border-collapse:collapse;font-size:0.75rem;font-variant-numeric:tabular-nums;
+  width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums;
 }
-th,td{
-  padding:4px 6px;text-align:center;white-space:nowrap;
-  border:1px solid var(--border);color:var(--txt-muted);
-}
+th,td{padding:4px 6px;text-align:center;border:1px solid var(--g-s3)}
 thead th{
-  background:var(--bg);color:var(--neon);position:sticky;top:0;
-  text-shadow:0 0 4px var(--neon);
+  background:var(--g-ac);color:#fff;position:sticky;top:0;z-index:1
 }
-tbody tr:hover{background:rgba(23,249,255,.08)}
-/* player col */
+tbody tr:nth-child(even){background:rgba(0,0,0,.03)}
+tbody tr:hover{background:rgba(0,0,0,.06)}
+/* 左端プレイヤー列 */
 .player-col{
-  position:sticky;left:0;background:var(--surface);
-  color:var(--neon);text-shadow:0 0 3px var(--neon);
+  position:sticky;left:0;background:var(--g-s2);min-width:60px;font-weight:600
 }
 
-/* ---------- Chip-style Badge ---------- */
-.badge{
-  display:inline-block;padding:2px 8px;border-radius:9999px;
-  background:var(--surface-alt);border:1px solid var(--neon);color:var(--neon);
-  font-size:0.7rem;box-shadow:0 0 6px var(--neon);
+/* ---------- 5. スクロールバー (webkit) ---------- */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--g-s2)}
+::-webkit-scrollbar-thumb{
+  background:var(--g-ac);border-radius:3px
 }
+::-webkit-scrollbar-thumb:hover{background:var(--g-ac-h)}
 
-/* ---------- Responsive ---------- */
+/* ---------- 6. レスポンシブ ---------- */
 @media(max-width:480px){
-  body{padding:calc(var(--space)/2)}
-  .container{gap:calc(var(--space)/2)}
-  section{padding:calc(var(--space)*0.75)}
-  table{font-size:0.65rem}
+  body{padding:calc(var(--g-sp)/2)}
+  .container{gap:calc(var(--g-sp)/2)}
+  section{padding:calc(var(--g-sp)*.75)}
+  table{font-size:.7rem}
+  h1{font-size:1.4rem}
 }
-
-/* ---------- Custom Scrollbar ---------- */
-::-webkit-scrollbar{height:6px;width:6px}
-::-webkit-scrollbar-track{background:var(--surface)}
-::-webkit-scrollbar-thumb{background:var(--neon)}
-::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--neon) 80%,black)}
