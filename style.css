@@ -1,108 +1,129 @@
-/* ==========  Graphite Elegance CSS (Light & Dark)  ========== */
+/* =========  Graphite-Plus CSS  ========= */
+/* Light & Dark / chic + depth / simple variable names */
 
-/* ---------- 0. 基本トークン ---------- */
+/* ---------- 0. tokens ---------- */
 :root{
-  /* Surfaces */
-  --g-s1:#ffffff;   /* 最背面 */
-  --g-s2:#f4f4f6;   /* セクション背景 */
-  --g-s3:#e6e8ea;   /* テーブル欄外・ボーダ */
-  /* Text */
-  --g-t1:#2e2f33;   /* 本文 */
-  --g-t2:#65666b;   /* 補足 */
-  /* Accent (控えめなティール) */
-  --g-ac:#008c9e;
-  --g-ac-h:#006f7d;
-  /* Feedback */
-  --g-good:#227a46; --g-bad:#9d2734; --g-warn:#986700;
-  /* Size / Radius / Shadow */
-  --g-r:6px;
-  --g-sp:clamp(8px,2vw,14px);
-  --g-sh-sm:0 1px 2px rgba(0,0,0,.04);
-  --g-sh-md:0 2px 6px rgba(0,0,0,.08);
+  /* colors – neutrals */
+  --bg:#fafafa;
+  --surf:#ffffff;
+  --surf-2:#f0f1f3;
+  --border:#d4d6da;
+  --txt:#24262a;
+  --txt-2:#676a70;
+
+  /* accent + states */
+  --accent:#156779;
+  --accent-h:#0f5160;
+  --good:#1e7a46;
+  --bad:#8f2a37;
+  --warn:#9c6d00;
+
+  /* metrics */
+  --r:8px;
+  --sp:clamp(8px,2vw,14px);
+
+  /* shadows */
+  --sh-s:0 1px 2px rgba(0,0,0,.05);
+  --sh-m:0 3px 10px rgba(0,0,0,.08);
 }
 @media(prefers-color-scheme:dark){
   :root{
-    --g-s1:#121214;
-    --g-s2:#1c1d1f;
-    --g-s3:#2c2e30;
-    --g-t1:#e8e9ea;
-    --g-t2:#a1a2a6;
-    --g-ac:#26b0c4;
-    --g-ac-h:#1590a0;
-    --g-sh-sm:0 1px 3px rgba(0,0,0,.6);
-    --g-sh-md:0 3px 8px rgba(0,0,0,.65);
+    --bg:#111214;
+    --surf:#1b1c1e;
+    --surf-2:#26272a;
+    --border:#3c3d42;
+    --txt:#e6e7e8;
+    --txt-2:#9a9ca1;
+
+    --accent:#20a0b8;
+    --accent-h:#158295;
+
+    --sh-s:0 1px 3px rgba(0,0,0,.55);
+    --sh-m:0 4px 16px rgba(0,0,0,.6);
   }
 }
-/* 手動トグル */
+/* manual toggle */
 [data-theme="dark"]{@media(prefers-color-scheme:light){:root{color-scheme:dark;}}}
 
-/* ---------- 1. リセット＆ベース ---------- */
+/* ---------- 1. reset & base ---------- */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 body{
-  font-family:"Roboto","Noto Sans JP",system-ui,sans-serif;
-  background:var(--g-s1);color:var(--g-t1);min-height:100vh;
+  font-family:"Inter","Noto Sans JP",system-ui,sans-serif;
+  background:var(--bg);color:var(--txt);min-height:100vh;
   display:flex;flex-direction:column;align-items:center;
-  padding:var(--g-sp);
-  transition:background .3s,color .3s;
+  padding:var(--sp);transition:background .3s,color .3s;
 }
-h1,h2,button{letter-spacing:-.015em;font-weight:600}
-h1{font-size:clamp(1.5rem,5vw,2rem);margin-bottom:var(--g-sp)}
-h2{font-size:clamp(1.1rem,4vw,1.35rem);margin-bottom:calc(var(--g-sp)/2)}
+h1,h2,button{font-weight:600;letter-spacing:-.015em}
+h1{font-size:clamp(1.6rem,5vw,2.1rem);margin-bottom:var(--sp)}
+h2{font-size:clamp(1.15rem,4vw,1.4rem);margin-bottom:calc(var(--sp)/2)}
+img,svg{max-width:100%;display:block}
 
-/* ---------- 2. レイアウト ---------- */
-.container{width:100%;max-width:780px;display:flex;flex-direction:column;gap:var(--g-sp)}
+/* ---------- 2. layout ---------- */
+.container{width:100%;max-width:800px;display:flex;flex-direction:column;gap:var(--sp)}
 section{
-  background:var(--g-s2);border:1px solid var(--g-s3);border-radius:var(--g-r);
-  padding:var(--g-sp);box-shadow:var(--g-sh-sm);
-  transition:box-shadow .25s,background .25s;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--surf) 94%,var(--accent) 6%),
+      var(--surf));
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:var(--sp);box-shadow:var(--sh-s);
+  transition:box-shadow .25s,transform .25s;
 }
-section:hover{box-shadow:var(--g-sh-md)}
-.subtle{color:var(--g-t2);font-size:.875rem}
+section:hover{box-shadow:var(--sh-m);transform:translateY(-2px)}
+p.subtle{color:var(--txt-2);font-size:.9rem;margin-top:4px}
 
-/* ---------- 3. ボタン ---------- */
+/* ---------- 3. button ---------- */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;cursor:pointer;
-  padding:10px 18px;border:none;border-radius:var(--g-r);font-weight:600;
-  font-size:clamp(.9rem,3.5vw,1rem);user-select:none;touch-action:manipulation;
-  transition:background .2s,transform .2s;
-  background:var(--g-ac);color:#fff;min-height:42px;
+  display:inline-flex;justify-content:center;align-items:center;
+  width:100%;min-height:42px;padding:10px 18px;
+  border:none;border-radius:var(--r);cursor:pointer;
+  background:var(--accent);color:#fff;font-size:clamp(.9rem,3.5vw,1rem);
+  transition:background .2s,transform .2s,box-shadow .2s;
+  box-shadow:0 2px 4px color-mix(in srgb,var(--accent) 40%,transparent);
+  user-select:none;touch-action:manipulation;
 }
-.btn:hover{background:var(--g-ac-h);transform:translateY(-2px);box-shadow:var(--g-sh-md)}
+.btn:hover{
+  background:var(--accent-h);
+  transform:translateY(-2px);
+  box-shadow:0 4px 12px color-mix(in srgb,var(--accent-h) 40%,transparent);
+}
 .btn:active{transform:none}
-.btn.good{background:var(--g-good)}
-.btn.bad {background:var(--g-bad)}
-.btn.warn{background:var(--g-warn);color:#fff}
+.btn.good{background:var(--good)}
+.btn.bad{background:var(--bad)}
+.btn.warn{background:var(--warn);color:#fff}
+.btn.good:hover{background:color-mix(in srgb,var(--good) 85%,#000)}
+.btn.bad:hover{background:color-mix(in srgb,var(--bad) 85%,#000)}
+.btn.warn:hover{background:color-mix(in srgb,var(--warn) 85%,#000)}
 
-/* ---------- 4. テーブル (Sticky＆コンパクト) ---------- */
-.table-wrap{overflow:auto;border:1px solid var(--g-s3);border-radius:var(--g-r)}
+/* ---------- 4. table ---------- */
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:var(--r)}
 table{
-  width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums;
+  width:100%;border-collapse:collapse;
+  font-size:.8rem;font-variant-numeric:tabular-nums;
 }
-th,td{padding:4px 6px;text-align:center;border:1px solid var(--g-s3)}
+th,td{padding:5px 8px;text-align:center;border:1px solid var(--border)}
 thead th{
-  background:var(--g-ac);color:#fff;position:sticky;top:0;z-index:1
+  background:var(--accent);color:#fff;position:sticky;top:0;z-index:1
 }
-tbody tr:nth-child(even){background:rgba(0,0,0,.03)}
-tbody tr:hover{background:rgba(0,0,0,.06)}
-/* 左端プレイヤー列 */
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--surf) 95%,#000)}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 10%,var(--surf))}
 .player-col{
-  position:sticky;left:0;background:var(--g-s2);min-width:60px;font-weight:600
+  position:sticky;left:0;min-width:60px;font-weight:600;
+  background:var(--surf-2);
 }
 
-/* ---------- 5. スクロールバー (webkit) ---------- */
+/* ---------- 5. scrollbar (webkit) ---------- */
 ::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--g-s2)}
-::-webkit-scrollbar-thumb{
-  background:var(--g-ac);border-radius:3px
-}
-::-webkit-scrollbar-thumb:hover{background:var(--g-ac-h)}
+::-webkit-scrollbar-track{background:var(--surf-2)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent-h)}
 
-/* ---------- 6. レスポンシブ ---------- */
+/* ---------- 6. responsive ---------- */
 @media(max-width:480px){
-  body{padding:calc(var(--g-sp)/2)}
-  .container{gap:calc(var(--g-sp)/2)}
-  section{padding:calc(var(--g-sp)*.75)}
-  table{font-size:.7rem}
-  h1{font-size:1.4rem}
+  body{padding:calc(var(--sp)/2)}
+  .container{gap:calc(var(--sp)/2)}
+  section{padding:calc(var(--sp)*.75)}
+  table{font-size:.72rem}
+  h1{font-size:1.5rem}
 }
