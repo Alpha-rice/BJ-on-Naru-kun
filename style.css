@@ -12,8 +12,8 @@
   --txt-2:#676a70;
 
   /* accent + states */
-  --accent:#156779;
-  --accent-h:#0f5160;
+  --accent:#8b2635;    /* ワインレッド系に変更 */
+  --accent-h:#5a1a24;  /* ホバー時はより深い色 */
   --good:#1e7a46;
   --bad:#8f2a37;
   --warn:#9c6d00;
@@ -35,8 +35,8 @@
     --txt:#e6e7e8;
     --txt-2:#9a9ca1;
 
-    --accent:#20a0b8;
-    --accent-h:#158295;
+    --accent:#d64555;    /* ダークモード時は少し明るいワインレッド */
+    --accent-h:#a73544;  /* ホバー時 */
 
     --sh-s:0 1px 3px rgba(0,0,0,.55);
     --sh-m:0 4px 16px rgba(0,0,0,.6);
