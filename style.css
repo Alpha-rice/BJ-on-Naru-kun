@@ -1,116 +1,95 @@
-/* ===== Mini‐Unified BlackjackGuide CSS ===== */
+/* ==========  Neo-Monochrome Blackjack CSS  ========== */
 
-/* ---------- Variables ---------- */
+/* ---------- Tokens ---------- */
 :root{
-  /* Surfaces */
-  --surf-1:#fff;--surf-2:#f6f8fa;--surf-3:#e9ecef;
-  /* Typography */
-  --txt-1:#24292e;--txt-2:#57606a;
-  /* Brand */
-  --brand:#0d6efd;--brand-hover:#0b5ed7;
-  --accent:#c49356;--accent-hover:#a67c47;
-  --success:#28a745;--danger:#dc3545;--warn:#ffc107;
-  /* Misc */
-  --radius:6px;
-  --shadow-sm:0 1px 2px rgba(0,0,0,.05);
-  --shadow-md:0 2px 4px rgba(0,0,0,.1);
-  --tbl-row-hover:rgba(13,110,253,.06);
-  /* Table sizing */
-  --cell-size:clamp(8px,2vw,14px);
-  --head-w:clamp(24px,5vw,36px);
-  --cell-h:clamp(16px,3vw,24px);
-}
-@media(prefers-color-scheme:dark){
-  :root{
-    --surf-1:#161b22;--surf-2:#1f242b;--surf-3:#2d333b;
-    --txt-1:#c9d1d9;--txt-2:#8b949e;
-    --brand:#58a6ff;--brand-hover:#1f6feb;
-    --accent:#d29922;--accent-hover:#bb8c00;
-    --tbl-row-hover:rgba(88,166,255,.08);
-  }
-}
-[data-theme="dark"]{@media(prefers-color-scheme:light){:root{color-scheme:dark;}}}
+  /* Base */
+  --bg:#0a0a0a;          /* almost black */
+  --surface:#121212;     /* card background */
+  --surface-alt:#1e1e1e; /* hover surface */
+  --border:#2e2e2e;
+  --txt:#e4e4e4;
+  --txt-muted:#7a7a7a;
 
-/* ---------- Base ---------- */
+  /* Neon accent (switch here to change entire mood) */
+  --neon:#17f9ff;        /* cyan glow */
+
+  /* Sizing */
+  --radius:8px;
+  --space:clamp(8px,2vw,14px);
+  --shadow:0 4px 16px rgba(0,0,0,.6);
+}
+
+/* ---------- Reset & Base ---------- */
 *,
 *::before,
 *::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
+html{font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 body{
-  min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:var(--surf-1);color:var(--txt-1);transition:background .3s,color .3s;
+  font-family:'JetBrains Mono',Menlo,Consolas,monospace;
+  background:var(--bg);color:var(--txt);min-height:100vh;
+  display:flex;flex-direction:column;align-items:center;padding:var(--space);
 }
-img,svg{max-width:100%;display:block}
+h1,h2,button{letter-spacing:-.02em}
+h1{font-size:clamp(1.4rem,5vw,2rem);margin-bottom:var(--space)}
+h2{font-size:clamp(1.1rem,4vw,1.4rem);margin-bottom:calc(var(--space)/2)}
 
-/* ---------- Layout ---------- */
-.container{max-width:840px;width:100%;margin:auto;padding:8px}
+/* ---------- Container & Section Cards ---------- */
+.container{width:100%;max-width:720px;display:flex;flex-direction:column;gap:var(--space)}
 section{
-  background:var(--surf-2);border:1px solid var(--surf-3);
-  border-radius:var(--radius);box-shadow:var(--shadow-sm);
-  margin-block:12px;padding:16px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);padding:var(--space);box-shadow:var(--shadow);
+  transition:background .25s;
 }
-section h2{
-  font-size:clamp(1rem,4vw,1.25rem);margin-bottom:8px;
-  border-bottom:2px solid var(--accent);padding-bottom:4px;letter-spacing:-.02em;
-}
+section:hover{background:var(--surface-alt)}
 
-/* ---------- Buttons ---------- */
+/* ---------- Neon Button ---------- */
 .btn{
-  display:inline-flex;align-items:center;justify-content:center;
-  padding:8px 16px;border:none;border-radius:var(--radius);
-  font-weight:600;font-size:clamp(.875rem,3.5vw,1rem);
-  color:#fff;background:var(--brand);width:100%;min-height:40px;
-  transition:background .2s,transform .2s;user-select:none;touch-action:manipulation;
+  all:unset;cursor:pointer;width:100%;text-align:center;
+  padding:var(--space);font-weight:600;border-radius:var(--radius);
+  color:var(--bg);background:var(--neon);
+  box-shadow:0 0 8px var(--neon),0 0 16px var(--neon);
+  transition:transform .2s,box-shadow .3s;
 }
-.btn:hover{background:var(--brand-hover);transform:translateY(-2px);box-shadow:var(--shadow-md)}
-.btn:active{transform:none}
-.btn-success{background:var(--success)}
-.btn-danger{background:var(--danger)}
-.btn-warn{background:var(--warn);color:#212529}
-.btn-success:hover{background:color-mix(in srgb,var(--success) 85%,#000)}
-.btn-danger:hover{background:color-mix(in srgb,var(--danger) 85%,#000)}
-.btn-warn:hover{background:color-mix(in srgb,var(--warn) 85%,#000)}
+.btn:hover{transform:translateY(-3px);box-shadow:0 0 12px var(--neon),0 0 24px var(--neon)}
+.btn:active{transform:none;box-shadow:0 0 6px var(--neon),0 0 12px var(--neon)}
 
-/* ---------- Tables ---------- */
-.strategy-table,
-.history-table{
-  width:100%;border-collapse:collapse;font-size:clamp(.5rem,2vw,.75rem);
-  user-select:none;border:2px solid var(--accent);border-radius:4px;overflow:hidden;
+/* ---------- Tables (Fixed 7-seg style) ---------- */
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:var(--radius)}
+table{
+  width:100%;border-collapse:collapse;font-size:0.75rem;font-variant-numeric:tabular-nums;
 }
-.strategy-table thead th,
-.history-table thead th{
-  position:sticky;top:0;z-index:1;background:var(--brand);color:#fff;
+th,td{
+  padding:4px 6px;text-align:center;white-space:nowrap;
+  border:1px solid var(--border);color:var(--txt-muted);
 }
-.strategy-table th,
-.strategy-table td,
-.history-table th,
-.history-table td{
-  padding:0;text-align:center;border:1px solid var(--accent);
-  width:var(--cell-size);min-width:var(--cell-size);height:var(--cell-h);
+thead th{
+  background:var(--bg);color:var(--neon);position:sticky;top:0;
+  text-shadow:0 0 4px var(--neon);
 }
-.strategy-table thead th:first-child,
-.strategy-table .player{
-  position:sticky;left:0;z-index:2;background:var(--accent);color:#fff;
-  width:var(--head-w);min-width:var(--head-w)
+tbody tr:hover{background:rgba(23,249,255,.08)}
+/* player col */
+.player-col{
+  position:sticky;left:0;background:var(--surface);
+  color:var(--neon);text-shadow:0 0 3px var(--neon);
 }
-.strategy-table tbody tr:hover,
-.history-table tbody tr:hover{background:var(--tbl-row-hover)}
-/* hit/stand/pair */
-.strategy-table td.h{background:#2a2d34;color:#f4f5f7}
-.strategy-table td.s{background:#f4f5f7;color:#2a2d34}
-.strategy-table td.p{background:var(--brand);color:#fff}
 
-/* ---------- Responsive Helpers ---------- */
+/* ---------- Chip-style Badge ---------- */
+.badge{
+  display:inline-block;padding:2px 8px;border-radius:9999px;
+  background:var(--surface-alt);border:1px solid var(--neon);color:var(--neon);
+  font-size:0.7rem;box-shadow:0 0 6px var(--neon);
+}
+
+/* ---------- Responsive ---------- */
 @media(max-width:480px){
-  .container{padding:4px}
-  section{padding:12px}
-  .btn{min-height:36px}
-  .strategy-table,
-  .history-table{font-size:.625rem}
+  body{padding:calc(var(--space)/2)}
+  .container{gap:calc(var(--space)/2)}
+  section{padding:calc(var(--space)*0.75)}
+  table{font-size:0.65rem}
 }
 
-/* ---------- Scrollbar (webkit) ---------- */
+/* ---------- Custom Scrollbar ---------- */
 ::-webkit-scrollbar{height:6px;width:6px}
-::-webkit-scrollbar-track{background:var(--surf-2)}
-::-webkit-scrollbar-thumb{background:var(--accent)}
-::-webkit-scrollbar-thumb:hover{background:var(--accent-hover)}
+::-webkit-scrollbar-track{background:var(--surface)}
+::-webkit-scrollbar-thumb{background:var(--neon)}
+::-webkit-scrollbar-thumb:hover{background:color-mix(in srgb,var(--neon) 80%,black)}
