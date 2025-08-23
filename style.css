@@ -1,183 +1,128 @@
-/* =========  Deep Sky & Quartz Theme CSS  ========= */
+/* ============  Sky-Quartz Design Tokens  ============ */
 
-/* ---------- 0. theme tokens ---------- */
+/* -------- 0. 共通メタ -------- */
 :root{
-  /* Quartz Theme (Light) - 石英の透明感と温かみ */
-  --bg:#fdfcfa;        /* warm white */
-  --surf:#ffffff;      /* pure white */
-  --surf-2:#f7f5f3;    /* soft beige */
-  --border:#e8e5e1;    /* warm gray */
-  --txt:#2d2b28;       /* charcoal */
-  --txt-2:#6b6762;     /* muted brown */
-  
-  /* quartz accent - warm amber gold */
-  --accent:#d97706;    /* amber */
-  --accent-h:#b45309;  /* deeper amber */
-  
-  /* functional colors */
-  --good:#059669;
-  --bad:#dc2626;
-  --warn:#d97706;
-  
+  /* サイズ・影 */
   --r:8px;
   --sp:clamp(8px,2vw,14px);
-  --sh-s:0 1px 3px rgba(0,0,0,.06);
-  --sh-m:0 4px 12px rgba(0,0,0,.1);
+  --sh-s:0 1px 2px rgba(0,0,0,.04);
+  --sh-m:0 3px 12px rgba(0,0,0,.1);
 }
 
-/* Deep Sky Theme (Dark) - 深い空の神秘性 */
-@media(prefers-color-scheme:dark){
-  :root{
-    --bg:#0c1420;       /* deep night sky */
-    --surf:#162332;     /* darker sky */
-    --surf-2:#1e2a3a;   /* cloud layer */
-    --border:#2a3441;   /* storm clouds */
-    --txt:#e2e8f0;      /* moonlight */
-    --txt-2:#94a3b8;    /* starlight */
-    
-    /* deep sky accent - bright sky blue */
-    --accent:#0ea5e9;   /* sky blue */
-    --accent-h:#0284c7;  /* deeper sky */
-    
-    --good:#10b981;
-    --bad:#ef4444;
-    --warn:#f59e0b;
-    
-    --sh-s:0 2px 4px rgba(0,0,0,.4);
-    --sh-m:0 8px 24px rgba(0,0,0,.5);
-  }
+/* -------- 1-A. ライト | Quartz & White-Gold -------- */
+:root{
+  /* 石英(Quartz)の柔らかいグレーに、白金(White-Gold)の艶感を重ねる */
+  --bg:#f9f9fb;           /* 背景ベース   Quartz Powder */
+  --surf:#ffffff;         /* カード面     Polished Quartz */
+  --surf-2:#ececf0;       /* トーン差分   Frosted Quartz */
+  --border:#dcdde4;       /* エッジ       White-Gold Rim */
+  --txt:#2b2c30;          /* 主テキスト   Graphite Ink */
+  --txt-2:#64656a;        /* 補助テキスト Smoky Silver */
+
+  /* アクセント: 白金の輝きを帯びた淡いシャンパンゴールド */
+  --accent:#b69d75;
+  --accent-h:#977e5d;
+
+  /* 状態色は低彩度で控えめに */
+  --good:#3e815a;
+  --bad:#a03a48;
+  --warn:#9c7a00;
 }
 
+/* -------- 1-B. ダーク | Deep-Dark-Sky & 藍 -------- */
+@media(prefers-color-scheme:dark){:root{
+  /* 深夜の空色と藍染を掛け合わせた低輝度パレット */
+  --bg:#0b0c10;           /* 星明りの無い夜空 */
+  --surf:#14161d;         /* 雲間の闇 */
+  --surf-2:#1e212a;       /* 薄雲の輪郭 */
+  --border:#2a2d38;       /* 藍の縁取り */
+  --txt:#e4e6eb;          /* 星屑の光 */
+  --txt-2:#9598a2;        /* 薄明の残光 */
+
+  /* アクセント: 濃藍に僅かなシアンを混ぜたディープスカイブルー */
+  --accent:#0070a8;
+  --accent-h:#005a86;
+
+  /* 状態色も夜の彩度で再調整 */
+  --good:#2ea27c;
+  --bad:#d04f5f;
+  --warn:#c09400;
+
+  --sh-s:0 2px 4px rgba(0,0,0,.55);
+  --sh-m:0 4px 18px rgba(0,0,0,.65);
+}}
+
+/* 手動切替： <html data-theme="dark"> */
 [data-theme="dark"]{@media(prefers-color-scheme:light){:root{color-scheme:dark;}}}
 
-/* ---------- 1. reset & base ---------- */
+/* ============ 以下、共通UIスタイル（変数参照） ============ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:16px;line-height:1.6;-webkit-text-size-adjust:100%}
+html{font-size:16px;line-height:1.5;-webkit-text-size-adjust:100%}
 body{
-  font-family:"SF Pro Display","Inter","Noto Sans JP",system-ui,sans-serif;
+  font-family:"Inter","Noto Sans JP",system-ui,sans-serif;
   background:var(--bg);color:var(--txt);min-height:100vh;
   display:flex;flex-direction:column;align-items:center;
-  padding:var(--sp);transition:all .4s ease;
+  padding:var(--sp);transition:background .3s,color .3s;
 }
+h1,h2,button{font-weight:600;letter-spacing:-.015em}
+h1{font-size:clamp(1.6rem,5vw,2.1rem);margin-bottom:var(--sp)}
+h2{font-size:clamp(1.15rem,4vw,1.4rem);margin-bottom:calc(var(--sp)/2)}
+img,svg{max-width:100%;display:block}
 
-/* ---------- 2. theme toggle ---------- */
+/* トグルボタン（既存クラス .theme-toggle 想定） */
 .theme-toggle{
   position:fixed;top:var(--sp);right:var(--sp);z-index:1000;
   background:var(--surf);border:1px solid var(--border);color:var(--txt);
-  padding:8px 12px;border-radius:var(--r);cursor:pointer;
-  font-size:.8rem;font-weight:500;backdrop-filter:blur(8px);
-  box-shadow:var(--sh-s);transition:all .3s;
+  padding:6px 12px;border-radius:var(--r);cursor:pointer;
+  font-size:.75rem;font-weight:500;box-shadow:var(--sh-s);
   user-select:none;touch-action:manipulation;
+  transition:background .25s,box-shadow .25s,transform .2s;
 }
-.theme-toggle:hover{
-  background:var(--surf-2);box-shadow:var(--sh-m);
-  transform:translateY(-2px);
-}
+.theme-toggle:hover{background:var(--surf-2);box-shadow:var(--sh-m);transform:translateY(-1px)}
+.theme-toggle:active{transform:translateY(0)}
 
-/* ---------- 3. typography ---------- */
-h1{
-  font-size:clamp(1.8rem,5vw,2.4rem);font-weight:700;
-  margin-bottom:var(--sp);letter-spacing:-.02em;
-  background:linear-gradient(135deg,var(--accent),var(--accent-h));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  background-clip:text;
-}
-h2{
-  font-size:clamp(1.2rem,4vw,1.5rem);font-weight:600;
-  margin-bottom:calc(var(--sp)/2);letter-spacing:-.01em;
-  color:var(--txt);position:relative;
-}
-h2::after{
-  content:'';position:absolute;bottom:-4px;left:0;
-  width:40px;height:2px;background:var(--accent);border-radius:1px;
-}
-
-/* ---------- 4. layout ---------- */
-.container{width:100%;max-width:840px;display:flex;flex-direction:column;gap:var(--sp)}
+/* カードセクション */
 section{
-  background:var(--surf);border:1px solid var(--border);
-  border-radius:calc(var(--r)*1.5);padding:calc(var(--sp)*1.2);
-  box-shadow:var(--sh-s);backdrop-filter:blur(8px);
-  transition:all .3s ease;position:relative;overflow:hidden;
+  background:
+    linear-gradient(145deg,
+      color-mix(in srgb,var(--surf) 92%,var(--accent) 8%),
+      var(--surf));
+  border:1px solid var(--border);border-radius:var(--r);
+  padding:var(--sp);box-shadow:var(--sh-s);
+  transition:box-shadow .25s,transform .25s;
 }
-section::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--accent),transparent);
-  opacity:.5;
-}
-section:hover{
-  box-shadow:var(--sh-m);transform:translateY(-3px);
-  border-color:color-mix(in srgb,var(--accent) 30%,var(--border));
-}
+section:hover{box-shadow:var(--sh-m);transform:translateY(-2px)}
 
-/* ---------- 5. buttons ---------- */
+/* 汎用ボタン */
 .btn{
-  display:inline-flex;justify-content:center;align-items:center;
-  width:100%;min-height:46px;padding:12px 20px;
-  border:none;border-radius:var(--r);cursor:pointer;
-  font-size:clamp(.95rem,3.5vw,1.05rem);font-weight:600;
-  background:linear-gradient(135deg,var(--accent),var(--accent-h));
-  color:#fff;position:relative;overflow:hidden;
-  transition:all .3s ease;user-select:none;touch-action:manipulation;
-  box-shadow:0 4px 12px color-mix(in srgb,var(--accent) 25%,transparent);
+  display:inline-flex;align-items:center;justify-content:center;width:100%;
+  min-height:42px;padding:10px 18px;border:none;border-radius:var(--r);
+  background:var(--accent);color:#fff;font-size:clamp(.9rem,3.5vw,1rem);
+  cursor:pointer;user-select:none;touch-action:manipulation;
+  box-shadow:0 2px 4px color-mix(in srgb,var(--accent) 30%,transparent);
+  transition:background .2s,transform .2s,box-shadow .2s;
 }
-.btn::before{
-  content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
-  transition:left .6s ease;
-}
-.btn:hover::before{left:100%}
 .btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 8px 24px color-mix(in srgb,var(--accent) 35%,transparent);
+  background:var(--accent-h);transform:translateY(-2px);
+  box-shadow:0 4px 12px color-mix(in srgb,var(--accent-h) 35%,transparent);
 }
-.btn:active{transform:translateY(0)}
-.btn.good{background:linear-gradient(135deg,var(--good),color-mix(in srgb,var(--good) 85%,#000))}
-.btn.bad{background:linear-gradient(135deg,var(--bad),color-mix(in srgb,var(--bad) 85%,#000))}
-.btn.warn{background:linear-gradient(135deg,var(--warn),color-mix(in srgb,var(--warn) 85%,#000))}
+.btn:active{transform:none}
 
-/* ---------- 6. tables ---------- */
-.table-wrap{
-  overflow:auto;border:1px solid var(--border);
-  border-radius:calc(var(--r)*1.5);backdrop-filter:blur(8px);
-}
+/* テーブル */
+.table-wrap{overflow:auto;border:1px solid var(--border);border-radius:var(--r)}
 table{
-  width:100%;border-collapse:collapse;
-  font-size:.85rem;font-variant-numeric:tabular-nums;
+  width:100%;border-collapse:collapse;font-size:.8rem;font-variant-numeric:tabular-nums;
 }
-th,td{padding:8px 10px;text-align:center;border:1px solid var(--border)}
+th,td{padding:5px 8px;text-align:center;border:1px solid var(--border)}
 thead th{
-  background:linear-gradient(135deg,var(--accent),var(--accent-h));
-  color:#fff;position:sticky;top:0;z-index:1;font-weight:600;
+  background:var(--accent);color:#fff;position:sticky;top:0;z-index:1
 }
-tbody tr:nth-child(even){
-  background:color-mix(in srgb,var(--surf-2) 50%,transparent);
-}
-tbody tr:hover{
-  background:color-mix(in srgb,var(--accent) 8%,var(--surf));
-  transform:scale(1.01);transition:all .2s ease;
-}
-.player-col{
-  position:sticky;left:0;min-width:70px;font-weight:600;
-  background:var(--surf-2);
-}
+tbody tr:nth-child(even){background:color-mix(in srgb,var(--surf) 95%,#000)}
+tbody tr:hover{background:color-mix(in srgb,var(--accent) 12%,var(--surf))}
+.player-col{position:sticky;left:0;background:var(--surf-2);min-width:60px;font-weight:600}
 
-/* ---------- 7. scrollbar ---------- */
-::-webkit-scrollbar{width:8px;height:8px}
-::-webkit-scrollbar-track{background:var(--surf-2);border-radius:4px}
-::-webkit-scrollbar-thumb{
-  background:linear-gradient(135deg,var(--accent),var(--accent-h));
-  border-radius:4px;
-}
-::-webkit-scrollbar-thumb:hover{
-  background:linear-gradient(135deg,var(--accent-h),var(--accent));
-}
-
-/* ---------- 8. responsive ---------- */
-@media(max-width:480px){
-  body{padding:calc(var(--sp)/2)}
-  .container{gap:calc(var(--sp)/2)}
-  section{padding:var(--sp)}
-  table{font-size:.75rem}
-  .theme-toggle{top:calc(var(--sp)/2);right:calc(var(--sp)/2)}
-}
+/* スクロールバー */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--surf-2)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--accent-h)}
