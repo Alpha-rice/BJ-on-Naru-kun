@@ -166,7 +166,7 @@ class BlackjackGuide {
         if (!this.sessionActive) { alert('セッション未開始です'); return; }
         switch (result) {
             case 'win':
-                this.currentBalance += this.betAmount; // Win = bet amount
+                this.currentBalance += this.betAmount * 2; // Win = bet amount
                 this.winStreak++; this.lossStreak = 0;
                 break;
             case 'lose':
@@ -178,6 +178,8 @@ class BlackjackGuide {
                 }
                 break;
             case 'push':
+                this.loseStreak = 0;
+                this.winStreak = 0;
                 break;
         }
 
