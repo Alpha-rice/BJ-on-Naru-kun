@@ -266,7 +266,7 @@ class BlackjackGuide {
                 followerX += (mouseX - followerX) * 0.1;
                 followerY += (mouseY - followerY) * 0.1;
                 
-                follower.style.transform = `translate(${followerX - 10}px, ${followerY - 10}px)`;
+                follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
                 requestAnimationFrame(updateFollower);
             };
             updateFollower();
@@ -455,10 +455,10 @@ class BlackjackGuide {
         
         switch (result) {
             case 'win':
-                this.currentBalance += this.betAmount;
+                this.currentBalance += this.betAmount * 2;
                 this.winStreak++; 
                 this.lossStreak = 0;
-                this.showNotification(`勝利! +${this.betAmount.toLocaleString()}円`, 'info');
+                this.showNotification(`勝利! +${this.betAmount.toLocaleString() * 2}円`, 'info');
                 break;
             case 'lose':
                 this.currentBalance -= this.betAmount;
@@ -472,6 +472,7 @@ class BlackjackGuide {
                 break;
             case 'push':
                 this.showNotification('プッシュ（引き分け）', 'info');
+                this.winStreak = this.lossStreak = 0;
                 break;
         }
 
