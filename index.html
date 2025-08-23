@@ -48,30 +48,126 @@
 
         <!-- 基本戦略表 -->
         <section>
-            <h2>基本戦略表</h2>
-            <div class="table-wrap">
-                <table>
-                    <thead>
-                        <tr>
-                            <th class="player-col">Player＼Dealer</th>
-                            <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr><td colspan="11" class="group-header">Hard Hands</td></tr>
-                        <tr><td class="player-col">17+</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td></tr>
-                        <tr><td class="player-col">13-16</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td></tr>
-                        <tr><td class="player-col">12</td><td>H</td><td>H</td><td>S</td><td>S</td><td>S</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td></tr>
-                        <tr><td class="player-col">11-</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td></tr>
-                        <tr><td colspan="11" class="group-header">Soft Hands</td></tr>
-                        <tr><td class="player-col">19+</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td></tr>
-                        <tr><td class="player-col">18</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>S</td><td>H</td><td>H</td><td>H</td></tr>
-                        <tr><td class="player-col">17-</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td><td>H</td></tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="legend">H: Hit（カードを引く）, S: Stand（カードを引かない）</p>
-        </section>
+<section>
+    <h2>基本戦略表</h2>
+    <div class="table-wrap">
+        <table class="strategy-table">
+            <thead>
+                <tr>
+                    <th class="player-col">Player＼Dealer</th>
+                    <th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th><th>8</th><th>9</th><th>10</th><th>A</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td colspan="11" class="group-header">Hard Hands</td></tr>
+                <tr>
+                    <td class="player-col">17+</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                </tr>
+                <tr>
+                    <td class="player-col">13-16</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                </tr>
+                <tr>
+                    <td class="player-col">12</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                </tr>
+                <tr>
+                    <td class="player-col">11-</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                </tr>
+                <tr><td colspan="11" class="group-header">Soft Hands</td></tr>
+                <tr>
+                    <td class="player-col">19+</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                </tr>
+                <tr>
+                    <td class="player-col">18</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="S" data-description="Stand">S</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                </tr>
+                <tr>
+                    <td class="player-col">17-</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                    <td data-action="H" data-description="Hit">H</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <!-- 改良版凡例 -->
+    <div class="legend">
+        <div class="legend-item legend-hit">
+            <span class="legend-sample">H</span>
+            <span>Hit（カードを引く）</span>
+        </div>
+        <div class="legend-item legend-stand">
+            <span class="legend-sample">S</span>
+            <span>Stand（カードを引かない）</span>
+        </div>
+    </div>
+</section>
 
         <!-- 📈 セッション履歴 -->
         <section>
