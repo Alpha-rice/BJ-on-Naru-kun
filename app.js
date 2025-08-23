@@ -266,7 +266,7 @@ class BlackjackGuide {
                 followerX += (mouseX - followerX) * 0.1;
                 followerY += (mouseY - followerY) * 0.1;
                 
-                follower.style.transform = `translate(${followerX}px, ${followerY}px)`;
+                follower.style.transform = `translate(${followerX + 10}px, ${followerY + 10}px)`;
                 requestAnimationFrame(updateFollower);
             };
             updateFollower();
