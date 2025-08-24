@@ -1,4 +1,4 @@
-/* BlackjackGuide - エレクトリック・ドリーム 超シンプル版 */
+/* BlackjackGuide - エレクトリック・ドリーム 改良版 */
 
 /* CSS Custom Properties (変数定義) */
 :root {
@@ -49,10 +49,10 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* アニメーション */
-  --transition-fast: 0.15s ease;
-  --transition-normal: 0.2s ease;
-  --transition-slow: 0.3s ease;
+  /* スムーズアニメーション */
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Z-index レイヤー */
   --z-dropdown: 1000;
@@ -68,7 +68,7 @@
   --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* === ダークモード === */
+/* === ダークモード（目に優しい改良版） === */
 @media (prefers-color-scheme: dark) {
   :root {
     /* 背景（モノクロ1色） */
@@ -78,12 +78,14 @@
     --border-base: #373D5C;
     
     /* 表背景（2色） */
-    --table-bg-primary: #16213E;
-    --table-bg-secondary: #0F3460;
+    --table-bg-primary: #212542;
+    --table-bg-secondary: #2A2F54;
 
-    /* 自動生成 */
-    --text-primary: #FFFFFF;
-    --text-secondary: #B8BCC8;
+    /* 目に優しいテキスト色（真っ白を避ける） */
+    --text-primary: #E2E8F0;        /* ソフトホワイト */
+    --text-secondary: #A0A9C0;       /* 柔らかいグレー */
+    
+    /* ダークモードシャドウ */
     --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
     --shadow-md: 0 4px 8px rgba(0,0,0,0.4);
     --shadow-lg: 0 8px 16px rgba(0,0,0,0.5);
@@ -94,10 +96,10 @@
 [data-theme="dark"] {
   --bg-base: #1A1A2E;
   --border-base: #373D5C;
-  --table-bg-primary: #16213E;
-  --table-bg-secondary: #0F3460;
-  --text-primary: #FFFFFF;
-  --text-secondary: #B8BCC8;
+  --table-bg-primary: #212542;
+  --table-bg-secondary: #2A2F54;
+  --text-primary: #E2E8F0;
+  --text-secondary: #A0A9C0;
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 8px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 16px rgba(0,0,0,0.5);
@@ -192,12 +194,12 @@ body {
 
 .theme-toggle:hover {
   background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
   box-shadow: var(--shadow-lg);
 }
 
 .theme-toggle:active {
-  transform: translateY(0);
+  transform: translateY(-1px) scale(1.01);
 }
 
 /* ヘッダー（タイトルにグラデーション適用） */
@@ -238,13 +240,14 @@ section {
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   box-shadow: var(--shadow-sm);
-  transition: box-shadow var(--transition-normal);
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
 }
 
 section:hover {
   box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
 }
 
 section h2 {
@@ -307,6 +310,7 @@ section h2::before {
   outline: none;
   border-color: var(--accent-primary);
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 20%, transparent 80%);
+  transform: translateY(-1px);
 }
 
 .input-group input:hover:not(:focus) {
@@ -371,7 +375,7 @@ section h2::before {
   padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--border-light);
   font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .balance-item:last-child {
@@ -384,6 +388,7 @@ section h2::before {
   padding-left: var(--space-xs);
   padding-right: var(--space-xs);
   border-radius: var(--radius-sm);
+  transform: translateX(2px);
 }
 
 .balance-item .label {
@@ -433,13 +438,13 @@ section h2::before {
 }
 
 .btn:not(:disabled):hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.01);
   box-shadow: var(--shadow-md);
   border-color: var(--accent-primary);
 }
 
 .btn:not(:disabled):active {
-  transform: translateY(0);
+  transform: translateY(-1px) scale(1.005);
 }
 
 /* 主要ボタンにのみグラデーション適用 */
@@ -452,6 +457,7 @@ section h2::before {
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
   border-color: transparent;
+  transform: translateY(-3px) scale(1.02);
 }
 
 .btn-win {
@@ -524,7 +530,7 @@ section h2::before {
   width: 100%;
   min-width: max(320px, 100%);
   border-collapse: collapse;
-  font-size: clamp(6px, 1.3vw, 8px);
+  font-size: clamp(7px, 1.4vw, 9px);
   position: relative;
   user-select: none;
   font-weight: var(--font-weight-bold);
@@ -546,7 +552,7 @@ section h2::before {
   height: var(--cell-height);
 }
 
-/* プレイヤー列（左端） */
+/* プレイヤー列（左端）- コントラスト改善 */
 .strategy-table thead th:first-child,
 .strategy-table .player {
   width: var(--header-width) !important;
@@ -555,10 +561,11 @@ section h2::before {
   height: var(--cell-height) !important;
   background: var(--accent-primary);
   color: white;
-  font-size: clamp(4px, 1.1vw, 7px) !important;
+  font-size: clamp(5px, 1.2vw, 8px) !important;
   position: sticky;
   left: 0;
   z-index: var(--z-sticky);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* 通常のセル */
@@ -568,10 +575,10 @@ section h2::before {
   min-width: var(--cell-size) !important;
   max-width: var(--cell-size) !important;
   height: var(--cell-height) !important;
-  font-size: clamp(8px, 1.2vw, 10px) !important;
+  font-size: clamp(8px, 1.3vw, 11px) !important;
 }
 
-/* ディーラー列見出し */
+/* ディーラー列見出し - コントラスト改善 */
 .strategy-table thead th:not(:first-child) {
   background: color-mix(in srgb, var(--accent-primary) 80%, var(--accent-secondary) 20%);
   color: white;
@@ -579,6 +586,7 @@ section h2::before {
   top: 0;
   z-index: calc(var(--z-sticky) - 1);
   height: var(--cell-height) !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* コーナーセル */
@@ -591,15 +599,16 @@ section h2::before {
 .strategy-table .section-header td {
   background: var(--accent-primary);
   color: white;
-  font-size: clamp(4px, 1vw, 6px) !important;
+  font-size: clamp(5px, 1.1vw, 7px) !important;
   height: calc(var(--cell-height) * 0.8) !important;
   font-weight: var(--font-weight-bold);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
-/* Hit/Stand/Pair セル */
+/* Hit/Stand/Pair セル - ダークモード対応改善 */
 .strategy-table td.h {
-  background: var(--text-primary);
-  color: white;
+  background: #374151;                 /* 暗すぎないグレー */
+  color: #F3F4F6;                     /* 柔らかい白 */
   position: relative;
 }
 
@@ -607,6 +616,7 @@ section h2::before {
   background: var(--table-bg-secondary);
   color: var(--text-primary);
   position: relative;
+  font-weight: var(--font-weight-bold);
 }
 
 /* Pair分割用のスタイル */
@@ -614,6 +624,7 @@ section h2::before {
   background: var(--accent-secondary);
   color: white;
   position: relative;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* ホバー効果 - タッチデバイス考慮 */
@@ -623,9 +634,11 @@ section h2::before {
     background: var(--accent-primary) !important;
     color: white !important;
     font-weight: var(--font-weight-bold);
-    transform: scale(1.02);
+    transform: scale(1.05);
     z-index: var(--z-dropdown);
     cursor: pointer;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+    box-shadow: 0 2px 8px rgba(108, 99, 255, 0.3);
   }
 
   .strategy-table tbody tr:hover {
@@ -666,7 +679,8 @@ section h2::before {
 }
 
 .legend-color.h {
-  background: var(--text-primary);
+  background: #374151;
+  color: #F3F4F6;
 }
 
 .legend-color.s {
@@ -690,12 +704,13 @@ section h2::before {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--space-xs);
   margin-bottom: var(--space-sm);
-  transition: color var(--transition-normal);
+  transition: all var(--transition-normal);
   user-select: none;
 }
 
 .history-section summary:hover {
   color: var(--accent-primary);
+  transform: translateX(2px);
 }
 
 .history-section summary h2 {
@@ -750,7 +765,7 @@ section h2::before {
 }
 
 .history-table tbody tr {
-  transition: background-color var(--transition-fast);
+  transition: all var(--transition-fast);
 }
 
 .history-table tbody tr:nth-child(even) {
@@ -759,6 +774,7 @@ section h2::before {
 
 .history-table tbody tr:hover {
   background: color-mix(in srgb, var(--accent-primary) 5%, transparent 95%);
+  transform: translateX(1px);
 }
 
 /* タイマー */
@@ -779,6 +795,12 @@ section h2::before {
   font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
   z-index: var(--z-fixed);
   border: 1px solid var(--border-color);
+  transition: all var(--transition-normal);
+}
+
+.timer:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
 }
 
 .timer-btn {
@@ -800,6 +822,7 @@ section h2::before {
   background: var(--accent-primary);
   color: white;
   border-color: var(--accent-primary);
+  transform: scale(1.05);
 }
 
 /* レスポンシブ対応 */
@@ -1064,11 +1087,11 @@ input:focus-visible {
   user-select: none;
 }
 
-/* ロード時のアニメーション */
-@keyframes fadeIn {
+/* スムーズなロード時のアニメーション */
+@keyframes fadeInSmooth {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -1077,7 +1100,7 @@ input:focus-visible {
 }
 
 section {
-  animation: fadeIn 0.3s ease-out;
+  animation: fadeInSmooth 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 section:nth-child(1) { animation-delay: 0.1s; }
