@@ -1,57 +1,30 @@
-/* BlackjackGuide - エレクトリック・ドリーム シームレス版 */
+/* BlackjackGuide - エレクトリック・ドリーム 超シンプル版 */
 
 /* CSS Custom Properties (変数定義) */
 :root {
-  /* === エレクトリック・ドリーム コアカラー（調和版） === */
-  --electric: #5B54D9;          /* 控えめエレクトリックパープル */
-  --neon: #00C853;              /* バランス取れたグリーン */
-  --hot: #E91E63;               /* 落ち着いたピンク */
-  --gold: #FF9800;              /* 温かみのあるオレンジ */
+  /* === エレクトリック・ドリーム テーマ === */
+  /* 背景（モノクロ1色） */
+  --bg-base: #FFFFFF;
+  
+  /* 差し色グラデーション（1色ベース） */
+  --accent-primary: #6C63FF;
+  --accent-secondary: #FF6B9D;
+  
+  /* 枠線（1色） */
+  --border-base: #E5E7EB;
+  
+  /* 表背景（2色） */
+  --table-bg-primary: #FAFAFA;
+  --table-bg-secondary: #F5F5F5;
 
-  /* === ライトモード === */
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8FAFF;      /* 非常に薄い紫味 */
-  --bg-tertiary: #F2F4FF;
-  --bg-accent: #FAFBFF;
+  /* === 自動生成色（基本色から派生） === */
+  --bg-primary: var(--bg-base);
+  --bg-secondary: color-mix(in srgb, var(--bg-base) 95%, var(--accent-primary) 5%);
+  --bg-tertiary: color-mix(in srgb, var(--bg-base) 90%, var(--accent-primary) 10%);
   --text-primary: #2C2F36;
   --text-secondary: #6B7280;
-  --text-muted: #9CA3AF;
-  --border-light: #E5E7EB;
-  --border-color: #D1D5DB;
-  --border-dark: #9CA3AF;
-
-  /* メインカラー（コア色を使用） */
-  --primary-color: var(--electric);
-  --primary-hover: #4A43C8;
-  --success-color: var(--neon);
-  --success-hover: #00B347;
-  --danger-color: var(--hot);
-  --danger-hover: #D81B60;
-  --warning-color: var(--gold);
-  --warning-hover: #F57C00;
-  --info-color: #2196F3;
-  --info-hover: #1976D2;
-
-  /* 戦略表（実用性重視の配色） */
-  --sage: var(--neon);
-  --sage-light: #4CAF50;
-  --sage-dark: #00A84A;
-  --amber: var(--gold);
-  --amber-light: #FFA726;
-  --amber-dark: #F57C00;
-  --charcoal: #455A64;          /* 読みやすいダークグレー */
-  --pearl: #FAFAFA;             /* 非常に薄いグレー */
-
-  /* シャドウ・エフェクト（控えめ版） */
-  --shadow-sm: 0 1px 3px rgba(91, 84, 217, 0.08);
-  --shadow-md: 0 2px 6px rgba(91, 84, 217, 0.12);
-  --shadow-lg: 0 4px 12px rgba(91, 84, 217, 0.15);
-  --shadow-xl: 0 8px 20px rgba(91, 84, 217, 0.18);
-  
-  /* 控えめなグロー効果 */
-  --glow-subtle: 0 0 8px rgba(91, 84, 217, 0.2);
-  --glow-medium: 0 0 12px rgba(91, 84, 217, 0.3);
-  --glow-strong: 0 0 16px rgba(91, 84, 217, 0.4);
+  --border-color: var(--border-base);
+  --border-light: color-mix(in srgb, var(--border-base) 70%, transparent 30%);
 
   /* サイズ・スペーシング */
   --radius-sm: 4px;
@@ -76,11 +49,10 @@
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
 
-  /* アニメーション（控えめ） */
+  /* アニメーション */
   --transition-fast: 0.15s ease;
   --transition-normal: 0.2s ease;
   --transition-slow: 0.3s ease;
-  --transition-smooth: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   /* Z-index レイヤー */
   --z-dropdown: 1000;
@@ -89,68 +61,55 @@
   --z-modal: 1040;
   --z-popover: 1060;
   --z-tooltip: 1080;
+
+  /* シャドウ */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+  --shadow-md: 0 2px 6px rgba(0,0,0,0.1);
+  --shadow-lg: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 /* === ダークモード === */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* ダーク背景 */
-    --bg-primary: #1A1A2E;
-    --bg-secondary: #16213E;
-    --bg-tertiary: #0F3460;
-    --bg-accent: #1E2A54;
+    /* 背景（モノクロ1色） */
+    --bg-base: #1A1A2E;
+    
+    /* 枠線（1色） */
+    --border-base: #373D5C;
+    
+    /* 表背景（2色） */
+    --table-bg-primary: #16213E;
+    --table-bg-secondary: #0F3460;
+
+    /* 自動生成 */
     --text-primary: #FFFFFF;
     --text-secondary: #B8BCC8;
-    --text-muted: #8B92A5;
-    --border-light: #2A2F4A;
-    --border-color: #373D5C;
-    --border-dark: #4A5568;
-
-    /* 戦略表（ダーク背景用） */
-    --charcoal: var(--hot);
-    --pearl: #1A1A2E;
-
-    /* ダークモードシャドウ */
-    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
-    --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.5);
+    --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-md: 0 4px 8px rgba(0,0,0,0.4);
+    --shadow-lg: 0 8px 16px rgba(0,0,0,0.5);
   }
 }
 
-/* === 手動ダークモード切り替え === */
+/* === 手動テーマ切り替え === */
 [data-theme="dark"] {
-  --bg-primary: #1A1A2E;
-  --bg-secondary: #16213E;
-  --bg-tertiary: #0F3460;
-  --bg-accent: #1E2A54;
+  --bg-base: #1A1A2E;
+  --border-base: #373D5C;
+  --table-bg-primary: #16213E;
+  --table-bg-secondary: #0F3460;
   --text-primary: #FFFFFF;
   --text-secondary: #B8BCC8;
-  --text-muted: #8B92A5;
-  --border-light: #2A2F4A;
-  --border-color: #373D5C;
-  --border-dark: #4A5568;
-  --pearl: #1A1A2E;
-  --charcoal: var(--hot);
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 16px 32px rgba(0, 0, 0, 0.5);
+  --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 8px rgba(0,0,0,0.4);
+  --shadow-lg: 0 8px 16px rgba(0,0,0,0.5);
 }
 
 [data-theme="light"] {
-  --bg-primary: #FFFFFF;
-  --bg-secondary: #F8FAFF;
-  --bg-tertiary: #F2F4FF;
-  --bg-accent: #FAFBFF;
+  --bg-base: #FFFFFF;
+  --border-base: #E5E7EB;
+  --table-bg-primary: #FAFAFA;
+  --table-bg-secondary: #F5F5F5;
   --text-primary: #2C2F36;
   --text-secondary: #6B7280;
-  --text-muted: #9CA3AF;
-  --border-light: #E5E7EB;
-  --border-color: #D1D5DB;
-  --border-dark: #9CA3AF;
-  --pearl: #FAFAFA;
-  --charcoal: #455A64;
 }
 
 /* リセットCSS */
@@ -194,14 +153,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--electric);
+  background: var(--accent-primary);
   border-radius: var(--radius-sm);
-  opacity: 0.8;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-hover);
-  opacity: 1;
+  background: color-mix(in srgb, var(--accent-primary) 80%, black 20%);
 }
 
 /* デバイス幅対応コンテナ */
@@ -213,13 +170,13 @@ body {
   position: relative;
 }
 
-/* ダークモード切り替えボタン */
+/* ダークモード切り替えボタン（グラデーション適用） */
 .theme-toggle {
   position: fixed;
   top: var(--space-sm);
   right: var(--space-sm);
-  background: var(--electric);
-  border: 1px solid var(--primary-hover);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  border: 1px solid var(--border-color);
   color: white;
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-md);
@@ -227,47 +184,37 @@ body {
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
   z-index: var(--z-fixed);
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-normal);
   user-select: none;
   touch-action: manipulation;
   box-shadow: var(--shadow-md);
 }
 
 .theme-toggle:hover {
-  background: var(--primary-hover);
-  box-shadow: var(--shadow-lg), var(--glow-subtle);
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
   transform: translateY(-1px);
+  box-shadow: var(--shadow-lg);
 }
 
 .theme-toggle:active {
   transform: translateY(0);
 }
 
-/* ヘッダー */
+/* ヘッダー（タイトルにグラデーション適用） */
 .header {
   text-align: center;
   margin-bottom: var(--space-lg);
   border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--space-sm);
-  position: relative;
-}
-
-.header::after {
-  content: '';
-  position: absolute;
-  bottom: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background: var(--electric);
-  border-radius: 1px;
 }
 
 .header h1 {
   font-size: clamp(1.2rem, 4vw, var(--font-size-2xl));
   font-weight: var(--font-weight-bold);
-  color: var(--text-primary);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   margin-bottom: var(--space-xs);
   letter-spacing: -0.025em;
 }
@@ -291,25 +238,13 @@ section {
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   box-shadow: var(--shadow-sm);
-  transition: all var(--transition-smooth);
+  transition: box-shadow var(--transition-normal);
   position: relative;
   overflow: hidden;
 }
 
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--electric);
-  opacity: 0.6;
-}
-
 section:hover {
   box-shadow: var(--shadow-md);
-  transform: translateY(-1px);
 }
 
 section h2 {
@@ -329,13 +264,13 @@ section h2::before {
   left: 0;
   width: 40px;
   height: 2px;
-  background: var(--electric);
+  background: var(--accent-primary);
   border-radius: 1px;
 }
 
 /* 資金管理セクション */
 .money-section {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  background: var(--bg-secondary);
 }
 
 .money-controls {
@@ -359,24 +294,23 @@ section h2::before {
 
 .input-group input {
   padding: var(--space-sm);
-  border: 2px solid var(--border-color);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
   background: var(--bg-primary);
   color: var(--text-primary);
   width: 100%;
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-normal);
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--electric);
-  box-shadow: 0 0 0 3px rgba(91, 84, 217, 0.15);
-  transform: translateY(-1px);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-primary) 20%, transparent 80%);
 }
 
 .input-group input:hover:not(:focus) {
-  border-color: var(--primary-hover);
+  border-color: color-mix(in srgb, var(--accent-primary) 50%, var(--border-color) 50%);
 }
 
 .checkbox-group {
@@ -394,7 +328,7 @@ section h2::before {
   height: 18px;
   flex-shrink: 0;
   cursor: pointer;
-  accent-color: var(--electric);
+  accent-color: var(--accent-primary);
 }
 
 .checkbox-group label {
@@ -409,7 +343,7 @@ section h2::before {
   border-radius: var(--radius-lg);
   padding: var(--space-md);
   margin-bottom: var(--space-md);
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05), var(--shadow-sm);
+  box-shadow: var(--shadow-sm);
   position: relative;
   overflow: hidden;
 }
@@ -421,8 +355,7 @@ section h2::before {
   left: 0;
   right: 0;
   height: 3px;
-  background: var(--electric);
-  opacity: 0.8;
+  background: var(--accent-primary);
 }
 
 .balance-grid {
@@ -438,7 +371,7 @@ section h2::before {
   padding: var(--space-xs) 0;
   border-bottom: 1px solid var(--border-light);
   font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast);
 }
 
 .balance-item:last-child {
@@ -446,7 +379,7 @@ section h2::before {
 }
 
 .balance-item:hover {
-  background: rgba(91, 84, 217, 0.05);
+  background: color-mix(in srgb, var(--accent-primary) 5%, transparent 95%);
   margin: 0 calc(-1 * var(--space-xs));
   padding-left: var(--space-xs);
   padding-right: var(--space-xs);
@@ -466,7 +399,7 @@ section h2::before {
 }
 
 .balance-item .value.bet {
-  color: var(--electric);
+  color: var(--accent-primary);
   font-size: clamp(var(--font-size-base), 3vw, var(--font-size-lg));
 }
 
@@ -476,38 +409,21 @@ section h2::before {
   align-items: center;
   justify-content: center;
   padding: clamp(var(--space-xs), 2vw, var(--space-sm)) clamp(var(--space-sm), 2.5vw, var(--space-md));
-  border: none;
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
   font-weight: var(--font-weight-semibold);
   font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-base));
   text-decoration: none;
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-normal);
   position: relative;
   overflow: hidden;
   min-height: clamp(36px, 8vw, 44px);
   width: 100%;
   user-select: none;
   touch-action: manipulation;
-}
-
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-  pointer-events: none;
-}
-
-.btn:active::before {
-  width: 300px;
-  height: 300px;
+  background: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 .btn:disabled {
@@ -517,69 +433,49 @@ section h2::before {
 }
 
 .btn:not(:disabled):hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--accent-primary);
 }
 
 .btn:not(:disabled):active {
   transform: translateY(0);
 }
 
-/* ボタンバリエーション */
+/* 主要ボタンにのみグラデーション適用 */
 .btn-primary {
-  background: var(--electric);
+  background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
   color: white;
-  box-shadow: var(--shadow-md);
+  border-color: transparent;
 }
 
 .btn-primary:hover {
-  background: var(--primary-hover);
-  box-shadow: var(--shadow-lg), var(--glow-subtle);
-}
-
-.btn-danger {
-  background: var(--danger-color);
-  color: white;
-  box-shadow: var(--shadow-md);
-}
-
-.btn-danger:hover {
-  background: var(--danger-hover);
-  box-shadow: var(--shadow-lg), 0 0 12px rgba(233, 30, 99, 0.3);
+  background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+  border-color: transparent;
 }
 
 .btn-win {
-  background: var(--success-color);
+  background: var(--accent-primary);
   color: white;
-  font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
-  box-shadow: var(--shadow-md);
-}
-
-.btn-win:hover {
-  background: var(--success-hover);
-  box-shadow: var(--shadow-lg), 0 0 12px rgba(0, 200, 83, 0.3);
+  border-color: transparent;
 }
 
 .btn-push {
-  background: var(--warning-color);
+  background: color-mix(in srgb, var(--accent-primary) 70%, orange 30%);
   color: white;
-  box-shadow: var(--shadow-md);
-}
-
-.btn-push:hover {
-  background: var(--warning-hover);
-  box-shadow: var(--shadow-lg), 0 0 12px rgba(255, 152, 0, 0.3);
+  border-color: transparent;
 }
 
 .btn-lose {
-  background: var(--danger-color);
+  background: color-mix(in srgb, var(--accent-secondary) 70%, red 30%);
   color: white;
-  box-shadow: var(--shadow-md);
+  border-color: transparent;
 }
 
-.btn-lose:hover {
-  background: var(--danger-hover);
-  box-shadow: var(--shadow-lg), 0 0 12px rgba(233, 30, 99, 0.3);
+.btn-danger {
+  background: var(--accent-secondary);
+  color: white;
+  border-color: transparent;
 }
 
 /* セッション制御 */
@@ -598,7 +494,7 @@ section h2::before {
 
 /* 戦略表セクション */
 .strategy-section {
-  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  background: var(--bg-secondary);
 }
 
 .strategy-container {
@@ -612,27 +508,16 @@ section h2::before {
   --cell-height: clamp(18px, 3.2vw, 26px);
   transform-origin: top left;
   overflow-x: auto;
-  border: 2px solid var(--neon);
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-md);
-  background: var(--pearl);
-  box-shadow: var(--shadow-md);
+  background: var(--table-bg-primary);
+  box-shadow: var(--shadow-sm);
   margin-bottom: var(--space-sm);
   position: relative;
   /* スムーススクロール */
   -webkit-overflow-scrolling: touch;
   scrollbar-width: thin;
-  scrollbar-color: var(--neon) var(--pearl);
-}
-
-.strategy-table-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: var(--neon);
-  z-index: 5;
+  scrollbar-color: var(--accent-primary) var(--table-bg-primary);
 }
 
 .strategy-table {
@@ -655,7 +540,7 @@ section h2::before {
   text-align: center;
   font-weight: var(--font-weight-bold);
   line-height: var(--cell-height);
-  border: 1px solid rgba(0, 200, 83, 0.3);
+  border: 1px solid var(--border-light);
   position: relative;
   transition: all var(--transition-fast);
   height: var(--cell-height);
@@ -668,13 +553,12 @@ section h2::before {
   min-width: var(--header-width) !important;
   max-width: var(--header-width) !important;
   height: var(--cell-height) !important;
-  background: var(--neon);
+  background: var(--accent-primary);
   color: white;
   font-size: clamp(4px, 1.1vw, 7px) !important;
   position: sticky;
   left: 0;
   z-index: var(--z-sticky);
-  box-shadow: 1px 0 3px rgba(0, 200, 83, 0.2);
 }
 
 /* 通常のセル */
@@ -689,24 +573,23 @@ section h2::before {
 
 /* ディーラー列見出し */
 .strategy-table thead th:not(:first-child) {
-  background: var(--gold);
+  background: color-mix(in srgb, var(--accent-primary) 80%, var(--accent-secondary) 20%);
   color: white;
   position: sticky;
   top: 0;
   z-index: calc(var(--z-sticky) - 1);
   height: var(--cell-height) !important;
-  box-shadow: 0 1px 3px rgba(255, 152, 0, 0.2);
 }
 
 /* コーナーセル */
 .strategy-table thead th:first-child {
   z-index: calc(var(--z-sticky) + 1);
-  background: var(--electric);
+  background: color-mix(in srgb, var(--accent-primary) 60%, var(--accent-secondary) 40%);
 }
 
 /* セクションヘッダー */
 .strategy-table .section-header td {
-  background: var(--electric);
+  background: var(--accent-primary);
   color: white;
   font-size: clamp(4px, 1vw, 6px) !important;
   height: calc(var(--cell-height) * 0.8) !important;
@@ -715,20 +598,20 @@ section h2::before {
 
 /* Hit/Stand/Pair セル */
 .strategy-table td.h {
-  background: var(--charcoal);
+  background: var(--text-primary);
   color: white;
   position: relative;
 }
 
 .strategy-table td.s {
-  background: var(--pearl);
-  color: var(--charcoal);
+  background: var(--table-bg-secondary);
+  color: var(--text-primary);
   position: relative;
 }
 
 /* Pair分割用のスタイル */
 .strategy-table td.p {
-  background: var(--electric);
+  background: var(--accent-secondary);
   color: white;
   position: relative;
 }
@@ -737,18 +620,16 @@ section h2::before {
 @media (hover: hover) and (pointer: fine) {
   .strategy-table tbody tr:hover td:first-child,
   .strategy-table tbody td:hover {
-    background: var(--gold) !important;
+    background: var(--accent-primary) !important;
     color: white !important;
     font-weight: var(--font-weight-bold);
     transform: scale(1.02);
     z-index: var(--z-dropdown);
-    box-shadow: 0 2px 6px rgba(255, 152, 0, 0.4);
-    border-radius: 2px;
     cursor: pointer;
   }
 
   .strategy-table tbody tr:hover {
-    background: rgba(255, 152, 0, 0.08);
+    background: color-mix(in srgb, var(--accent-primary) 10%, transparent 90%);
   }
 }
 
@@ -763,7 +644,6 @@ section h2::before {
   border-radius: var(--radius-lg);
   flex-wrap: wrap;
   border: 1px solid var(--border-color);
-  box-shadow: var(--shadow-sm);
 }
 
 .legend-item {
@@ -783,21 +663,20 @@ section h2::before {
   min-width: 24px;
   font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
   text-align: center;
-  box-shadow: var(--shadow-sm);
 }
 
 .legend-color.h {
-  background: var(--charcoal);
+  background: var(--text-primary);
 }
 
 .legend-color.s {
-  background: var(--pearl);
-  color: var(--charcoal);
+  background: var(--table-bg-secondary);
+  color: var(--text-primary);
   border: 1px solid var(--border-color);
 }
 
 .legend-color.p {
-  background: var(--electric);
+  background: var(--accent-secondary);
 }
 
 /* 履歴セクション */
@@ -811,12 +690,12 @@ section h2::before {
   border-bottom: 1px solid var(--border-color);
   padding-bottom: var(--space-xs);
   margin-bottom: var(--space-sm);
-  transition: all var(--transition-smooth);
+  transition: color var(--transition-normal);
   user-select: none;
 }
 
 .history-section summary:hover {
-  color: var(--electric);
+  color: var(--accent-primary);
 }
 
 .history-section summary h2 {
@@ -828,7 +707,7 @@ section h2::before {
 
 .history-section summary::marker {
   content: '▶ ';
-  color: var(--electric);
+  color: var(--accent-primary);
   font-weight: var(--font-weight-bold);
 }
 
@@ -861,7 +740,7 @@ section h2::before {
 }
 
 .history-table th {
-  background: var(--bg-tertiary);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   font-weight: var(--font-weight-semibold);
   font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
@@ -871,7 +750,7 @@ section h2::before {
 }
 
 .history-table tbody tr {
-  transition: all var(--transition-fast);
+  transition: background-color var(--transition-fast);
 }
 
 .history-table tbody tr:nth-child(even) {
@@ -879,7 +758,7 @@ section h2::before {
 }
 
 .history-table tbody tr:hover {
-  background: rgba(91, 84, 217, 0.05);
+  background: color-mix(in srgb, var(--accent-primary) 5%, transparent 95%);
 }
 
 /* タイマー */
@@ -887,8 +766,8 @@ section h2::before {
   position: fixed;
   bottom: var(--space-sm);
   right: var(--space-sm);
-  background: var(--electric);
-  color: white;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
   padding: var(--space-sm) var(--space-md);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-lg);
@@ -899,19 +778,18 @@ section h2::before {
   font-weight: var(--font-weight-bold);
   font-size: clamp(var(--font-size-sm), 2vw, var(--font-size-base));
   z-index: var(--z-fixed);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--primary-hover);
+  border: 1px solid var(--border-color);
 }
 
 .timer-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
   padding: var(--space-xs) var(--space-sm);
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
-  transition: all var(--transition-smooth);
+  transition: all var(--transition-normal);
   min-width: 24px;
   text-align: center;
   user-select: none;
@@ -919,8 +797,9 @@ section h2::before {
 }
 
 .timer-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.05);
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
 }
 
 /* レスポンシブ対応 */
@@ -1107,15 +986,14 @@ section h2::before {
 .btn:focus-visible,
 .theme-toggle:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--electric);
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
 /* 高コントラストモード */
 @media (prefers-contrast: high) {
   :root {
-    --border-color: var(--electric);
-    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.8);
+    --border-color: var(--accent-primary);
   }
   .strategy-table th,
   .strategy-table td {
@@ -1167,13 +1045,13 @@ input:focus-visible {
 
 .strategy-table-wrap::-webkit-scrollbar-thumb,
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: var(--neon);
+  background: var(--accent-primary);
   border-radius: 2px;
 }
 
 .strategy-table-wrap::-webkit-scrollbar-thumb:hover,
 .table-wrapper::-webkit-scrollbar-thumb:hover {
-  background: var(--success-hover);
+  background: color-mix(in srgb, var(--accent-primary) 80%, black 20%);
 }
 
 /* 選択不可テキスト */
@@ -1187,7 +1065,7 @@ input:focus-visible {
 }
 
 /* ロード時のアニメーション */
-@keyframes fadeInSmooth {
+@keyframes fadeIn {
   from {
     opacity: 0;
     transform: translateY(10px);
@@ -1199,7 +1077,7 @@ input:focus-visible {
 }
 
 section {
-  animation: fadeInSmooth 0.4s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
 
 section:nth-child(1) { animation-delay: 0.1s; }
@@ -1225,21 +1103,4 @@ html {
 body {
   min-height: 100vh;
   position: relative;
-}
-
-/* シームレス統合エフェクト */
-.seamless-glow {
-  position: relative;
-}
-
-.seamless-glow::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
 }
