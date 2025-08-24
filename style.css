@@ -1,389 +1,414 @@
-/* ============ Sky-Quartz Design Tokens (完全版) ============ */
+/* ============ CSS Variables ============ */
 :root {
-  /* 余白を最適化 */
-  --r: 8px;
-  --sp: 12px;
-  --sp-s: 8px;
-  --sh-s: 0 1px 3px rgba(0,0,0,.08);
-  --sh-m: 0 2px 8px rgba(0,0,0,.12);
-  --sh-lg: 0 4px 16px rgba(0,0,0,.15);
-  --transition: all .2s ease;
-  
-  /* マウス位置変数 */
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  
-  /* カラーパレット */
-  --bg: #fafafa;
-  --surf: #ffffff;
-  --surf-2: #f5f5f5;
-  --surf-3: #eeeeee;
-  --border: #e0e0e0;
-  --txt: #333;
-  --txt-2: #666;
-  --accent: #2196f3;
-  --accent-h: #1976d2;
-  --accent-soft: rgba(33, 150, 243, 0.15);
-  --good: #4caf50;
-  --bad: #f44336;
-  --warn: #ff9800;
-  
-  /* Hit/Stand専用色 */
-  --hit-bg: #fff3e0;
-  --hit-text: #e65100;
-  --hit-border: #ffb74d;
-  --stand-bg: #e3f2fd;
-  --stand-text: #1565c0;
-  --stand-border: #64b5f6;
+    --r: 8px;
+    --sp: 16px;
+    --sp-s: 12px;
+    --sp-xs: 8px;
+    --transition: all 0.2s ease;
+    --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    
+    /* Colors - Light Theme */
+    --bg: #fafafa;
+    --surface: #ffffff;
+    --surface-2: #f5f5f5;
+    --surface-3: #eeeeee;
+    --border: #e0e0e0;
+    --text: #333;
+    --text-muted: #666;
+    --primary: #2196f3;
+    --primary-hover: #1976d2;
+    --primary-soft: rgba(33, 150, 243, 0.1);
+    --success: #4caf50;
+    --success-soft: rgba(76, 175, 80, 0.1);
+    --danger: #f44336;
+    --danger-soft: rgba(244, 67, 54, 0.1);
+    --warning: #ff9800;
+    --warning-soft: rgba(255, 152, 0, 0.1);
+    
+    /* Strategy Table Colors */
+    --hit-bg: #fff3e0;
+    --hit-text: #e65100;
+    --hit-border: #ffb74d;
+    --stand-bg: #e3f2fd;
+    --stand-text: #1565c0;
+    --stand-border: #64b5f6;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
 }
 
+/* Dark Theme */
 [data-theme="dark"] {
-  --bg: #121212;
-  --surf: #1e1e1e;
-  --surf-2: #2a2a2a;
-  --surf-3: #363636;
-  --border: #444;
-  --txt: #fff;
-  --txt-2: #bbb;
-  --accent: #2196f3;
-  --accent-soft: rgba(33, 150, 243, 0.2);
-  --good: #4caf50;
-  --bad: #f44336;
-  --warn: #ff9800;
-  --hit-bg: #3e2723;
-  --hit-text: #ff8a65;
-  --hit-border: #5d4037;
-  --stand-bg: #1a237e;
-  --stand-text: #82b1ff;
-  --stand-border: #303f9f;
-  --sh-s: 0 2px 6px rgba(0,0,0,.4);
-  --sh-m: 0 4px 12px rgba(0,0,0,.5);
-  --sh-lg: 0 6px 20px rgba(0,0,0,.6);
+    --bg: #121212;
+    --surface: #1e1e1e;
+    --surface-2: #2a2a2a;
+    --surface-3: #363636;
+    --border: #444;
+    --text: #fff;
+    --text-muted: #bbb;
+    --primary-soft: rgba(33, 150, 243, 0.2);
+    --success-soft: rgba(76, 175, 80, 0.2);
+    --danger-soft: rgba(244, 67, 54, 0.2);
+    --warning-soft: rgba(255, 152, 0, 0.2);
+    
+    --hit-bg: #3e2723;
+    --hit-text: #ff8a65;
+    --hit-border: #5d4037;
+    --stand-bg: #1a237e;
+    --stand-text: #82b1ff;
+    --stand-border: #303f9f;
+    
+    --shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
+    --shadow-md: 0 6px 16px rgba(0,0,0,0.5);
+    --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
 }
 
-/* ============ ベース（余白最小化） ============ */
-* { 
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0; 
+/* High Contrast Theme */
+[data-theme="hc"] {
+    --bg: #000;
+    --surface: #000;
+    --surface-2: #111;
+    --surface-3: #222;
+    --border: #666;
+    --text: #fff;
+    --text-muted: #ccc;
+    --primary: #00aaff;
+    --primary-hover: #0088cc;
+    --success: #00ff00;
+    --danger: #ff0000;
+    --warning: #ffff00;
+    
+    --hit-bg: #330000;
+    --hit-text: #ff6666;
+    --hit-border: #660000;
+    --stand-bg: #000033;
+    --stand-text: #6666ff;
+    --stand-border: #000066;
+}
+
+/* ============ Base Styles ============ */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--txt);
-  line-height: 1.4;
-  padding: var(--sp);
-  position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    transition: var(--transition);
 }
 
-/* マウス位置反応背景 */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: radial-gradient(
-    600px circle at var(--mouse-x) var(--mouse-y),
-    var(--accent-soft),
-    transparent 40%
-  );
-  pointer-events: none;
-  z-index: 0;
-  transition: background 0.3s ease;
+/* ============ Layout ============ */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--sp);
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 h1 {
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  margin-bottom: var(--sp);
-  text-align: center;
-  background: linear-gradient(135deg, var(--accent), var(--accent-h));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  font-weight: 700;
-  position: relative;
-  z-index: 1;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
-h2 {
-  font-size: clamp(1.1rem, 3vw, 1.4rem);
-  margin-bottom: var(--sp-s);
-  color: var(--txt);
-  border-bottom: 2px solid var(--accent);
-  padding-bottom: 4px;
-  display: inline-block;
-}
-
-h3 {
-  font-size: 1rem;
-  margin: 0 0 var(--sp-s) 0;
-  color: var(--accent);
-  font-weight: 600;
-}
-
-/* ============ レイアウト（コンパクト） ============ */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  gap: var(--sp);
-  position: relative;
-  z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--sp);
+    display: grid;
+    gap: var(--sp);
+    grid-template-columns: 1fr;
 }
 
 @media (min-width: 768px) {
-  .container {
-    grid-template-columns: 350px 1fr;
-    gap: 16px;
-    max-width: 1400px;
-  }
-  body { 
-    padding: 16px; 
-  }
-  .container > h1 {
-    grid-column: 1 / -1;
-  }
+    .container {
+        grid-template-columns: 320px 1fr;
+        gap: var(--sp) calc(var(--sp) * 1.5);
+    }
+    
+    #controlSection,
+    #balanceSection {
+        grid-column: 1;
+    }
+    
+    #strategySection {
+        grid-column: 2;
+        grid-row: 1 / 3;
+    }
+    
+    #chartContainer,
+    #historyWrap,
+    .tools {
+        grid-column: 1 / -1;
+    }
 }
 
 @media (min-width: 1200px) {
-  .container {
-    grid-template-columns: 320px 1fr 1fr;
-    gap: 20px;
-  }
+    .container {
+        grid-template-columns: 280px 1fr 320px;
+    }
+    
+    #chartContainer,
+    #historyWrap {
+        grid-column: 2;
+    }
+    
+    .tools {
+        grid-column: 3;
+    }
 }
 
-/* ============ セクション（マウス反応付き） ============ */
-section {
-  background: var(--surf);
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  padding: var(--sp);
-  box-shadow: var(--sh-s);
-  position: relative;
-  overflow: visible;
-  transition: var(--transition);
+/* ============ Sections ============ */
+section, details {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--sp);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
 }
 
-section::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--accent), transparent);
-  border-radius: var(--r) var(--r) 0 0;
+section:hover, details:hover {
+    box-shadow: var(--shadow-md);
 }
 
-section::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, transparent, var(--accent-soft) 50%, transparent);
-  opacity: 0;
-  border-radius: calc(var(--r) + 2px);
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  z-index: -1;
+h2, h3 {
+    margin-bottom: var(--sp-s);
+    color: var(--primary);
+    font-weight: 600;
 }
 
-section:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--sh-m);
+h2 {
+    font-size: 1.25rem;
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 4px;
+    display: inline-block;
 }
 
-section:hover::after {
-  opacity: 1;
+h3 {
+    font-size: 1.1rem;
 }
 
-/* ============ ボタン（リップルエフェクト付き） ============ */
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  min-height: 40px;
-  padding: 8px 12px;
-  border: none;
-  border-radius: var(--r);
-  background: linear-gradient(135deg, var(--accent), var(--accent-h));
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: var(--transition);
-  position: relative;
-  overflow: hidden;
+/* ============ Forms ============ */
+.input-group {
+    margin-bottom: var(--sp-s);
 }
 
-.btn::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 0;
-  height: 0;
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s ease, height 0.4s ease;
-  pointer-events: none;
+label {
+    display: block;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+    font-size: 0.9rem;
 }
 
-.btn:hover:not(:disabled) { 
-  background: linear-gradient(135deg, var(--accent-h), var(--accent));
-  transform: translateY(-1px);
-  box-shadow: var(--sh-m);
-}
-
-.btn:hover:not(:disabled)::before {
-  width: 300px;
-  height: 300px;
-}
-
-.btn:active:not(:disabled) {
-  transform: translateY(0);
-}
-
-.btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-  transform: none;
-}
-
-.btn.good { 
-  background: linear-gradient(135deg, var(--good), #388e3c);
-}
-.btn.bad { 
-  background: linear-gradient(135deg, var(--bad), #d32f2f);
-}
-.btn.warn { 
-  background: linear-gradient(135deg, var(--warn), #f57c00);
-}
-
-#gameButtons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--sp-s);
-}
-
-/* ============ フォーム（コンパクト） ============ */
 input[type="number"] {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  background: var(--surf);
-  color: var(--txt);
-  font-size: 0.9rem;
-  transition: var(--transition);
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: var(--r);
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    transition: var(--transition);
 }
 
 input[type="number"]:focus {
-  outline: none;
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-soft);
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-soft);
 }
 
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  margin-bottom: var(--sp-s);
+/* ============ Buttons ============ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: var(--r);
+    background: var(--primary);
+    color: white;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
 }
 
-.input-group label {
-  font-weight: 500;
-  color: var(--txt-2);
-  font-size: 0.85rem;
+.btn:hover:not(:disabled) {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
 }
 
-#balanceDisplay {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: var(--sp-s);
-  background: var(--surf-2);
-  border-radius: var(--r);
-  font-size: 0.85rem;
-  border: 1px solid var(--border);
+.btn:active:not(:disabled) {
+    transform: translateY(0);
 }
 
-#balanceDisplay p {
-  margin: 0;
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
 }
 
-#balanceDisplay strong {
-  font-weight: 600;
-  color: var(--accent);
+.btn.primary {
+    background: var(--primary);
 }
 
+.btn.good {
+    background: var(--success);
+}
+
+.btn.good:hover:not(:disabled) {
+    background: #388e3c;
+}
+
+.btn.bad {
+    background: var(--danger);
+}
+
+.btn.bad:hover:not(:disabled) {
+    background: #d32f2f;
+}
+
+.btn.warn {
+    background: var(--warning);
+}
+
+.btn.warn:hover:not(:disabled) {
+    background: #f57c00;
+}
+
+.button-group {
+    display: flex;
+    gap: var(--sp-xs);
+    margin-bottom: var(--sp-s);
+}
+
+.button-group .btn {
+    flex: 1;
+}
+
+#gameButtons {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--sp-xs);
+    margin-bottom: var(--sp-s);
+}
+
+/* ============ Toggle Switch ============ */
 .toggle-switch {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    cursor: pointer;
+    font-size: 0.9rem;
+    user-select: none;
 }
 
 .toggle-switch input[type="checkbox"] {
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
 
-/* ============ Hit/Stand色分け（確実版） ============ */
+/* ============ Balance Display ============ */
+#balanceDisplay {
+    display: grid;
+    gap: var(--sp-xs);
+    padding: var(--sp-s);
+    background: var(--surface-2);
+    border-radius: var(--r);
+    border: 1px solid var(--border);
+}
+
+#balanceDisplay p {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#balanceDisplay strong {
+    font-weight: 600;
+    color: var(--primary);
+}
+
+/* ============ Strategy Table ============ */
+.table-wrap {
+    overflow: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    max-height: 60vh;
+    -webkit-overflow-scrolling: touch;
+}
+
 .strategy-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: clamp(0.7rem, 2vw, 0.85rem);
-  font-family: ui-monospace, "SF Mono", Monaco, monospace;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: clamp(0.7rem, 2vw, 0.85rem);
+    font-family: var(--font-mono);
 }
 
 .strategy-table th,
 .strategy-table td {
-  padding: clamp(3px, 1vw, 6px) clamp(4px, 1.5vw, 8px);
-  border: 1px solid var(--border);
-  text-align: center;
-  font-weight: 600;
-  position: relative;
-  transition: all 0.2s ease;
+    padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 10px);
+    border: 1px solid var(--border);
+    text-align: center;
+    font-weight: 600;
+    transition: var(--transition);
 }
 
 .strategy-table thead th {
-  background: var(--surf-3);
-  font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    background: var(--surface-3);
+    font-size: clamp(0.65rem, 1.8vw, 0.75rem);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: var(--shadow-sm);
 }
 
 .strategy-table .player-col {
-  background: var(--surf-3);
-  position: sticky;
-  left: 0;
-  z-index: 5;
-  min-width: clamp(45px, 12vw, 60px);
-  font-size: clamp(0.6rem, 1.5vw, 0.7rem);
-  box-shadow: 1px 0 3px rgba(0,0,0,0.1);
+    background: var(--surface-3);
+    position: sticky;
+    left: 0;
+    z-index: 5;
+    min-width: clamp(45px, 12vw, 60px);
+    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+    box-shadow: 1px 0 3px rgba(0,0,0,0.1);
 }
 
 .strategy-table .group-header {
-  background: var(--accent);
-  color: white;
-  font-weight: bold;
-  text-align: left;
-  padding-left: var(--sp-s);
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding-left: var(--sp-s);
 }
 
-/* Hit用スタイル（nth-child使用で確実実装） */
+/* Hit Cells */
 .strategy-table tbody tr:nth-child(4) td:nth-child(7),
 .strategy-table tbody tr:nth-child(4) td:nth-child(8),
 .strategy-table tbody tr:nth-child(4) td:nth-child(9),
@@ -401,12 +426,12 @@ input[type="number"]:focus {
 .strategy-table tbody tr:nth-child(9) td:nth-child(10),
 .strategy-table tbody tr:nth-child(9) td:nth-child(11),
 .strategy-table tbody tr:nth-child(10) td:nth-child(n+2):nth-child(-n+11) {
-  background: var(--hit-bg) !important;
-  color: var(--hit-text) !important;
-  border-color: var(--hit-border) !important;
+    background: var(--hit-bg) !important;
+    color: var(--hit-text) !important;
+    border-color: var(--hit-border) !important;
 }
 
-/* Stand用スタイル */
+/* Stand Cells */
 .strategy-table tbody tr:nth-child(3) td:nth-child(n+2):nth-child(-n+11),
 .strategy-table tbody tr:nth-child(4) td:nth-child(2),
 .strategy-table tbody tr:nth-child(4) td:nth-child(3),
@@ -418,330 +443,354 @@ input[type="number"]:focus {
 .strategy-table tbody tr:nth-child(5) td:nth-child(6),
 .strategy-table tbody tr:nth-child(7) td:nth-child(n+2):nth-child(-n+11),
 .strategy-table tbody tr:nth-child(8) td:nth-child(n+2):nth-child(-n+8) {
-  background: var(--stand-bg) !important;
-  color: var(--stand-text) !important;
-  border-color: var(--stand-border) !important;
+    background: var(--stand-bg) !important;
+    color: var(--stand-text) !important;
+    border-color: var(--stand-border) !important;
 }
 
-/* セルホバー効果 */
-.strategy-table tbody td:not(.player-col):not(.group-header) {
-  cursor: pointer;
-}
-
-.strategy-table tbody td:not(.player-col):not(.group-header):hover {
-  transform: scale(1.05);
-  z-index: 20;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-.strategy-table tbody td:not(.player-col):not(.group-header)::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.05));
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  pointer-events: none;
-}
-
-.strategy-table tbody td:not(.player-col):not(.group-header):hover::after {
-  opacity: 1;
-}
-
-/* ============ テーブルラッパー ============ */
-.table-wrap {
-  overflow: auto;
-  border: 1px solid var(--border);
-  border-radius: var(--r);
-  max-height: 60vh;
-  box-shadow: var(--sh-s);
-  -webkit-overflow-scrolling: touch;
-}
-
-/* ============ 凡例（コンパクト） ============ */
+/* ============ Legend ============ */
 .legend {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: var(--sp-s);
-  font-size: 0.8rem;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: var(--sp);
+    margin-top: var(--sp-s);
+    font-size: 0.85rem;
 }
 
 .legend-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
 }
 
 .legend-sample {
-  width: 22px;
-  height: 22px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  font-weight: bold;
-  font-size: 0.75rem;
-  border: 1px solid;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem;
+    border: 2px solid;
 }
 
 .legend-hit .legend-sample {
-  background: var(--hit-bg);
-  color: var(--hit-text);
-  border-color: var(--hit-border);
+    background: var(--hit-bg);
+    color: var(--hit-text);
+    border-color: var(--hit-border);
 }
 
 .legend-stand .legend-sample {
-  background: var(--stand-bg);
-  color: var(--stand-text);
-  border-color: var(--stand-border);
+    background: var(--stand-bg);
+    color: var(--stand-text);
+    border-color: var(--stand-border);
 }
 
-/* ============ チャート表示エリア ============ */
-#chartContainer {
-  margin-top: var(--sp);
-  padding: var(--sp-s);
-  background: var(--surf-2);
-  border-radius: var(--r);
-  border: 1px solid var(--border);
-}
-
+/* ============ Chart ============ */
 #sessionChart {
-  width: 100%;
-  height: 200px;
-  background: var(--surf);
-  border-radius: var(--r);
-  box-shadow: var(--sh-s);
-  display: block;
+    width: 100%;
+    height: 200px;
+    background: var(--surface);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-sm);
+    display: block;
 }
 
-/* ============ フローティングタイマー（コンパクト） ============ */
+@media (max-width: 767px) {
+    #sessionChart {
+        height: 150px;
+    }
+}
+
+/* ============ History Table ============ */
+#historyTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+}
+
+#historyTable th,
+#historyTable td {
+    padding: var(--sp-xs);
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+#historyTable th {
+    background: var(--surface-3);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#historyTable td:first-child {
+    position: sticky;
+    left: 0;
+    background: var(--surface);
+    z-index: 5;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+}
+
+#historyTable tr:nth-child(even) {
+    background: var(--surface-2);
+}
+
+#historyTable tr:hover {
+    background: var(--primary-soft);
+}
+
+/* ============ Tools Section ============ */
+.tools {
+    display: grid;
+    gap: var(--sp-xs);
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
+
+.tools .btn {
+    font-size: 0.85rem;
+    min-height: 44px;
+}
+
+/* ============ Floating Timer ============ */
 #floatingTimer {
-  position: fixed;
-  bottom: var(--sp);
-  right: var(--sp);
-  background: var(--surf);
-  padding: 6px 10px;
-  border-radius: var(--r);
-  box-shadow: var(--sh-m);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: ui-monospace, "SF Mono", Monaco, monospace;
-  font-size: 0.9rem;
-  border: 1px solid var(--border);
-  backdrop-filter: blur(12px);
-  z-index: 1000;
-  transition: var(--transition);
+    position: fixed;
+    bottom: var(--sp);
+    right: var(--sp);
+    background: var(--surface);
+    padding: var(--sp-xs) var(--sp-s);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--sp-xs);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    border: 1px solid var(--border);
+    z-index: 1000;
+    cursor: grab;
+    user-select: none;
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
 }
 
-#floatingTimer:hover {
-  box-shadow: var(--sh-lg);
-  transform: translateY(-2px) scale(1.02);
+#floatingTimer.dragging {
+    cursor: grabbing;
 }
 
 #floatingTimer button {
-  background: none;
-  border: none;
-  color: var(--txt);
-  cursor: pointer;
-  padding: 4px;
-  border-radius: 3px;
-  transition: var(--transition);
-  font-size: 1rem;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 3px;
+    transition: var(--transition);
+    font-size: 1rem;
 }
 
 #floatingTimer button:hover {
-  background: var(--surf-2);
-  transform: scale(1.1);
+    background: var(--surface-2);
 }
 
-/* ============ テーマ切替（コンパクト） ============ */
+/* ============ Theme Toggle ============ */
 .theme-toggle {
-  position: fixed;
-  top: var(--sp);
-  right: var(--sp);
-  background: var(--surf);
-  border: 1px solid var(--border);
-  padding: 8px 12px;
-  border-radius: var(--r);
-  cursor: pointer;
-  font-size: 0.8rem;
-  box-shadow: var(--sh-s);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  z-index: 1000;
-  backdrop-filter: blur(12px);
-  transition: var(--transition);
-  font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    padding: var(--sp-xs) var(--sp-s);
+    border-radius: var(--r);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: var(--transition);
 }
 
 .theme-toggle:hover {
-  background: var(--surf-2);
-  box-shadow: var(--sh-m);
-  transform: translateY(-2px) scale(1.05);
+    background: var(--surface-3);
+    box-shadow: var(--shadow-sm);
 }
 
-/* ============ カーソル追従エフェクト ============ */
-.cursor-follower {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
+/* ============ Snackbar ============ */
+.snackbar {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    padding: var(--sp-s) var(--sp);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--sp);
+    z-index: 10000;
+    animation: slideIn 0.3s ease;
+    max-width: 90vw;
 }
 
-/* ============ スクロールバー ============ */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.snackbar button {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    transition: var(--transition);
 }
 
-::-webkit-scrollbar-track {
-  background: var(--surf-2);
-  border-radius: 3px;
+.snackbar button:hover {
+    background: var(--primary-soft);
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, var(--accent), var(--accent-h));
-  border-radius: 3px;
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-h);
+/* ============ Details/Summary ============ */
+details {
+    cursor: pointer;
 }
 
-/* ============ モバイル最適化 ============ */
+summary {
+    font-weight: 600;
+    padding: var(--sp-xs) 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: var(--sp-s);
+    list-style: none;
+    position: relative;
+}
+
+summary::before {
+    content: '▶';
+    position: absolute;
+    left: -20px;
+    transition: var(--transition);
+}
+
+details[open] summary::before {
+    transform: rotate(90deg);
+}
+
+/* ============ Responsive Design ============ */
 @media (max-width: 767px) {
-  body { 
-    padding: 8px; 
-  }
-  .container { 
-    gap: 8px; 
-  }
-  section { 
-    padding: 8px; 
-  }
-  h1 { 
-    font-size: 1.5rem; 
-  }
-  h2 { 
-    font-size: 1.1rem; 
-  }
-  .strategy-table { 
-    font-size: 0.65rem; 
-  }
-  .strategy-table th, 
-  .strategy-table td { 
-    padding: 2px 3px; 
-  }
-  #gameButtons { 
-    gap: 6px; 
-  }
-  .btn { 
-    min-height: 36px; 
-    font-size: 0.8rem; 
-  }
-  #balanceDisplay { 
-    padding: 6px; 
-    font-size: 0.8rem; 
-  }
-  #sessionChart {
-    height: 150px;
-  }
-  .cursor-follower {
-    display: none;
-  }
+    header {
+        padding: var(--sp-s);
+    }
+    
+    .container {
+        padding: var(--sp-s);
+        gap: var(--sp-s);
+    }
+    
+    section, details {
+        padding: var(--sp-s);
+    }
+    
+    .btn {
+        min-height: 44px;
+        font-size: 0.9rem;
+    }
+    
+    #gameButtons {
+        gap: 6px;
+    }
+    
+    .strategy-table {
+        font-size: 0.65rem;
+    }
+    
+    .strategy-table th,
+    .strategy-table td {
+        padding: 3px 4px;
+    }
+    
+    #floatingTimer {
+        bottom: var(--sp-s);
+        right: var(--sp-s);
+        padding: 6px var(--sp-xs);
+        font-size: 0.8rem;
+    }
+    
+    .tools {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
-/* ============ PC向け最適化 ============ */
-@media (min-width: 768px) {
-  .strategy-table { 
-    font-size: 0.8rem; 
-  }
-  .strategy-table th, 
-  .strategy-table td { 
-    padding: 5px 7px; 
-  }
-  .btn { 
-    min-height: 44px; 
-    font-size: 0.95rem;
-  }
-  #balanceDisplay {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-    padding: 12px;
-  }
-  #balanceDisplay p:last-of-type {
-    grid-column: 1 / -1;
-  }
-  #floatingTimer {
-    padding: 8px 12px;
-    font-size: 1rem;
-  }
-  .theme-toggle {
-    padding: 10px 14px;
-    font-size: 0.9rem;
-  }
-}
-
-/* ============ 大画面向け最適化 ============ */
-@media (min-width: 1200px) {
-  #balanceSection {
-    position: sticky;
-    top: 20px;
-  }
-}
-
-/* ============ アクセシビリティ ============ */
+/* ============ Accessibility ============ */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
 
 @media (prefers-contrast: high) {
-  :root {
-    --border: #000;
-    --accent: #0066cc;
-    --good: #006600;
-    --bad: #cc0000;
-    --warn: #996600;
-  }
-  
-  .btn {
-    border: 2px solid rgba(0,0,0,0.3);
-  }
+    :root {
+        --border: #000;
+        --primary: #0066cc;
+        --success: #006600;
+        --danger: #cc0000;
+        --warning: #996600;
+    }
+    
+    .btn {
+        border: 2px solid rgba(0,0,0,0.3);
+    }
 }
 
-/* ============ プリントスタイル ============ */
+/* ============ Print Styles ============ */
 @media print {
-  .theme-toggle,
-  #floatingTimer,
-  .btn {
-    display: none !important;
-  }
-  
-  section {
-    break-inside: avoid;
-    box-shadow: none;
-    border: 1px solid #000;
-  }
-  
-  body {
-    background: white;
-    color: black;
-  }
+    header,
+    #floatingTimer,
+    .btn,
+    .tools {
+        display: none !important;
+    }
+    
+    section, details {
+        break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #000;
+    }
+    
+    body {
+        background: white;
+        color: black;
+    }
+}
+
+/* ============ Scrollbar Styling ============ */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--surface-2);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-hover);
 }
