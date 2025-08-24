@@ -1,796 +1,1239 @@
-/* ============ CSS Variables ============ */
+/* BlackjackGuide - 完全改良版 */
+
+/* CSS Custom Properties (変数定義) */
 :root {
-    --r: 8px;
-    --sp: 16px;
-    --sp-s: 12px;
-    --sp-xs: 8px;
-    --transition: all 0.2s ease;
-    --font-mono: ui-monospace, "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas, "Courier New", monospace;
+    /* カラーパレット - ライトモード */
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #e9ecef;
+    --bg-accent: #f1f3f4;
     
-    /* Colors - Light Theme */
-    --bg: #fafafa;
-    --surface: #ffffff;
-    --surface-2: #f5f5f5;
-    --surface-3: #eeeeee;
-    --border: #e0e0e0;
-    --text: #333;
-    --text-muted: #666;
-    --primary: #2196f3;
-    --primary-hover: #1976d2;
-    --primary-soft: rgba(33, 150, 243, 0.1);
-    --success: #4caf50;
-    --success-soft: rgba(76, 175, 80, 0.1);
-    --danger: #f44336;
-    --danger-soft: rgba(244, 67, 54, 0.1);
-    --warning: #ff9800;
-    --warning-soft: rgba(255, 152, 0, 0.1);
+    --text-primary: #2c3e50;
+    --text-secondary: #6c757d;
+    --text-muted: #adb5bd;
     
-    /* Strategy Table Colors */
-    --hit-bg: #fff3e0;
-    --hit-text: #e65100;
-    --hit-border: #ffb74d;
-    --stand-bg: #e3f2fd;
-    --stand-text: #1565c0;
-    --stand-border: #64b5f6;
+    --border-light: #e9ecef;
+    --border-color: #dee2e6;
+    --border-dark: #adb5bd;
     
-    /* Shadows */
-    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
-    --shadow-md: 0 4px 12px rgba(0,0,0,0.15);
-    --shadow-lg: 0 8px 24px rgba(0,0,0,0.2);
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --success-color: #28a745;
+    --success-hover: #1e7e34;
+    --danger-color: #dc3545;
+    --danger-hover: #c82333;
+    --warning-color: #ffc107;
+    --warning-hover: #e0a800;
+    --info-color: #17a2b8;
+    --info-hover: #138496;
+    
+    /* 戦略表専用カラー */
+    --sage: #6b7c32;
+    --sage-light: #8fb543;
+    --sage-dark: #5a6b2a;
+    --amber: #c49356;
+    --amber-light: #d4a574;
+    --amber-dark: #a67c47;
+    --charcoal: #2a2d34;
+    --pearl: #f4f5f7;
+    
+    /* シャドウ・エフェクト */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,0.15);
+    --shadow-xl: 0 8px 16px rgba(0,0,0,0.2);
+    
+    /* サイズ・スペーシング */
+    --radius-sm: 2px;
+    --radius-md: 4px;
+    --radius-lg: 6px;
+    
+    --space-xs: 4px;
+    --space-sm: 8px;
+    --space-md: 12px;
+    --space-lg: 16px;
+    --space-xl: 20px;
+    --space-2xl: 24px;
+    
+    /* タイポグラフィ */
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-base: 1rem;
+    --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
+    
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    
+    /* アニメーション */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    
+    /* Z-index レイヤー */
+    --z-dropdown: 1000;
+    --z-sticky: 1020;
+    --z-fixed: 1030;
+    --z-modal: 1040;
+    --z-popover: 1060;
+    --z-tooltip: 1080;
 }
 
-/* Dark Theme */
+/* ダークモード対応 */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --bg-tertiary: #404040;
+        --bg-accent: #505050;
+        
+        --text-primary: #e9ecef;
+        --text-secondary: #adb5bd;
+        --text-muted: #6c757d;
+        
+        --border-light: #404040;
+        --border-color: #495057;
+        --border-dark: #6c757d;
+        
+        --primary-color: #0d6efd;
+        --primary-hover: #0b5ed7;
+        --success-color: #198754;
+        --success-hover: #157347;
+        --danger-color: #dc3545;
+        --danger-hover: #bb2d3b;
+        --warning-color: #fd7e14;
+        --warning-hover: #e55100;
+        --info-color: #0dcaf0;
+        --info-hover: #0baccc;
+        
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+        --shadow-md: 0 2px 4px rgba(0,0,0,0.3);
+        --shadow-lg: 0 4px 8px rgba(0,0,0,0.4);
+        --shadow-xl: 0 8px 16px rgba(0,0,0,0.5);
+        
+        /* ダークモード戦略表 */
+        --sage: #8fb543;
+        --sage-light: #a5c956;
+        --sage-dark: #7a9f39;
+        --amber: #d4a574;
+        --amber-light: #deb584;
+        --amber-dark: #c49356;
+        --charcoal: #f4f5f7;
+        --pearl: #2a2d34;
+    }
+}
+
+/* 手動ダークモード切り替え */
 [data-theme="dark"] {
-    --bg: #121212;
-    --surface: #1e1e1e;
-    --surface-2: #2a2a2a;
-    --surface-3: #363636;
-    --border: #444;
-    --text: #fff;
-    --text-muted: #bbb;
-    --primary-soft: rgba(33, 150, 243, 0.2);
-    --success-soft: rgba(76, 175, 80, 0.2);
-    --danger-soft: rgba(244, 67, 54, 0.2);
-    --warning-soft: rgba(255, 152, 0, 0.2);
-    
-    --hit-bg: #3e2723;
-    --hit-text: #ff8a65;
-    --hit-border: #5d4037;
-    --stand-bg: #1a237e;
-    --stand-text: #82b1ff;
-    --stand-border: #303f9f;
-    
-    --shadow-sm: 0 2px 6px rgba(0,0,0,0.4);
-    --shadow-md: 0 6px 16px rgba(0,0,0,0.5);
-    --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #404040;
+    --bg-accent: #505050;
+    --text-primary: #e9ecef;
+    --text-secondary: #adb5bd;
+    --text-muted: #6c757d;
+    --border-light: #404040;
+    --border-color: #495057;
+    --border-dark: #6c757d;
+    --primary-color: #0d6efd;
+    --primary-hover: #0b5ed7;
+    --success-color: #198754;
+    --success-hover: #157347;
+    --danger-color: #dc3545;
+    --danger-hover: #bb2d3b;
+    --warning-color: #fd7e14;
+    --warning-hover: #e55100;
+    --info-color: #0dcaf0;
+    --info-hover: #0baccc;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+    --shadow-md: 0 2px 4px rgba(0,0,0,0.3);
+    --shadow-lg: 0 4px 8px rgba(0,0,0,0.4);
+    --shadow-xl: 0 8px 16px rgba(0,0,0,0.5);
+    --sage: #8fb543;
+    --sage-light: #a5c956;
+    --sage-dark: #7a9f39;
+    --amber: #d4a574;
+    --amber-light: #deb584;
+    --amber-dark: #c49356;
+    --charcoal: #f4f5f7;
+    --pearl: #2a2d34;
 }
 
-/* High Contrast Theme */
-[data-theme="hc"] {
-    --bg: #000;
-    --surface: #000;
-    --surface-2: #111;
-    --surface-3: #222;
-    --border: #666;
-    --text: #fff;
-    --text-muted: #ccc;
-    --primary: #00aaff;
-    --primary-hover: #0088cc;
-    --success: #00ff00;
-    --danger: #ff0000;
-    --warning: #ffff00;
-    
-    --hit-bg: #330000;
-    --hit-text: #ff6666;
-    --hit-border: #660000;
-    --stand-bg: #000033;
-    --stand-text: #6666ff;
-    --stand-border: #000066;
-}
-
-/* ============ Base Styles ============ */
-* {
+/* リセットCSS */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
+html {
+    font-size: 16px;
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    min-height: 100vh;
-    transition: var(--transition);
+    font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 
+                 'Helvetica Neue', Arial, sans-serif;
+    font-size: var(--font-size-base);
+    line-height: 1.4;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    transition: background-color var(--transition-slow), 
+                color var(--transition-slow);
+    overflow-x: hidden;
 }
 
-/* ============ Layout ============ */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--sp);
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    box-shadow: var(--shadow-sm);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+/* スクロールバーのスタイリング */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
 }
 
-h1 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    font-weight: 700;
-    background: linear-gradient(135deg, var(--primary), var(--primary-hover));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-sm);
 }
 
+::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--border-dark);
+}
+
+/* デバイス幅対応コンテナ */
 .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: min(95vw, 800px);
     margin: 0 auto;
-    padding: var(--sp);
-    display: grid;
-    gap: var(--sp);
-    grid-template-columns: 1fr;
+    padding: var(--space-sm);
+    position: relative;
 }
 
-@media (min-width: 768px) {
-    .container {
-        grid-template-columns: 320px 1fr;
-        gap: var(--sp) calc(var(--sp) * 1.5);
-    }
-    
-    #controlSection,
-    #balanceSection {
-        grid-column: 1;
-    }
-    
-    #strategySection {
-        grid-column: 2;
-        grid-row: 1 / 3;
-    }
-    
-    #chartContainer,
-    #historyWrap,
-    .tools {
-        grid-column: 1 / -1;
-    }
+/* ダークモード切り替えボタン */
+.theme-toggle {
+    position: fixed;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    z-index: var(--z-fixed);
+    transition: all var(--transition-normal);
+    user-select: none;
+    touch-action: manipulation;
 }
 
-@media (min-width: 1200px) {
-    .container {
-        grid-template-columns: 280px 1fr 320px;
-    }
-    
-    #chartContainer,
-    #historyWrap {
-        grid-column: 2;
-    }
-    
-    .tools {
-        grid-column: 3;
-    }
-}
-
-/* ============ Sections ============ */
-section, details {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: var(--sp);
+.theme-toggle:hover {
+    background: var(--bg-tertiary);
     box-shadow: var(--shadow-sm);
-    transition: var(--transition);
+    transform: translateY(-1px);
 }
 
-section:hover, details:hover {
+.theme-toggle:active {
+    transform: translateY(0);
+}
+
+/* ヘッダー */
+.header {
+    text-align: center;
+    margin-bottom: var(--space-lg);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-sm);
+}
+
+.header h1 {
+    font-size: clamp(1.2rem, 4vw, var(--font-size-2xl));
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+    letter-spacing: -0.025em;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
+    font-weight: var(--font-weight-normal);
+}
+
+/* メインコンテンツ */
+.main-content {
+    display: grid;
+    gap: var(--space-md);
+}
+
+/* セクション共通スタイル */
+section {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+section:hover {
     box-shadow: var(--shadow-md);
 }
 
-h2, h3 {
-    margin-bottom: var(--sp-s);
-    color: var(--primary);
-    font-weight: 600;
+section h2 {
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+    font-size: clamp(var(--font-size-base), 3vw, var(--font-size-xl));
+    font-weight: var(--font-weight-bold);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-xs);
+    position: relative;
 }
 
-h2 {
-    font-size: 1.25rem;
-    border-bottom: 2px solid var(--primary);
-    padding-bottom: 4px;
-    display: inline-block;
+section h2::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 1px;
 }
 
-h3 {
-    font-size: 1.1rem;
+/* 資金管理セクション */
+.money-section {
+    background: linear-gradient(135deg, var(--bg-secondary), var(--bg-accent));
 }
 
-/* ============ Forms ============ */
+.money-controls {
+    display: grid;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+}
+
+/* フォーム要素 */
 .input-group {
-    margin-bottom: var(--sp-s);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-xs);
 }
 
-label {
-    display: block;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 4px;
-    font-size: 0.9rem;
+.input-group label {
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
 }
 
-input[type="number"] {
+.input-group input {
+    padding: var(--space-sm);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
+    background: var(--bg-primary);
+    color: var(--text-primary);
     width: 100%;
-    padding: 12px;
-    border: 2px solid var(--border);
-    border-radius: var(--r);
-    background: var(--surface);
-    color: var(--text);
-    font-size: 1rem;
-    transition: var(--transition);
+    transition: all var(--transition-normal);
 }
 
-input[type="number"]:focus {
+.input-group input:focus {
     outline: none;
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-soft);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    transform: translateY(-1px);
 }
 
-/* ============ Buttons ============ */
+.input-group input:hover:not(:focus) {
+    border-color: var(--border-dark);
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-top: var(--space-sm);
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-group label {
+    cursor: pointer;
+    font-weight: var(--font-weight-medium);
+}
+
+/* 残高表示パネル */
+.balance-panel {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: var(--space-md);
+    margin-bottom: var(--space-md);
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.balance-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary-color), var(--info-color));
+}
+
+.balance-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+}
+
+.balance-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xs) 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-base));
+    transition: background-color var(--transition-fast);
+}
+
+.balance-item:last-child {
+    border-bottom: none;
+}
+
+.balance-item:hover {
+    background: var(--bg-accent);
+    margin: 0 calc(-1 * var(--space-xs));
+    padding-left: var(--space-xs);
+    padding-right: var(--space-xs);
+    border-radius: var(--radius-sm);
+}
+
+.balance-item .label {
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+}
+
+.balance-item .value {
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    font-feature-settings: "tnum";
+    letter-spacing: 0.025em;
+}
+
+.balance-item .value.bet {
+    color: var(--primary-color);
+    font-size: clamp(var(--font-size-base), 3vw, var(--font-size-lg));
+    text-shadow: 0 1px 2px rgba(0, 123, 255, 0.1);
+}
+
+/* ボタン共通スタイル */
 .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 48px;
-    padding: 12px 20px;
+    padding: clamp(var(--space-xs), 2vw, var(--space-sm)) clamp(var(--space-sm), 2.5vw, var(--space-md));
     border: none;
-    border-radius: var(--r);
-    background: var(--primary);
-    color: white;
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
+    border-radius: var(--radius-sm);
+    font-weight: var(--font-weight-semibold);
+    font-size: clamp(var(--font-size-sm), 2.2vw, var(--font-size-base));
     text-decoration: none;
-    transition: var(--transition);
+    cursor: pointer;
+    transition: all var(--transition-normal);
     position: relative;
     overflow: hidden;
+    min-height: clamp(32px, 8vw, 40px);
+    width: 100%;
     user-select: none;
-    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    
+    /* リップルエフェクト用 */
+    background-size: 200% auto;
 }
 
-.btn:hover:not(:disabled) {
-    background: var(--primary-hover);
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-md);
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    pointer-events: none;
 }
 
-.btn:active:not(:disabled) {
-    transform: translateY(0);
+.btn:active::before {
+    width: 300px;
+    height: 300px;
 }
 
 .btn:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    transform: none;
+    transform: none !important;
 }
 
-.btn.primary {
-    background: var(--primary);
+.btn:not(:disabled):hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
-.btn.good {
-    background: var(--success);
+.btn:not(:disabled):active {
+    transform: translateY(0);
 }
 
-.btn.good:hover:not(:disabled) {
-    background: #388e3c;
+/* ボタンバリエーション */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: white;
+    box-shadow: var(--shadow-md);
 }
 
-.btn.bad {
-    background: var(--danger);
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--primary-hover), var(--primary-color));
 }
 
-.btn.bad:hover:not(:disabled) {
-    background: #d32f2f;
+.btn-danger {
+    background: linear-gradient(135deg, var(--danger-color), var(--danger-hover));
+    color: white;
+    box-shadow: var(--shadow-md);
 }
 
-.btn.warn {
-    background: var(--warning);
+.btn-danger:hover {
+    background: linear-gradient(135deg, var(--danger-hover), var(--danger-color));
 }
 
-.btn.warn:hover:not(:disabled) {
-    background: #f57c00;
+.btn-win {
+    background: linear-gradient(135deg, var(--success-color), var(--success-hover));
+    color: white;
+    font-size: clamp(var(--font-size-sm), 2.5vw, var(--font-size-lg));
+    box-shadow: var(--shadow-md);
 }
 
-.button-group {
+.btn-win:hover {
+    background: linear-gradient(135deg, var(--success-hover), var(--success-color));
+    box-shadow: var(--shadow-xl);
+}
+
+.btn-push {
+    background: linear-gradient(135deg, var(--warning-color), var(--warning-hover));
+    color: #212529;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-push:hover {
+    background: linear-gradient(135deg, var(--warning-hover), var(--warning-color));
+}
+
+.btn-lose {
+    background: linear-gradient(135deg, var(--danger-color), var(--danger-hover));
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.btn-lose:hover {
+    background: linear-gradient(135deg, var(--danger-hover), var(--danger-color));
+}
+
+/* セッション制御 */
+.session-controls {
     display: flex;
-    gap: var(--sp-xs);
-    margin-bottom: var(--sp-s);
+    gap: var(--space-sm);
+    justify-content: center;
 }
 
-.button-group .btn {
-    flex: 1;
-}
-
-#gameButtons {
+/* ゲームボタン - 常時1行配置 */
+.game-buttons {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--sp-xs);
-    margin-bottom: var(--sp-s);
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: clamp(var(--space-xs), 1.5vw, var(--space-sm));
 }
 
-/* ============ Toggle Switch ============ */
-.toggle-switch {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-xs);
-    cursor: pointer;
-    font-size: 0.9rem;
-    user-select: none;
+/* 戦略表セクション */
+.strategy-section {
+    background: linear-gradient(135deg, var(--pearl), var(--bg-secondary));
 }
 
-.toggle-switch input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+.strategy-container {
+    overflow: hidden;
 }
 
-/* ============ Balance Display ============ */
-#balanceDisplay {
-    display: grid;
-    gap: var(--sp-xs);
-    padding: var(--sp-s);
-    background: var(--surface-2);
-    border-radius: var(--r);
-    border: 1px solid var(--border);
-}
-
-#balanceDisplay p {
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-#balanceDisplay strong {
-    font-weight: 600;
-    color: var(--primary);
-}
-
-/* ============ Strategy Table ============ */
-.table-wrap {
-    overflow: auto;
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    max-height: 60vh;
+.strategy-table-wrap {
+    /* 動的サイズ調整 */
+    --cell-size: clamp(10px, 2vw, 16px);
+    --header-width: clamp(24px, 5vw, 36px);
+    --cell-height: clamp(18px, 3.2vw, 26px);
+    
+    transform-origin: top left;
+    overflow-x: auto;
+    border: 2px solid var(--sage);
+    border-radius: var(--radius-sm);
+    background: var(--pearl);
+    box-shadow: 0 4px 12px rgba(107, 124, 50, 0.15);
+    margin-bottom: var(--space-sm);
+    position: relative;
+    
+    /* スムーススクロール */
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sage) var(--pearl);
+}
+
+.strategy-table-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--sage), var(--amber));
+    z-index: 5;
 }
 
 .strategy-table {
     width: 100%;
+    min-width: max(320px, 100%);
     border-collapse: collapse;
-    font-size: clamp(0.7rem, 2vw, 0.85rem);
-    font-family: var(--font-mono);
+    font-size: clamp(6px, 1.3vw, 8px);
+    position: relative;
+    user-select: none;
+    font-weight: var(--font-weight-bold);
+}
+
+.strategy-table[data-highlight-mode="active"] {
+    cursor: crosshair;
 }
 
 .strategy-table th,
 .strategy-table td {
-    padding: clamp(4px, 1vw, 8px) clamp(6px, 1.5vw, 10px);
-    border: 1px solid var(--border);
+    padding: 0;
     text-align: center;
-    font-weight: 600;
-    transition: var(--transition);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--cell-height);
+    border: 1px solid var(--sage);
+    position: relative;
+    transition: all var(--transition-fast);
+    height: var(--cell-height);
 }
 
-.strategy-table thead th {
-    background: var(--surface-3);
-    font-size: clamp(0.65rem, 1.8vw, 0.75rem);
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    box-shadow: var(--shadow-sm);
-}
-
-.strategy-table .player-col {
-    background: var(--surface-3);
+/* プレイヤー列（左端） */
+.strategy-table thead th:first-child,
+.strategy-table .player {
+    width: var(--header-width) !important;
+    min-width: var(--header-width) !important;
+    max-width: var(--header-width) !important;
+    height: var(--cell-height) !important;
+    background: var(--sage);
+    color: var(--pearl);
+    font-size: clamp(4px, 1.1vw, 7px) !important;
     position: sticky;
     left: 0;
-    z-index: 5;
-    min-width: clamp(45px, 12vw, 60px);
-    font-size: clamp(0.6rem, 1.5vw, 0.7rem);
+    z-index: var(--z-sticky);
     box-shadow: 1px 0 3px rgba(0,0,0,0.1);
 }
 
-.strategy-table .group-header {
-    background: var(--primary);
+/* 通常のセル */
+.strategy-table th:not(:first-child),
+.strategy-table td {
+    width: var(--cell-size) !important;
+    min-width: var(--cell-size) !important;
+    max-width: var(--cell-size) !important;
+    height: var(--cell-height) !important;
+    font-size: clamp(8px, 1.2vw, 10px) !important;
+}
+
+/* ディーラー列見出し */
+.strategy-table thead th:not(:first-child) {
+    background: var(--amber);
+    color: var(--pearl);
+    position: sticky;
+    top: 0;
+    z-index: calc(var(--z-sticky) - 1);
+    height: var(--cell-height) !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+/* コーナーセル */
+.strategy-table thead th:first-child {
+    z-index: calc(var(--z-sticky) + 1);
+    background: var(--sage-dark);
+}
+
+/* セクションヘッダー */
+.strategy-table .section-header td {
+    background: linear-gradient(135deg, rgba(107,124,50,0.9), rgba(107,124,50,0.7));
+    color: var(--pearl);
+    font-size: clamp(4px, 1vw, 6px) !important;
+    height: calc(var(--cell-height) * 0.8) !important;
+    font-weight: var(--font-weight-bold);
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+/* Hit/Stand/Pair セル */
+.strategy-table td.h {
+    background: var(--charcoal);
+    color: var(--pearl);
+    position: relative;
+}
+
+.strategy-table td.s {
+    background: var(--pearl);
+    color: var(--charcoal);
+    position: relative;
+}
+
+/* Pair分割用のスタイル */
+.strategy-table td.p {
+    background: linear-gradient(135deg, var(--info-color), var(--info-hover));
     color: white;
-    font-weight: bold;
-    text-align: left;
-    padding-left: var(--sp-s);
+    position: relative;
 }
 
-/* Hit Cells */
-.strategy-table tbody tr:nth-child(4) td:nth-child(7),
-.strategy-table tbody tr:nth-child(4) td:nth-child(8),
-.strategy-table tbody tr:nth-child(4) td:nth-child(9),
-.strategy-table tbody tr:nth-child(4) td:nth-child(10),
-.strategy-table tbody tr:nth-child(4) td:nth-child(11),
-.strategy-table tbody tr:nth-child(5) td:nth-child(2),
-.strategy-table tbody tr:nth-child(5) td:nth-child(3),
-.strategy-table tbody tr:nth-child(5) td:nth-child(7),
-.strategy-table tbody tr:nth-child(5) td:nth-child(8),
-.strategy-table tbody tr:nth-child(5) td:nth-child(9),
-.strategy-table tbody tr:nth-child(5) td:nth-child(10),
-.strategy-table tbody tr:nth-child(5) td:nth-child(11),
-.strategy-table tbody tr:nth-child(6) td:nth-child(n+2):nth-child(-n+11),
-.strategy-table tbody tr:nth-child(9) td:nth-child(9),
-.strategy-table tbody tr:nth-child(9) td:nth-child(10),
-.strategy-table tbody tr:nth-child(9) td:nth-child(11),
-.strategy-table tbody tr:nth-child(10) td:nth-child(n+2):nth-child(-n+11) {
-    background: var(--hit-bg) !important;
-    color: var(--hit-text) !important;
-    border-color: var(--hit-border) !important;
+/* ホバー効果 - タッチデバイス考慮 */
+@media (hover: hover) and (pointer: fine) {
+    .strategy-table tbody tr:hover td:first-child,
+    .strategy-table tbody td:hover {
+        background: var(--amber) !important;
+        color: var(--pearl) !important;
+        font-weight: var(--font-weight-bold);
+        transform: scale(1.02);
+        z-index: var(--z-dropdown);
+        box-shadow: 0 2px 8px rgba(196, 147, 86, 0.4);
+        border-radius: 2px;
+        cursor: pointer;
+    }
+    
+    .strategy-table tbody tr:hover {
+        background: rgba(196, 147, 86, 0.1);
+    }
 }
 
-/* Stand Cells */
-.strategy-table tbody tr:nth-child(3) td:nth-child(n+2):nth-child(-n+11),
-.strategy-table tbody tr:nth-child(4) td:nth-child(2),
-.strategy-table tbody tr:nth-child(4) td:nth-child(3),
-.strategy-table tbody tr:nth-child(4) td:nth-child(4),
-.strategy-table tbody tr:nth-child(4) td:nth-child(5),
-.strategy-table tbody tr:nth-child(4) td:nth-child(6),
-.strategy-table tbody tr:nth-child(5) td:nth-child(4),
-.strategy-table tbody tr:nth-child(5) td:nth-child(5),
-.strategy-table tbody tr:nth-child(5) td:nth-child(6),
-.strategy-table tbody tr:nth-child(7) td:nth-child(n+2):nth-child(-n+11),
-.strategy-table tbody tr:nth-child(8) td:nth-child(n+2):nth-child(-n+8) {
-    background: var(--stand-bg) !important;
-    color: var(--stand-text) !important;
-    border-color: var(--stand-border) !important;
-}
-
-/* ============ Legend ============ */
+/* 凡例 */
 .legend {
     display: flex;
+    gap: var(--space-md);
     justify-content: center;
-    gap: var(--sp);
-    margin-top: var(--sp-s);
-    font-size: 0.85rem;
+    align-items: center;
+    padding: var(--space-sm);
+    background: var(--bg-primary);
+    border-radius: var(--radius-md);
+    flex-wrap: wrap;
+    border: 1px solid var(--border-color);
 }
 
 .legend-item {
     display: flex;
     align-items: center;
-    gap: 6px;
+    gap: var(--space-xs);
+    font-weight: var(--font-weight-semibold);
+    font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-sm));
 }
 
-.legend-sample {
-    width: 24px;
-    height: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    font-weight: bold;
-    font-size: 0.75rem;
-    border: 2px solid;
-}
-
-.legend-hit .legend-sample {
-    background: var(--hit-bg);
-    color: var(--hit-text);
-    border-color: var(--hit-border);
-}
-
-.legend-stand .legend-sample {
-    background: var(--stand-bg);
-    color: var(--stand-text);
-    border-color: var(--stand-border);
-}
-
-/* ============ Chart ============ */
-#sessionChart {
-    width: 100%;
-    height: 200px;
-    background: var(--surface);
-    border-radius: var(--r);
+.legend-color {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    color: white;
+    font-weight: var(--font-weight-bold);
+    min-width: 20px;
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
+    text-align: center;
     box-shadow: var(--shadow-sm);
-    display: block;
 }
 
-@media (max-width: 767px) {
-    #sessionChart {
-        height: 150px;
-    }
+.legend-color.h {
+    background: var(--charcoal);
 }
 
-/* ============ History Table ============ */
-#historyTable {
+.legend-color.s {
+    background: var(--pearl);
+    color: var(--charcoal);
+}
+
+.legend-color.p {
+    background: var(--info-color);
+}
+
+/* 履歴セクション */
+.history-section details {
+    border: none;
+}
+
+.history-section summary {
+    cursor: pointer;
+    outline: none;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: var(--space-xs);
+    margin-bottom: var(--space-sm);
+    transition: color var(--transition-normal);
+    user-select: none;
+}
+
+.history-section summary:hover {
+    color: var(--primary-color);
+}
+
+.history-section summary h2 {
+    display: inline;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.history-section summary::marker {
+    content: '▶ ';
+    color: var(--primary-color);
+    font-weight: var(--font-weight-bold);
+}
+
+.history-section details[open] summary::marker {
+    content: '▼ ';
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.history-table {
     width: 100%;
+    min-width: max(500px, 100%);
     border-collapse: collapse;
-    font-size: 0.85rem;
+    font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-sm));
+    background: var(--bg-primary);
 }
 
-#historyTable th,
-#historyTable td {
-    padding: var(--sp-xs);
-    border: 1px solid var(--border);
-    text-align: left;
+.history-table th,
+.history-table td {
+    border: 1px solid var(--border-color);
+    padding: var(--space-xs) var(--space-sm);
+    text-align: center;
+    white-space: nowrap;
 }
 
-#historyTable th {
-    background: var(--surface-3);
-    font-weight: 600;
+.history-table th {
+    background: var(--bg-tertiary);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-primary);
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: var(--z-sticky);
 }
 
-#historyTable td:first-child {
-    position: sticky;
-    left: 0;
-    background: var(--surface);
-    z-index: 5;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
+.history-table tbody tr {
+    transition: background-color var(--transition-fast);
 }
 
-#historyTable tr:nth-child(even) {
-    background: var(--surface-2);
+.history-table tbody tr:nth-child(even) {
+    background: var(--bg-secondary);
 }
 
-#historyTable tr:hover {
-    background: var(--primary-soft);
+.history-table tbody tr:hover {
+    background: var(--bg-accent);
 }
 
-/* ============ Tools Section ============ */
-.tools {
-    display: grid;
-    gap: var(--sp-xs);
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-}
-
-.tools .btn {
-    font-size: 0.85rem;
-    min-height: 44px;
-}
-
-/* ============ Floating Timer ============ */
-#floatingTimer {
+/* タイマー */
+.timer {
     position: fixed;
-    bottom: var(--sp);
-    right: var(--sp);
-    background: var(--surface);
-    padding: var(--sp-xs) var(--sp-s);
-    border-radius: var(--r);
+    bottom: var(--space-sm);
+    right: var(--space-sm);
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
     display: flex;
     align-items: center;
-    gap: var(--sp-xs);
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    border: 1px solid var(--border);
-    z-index: 1000;
-    cursor: grab;
+    gap: var(--space-xs);
+    font-family: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', 'Courier New', monospace;
+    font-weight: var(--font-weight-bold);
+    font-size: clamp(var(--font-size-xs), 2vw, var(--font-size-sm));
+    z-index: var(--z-fixed);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.timer-btn {
+    background: transparent;
+    border: 1px solid currentColor;
+    color: inherit;
+    padding: 2px var(--space-xs);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: clamp(var(--font-size-xs), 1.8vw, var(--font-size-sm));
+    transition: all var(--transition-fast);
+    min-width: 20px;
+    text-align: center;
     user-select: none;
-    -webkit-backdrop-filter: blur(12px);
-    backdrop-filter: blur(12px);
+    touch-action: manipulation;
 }
 
-#floatingTimer.dragging {
-    cursor: grabbing;
+.timer-btn:hover {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    transform: scale(1.05);
 }
 
-#floatingTimer button {
-    background: none;
-    border: none;
-    color: var(--text);
-    cursor: pointer;
-    padding: 4px;
-    border-radius: 3px;
-    transition: var(--transition);
-    font-size: 1rem;
-}
+/* レスポンシブ対応 */
 
-#floatingTimer button:hover {
-    background: var(--surface-2);
-}
-
-/* ============ Theme Toggle ============ */
-.theme-toggle {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--surface-2);
-    border: 1px solid var(--border);
-    padding: var(--sp-xs) var(--sp-s);
-    border-radius: var(--r);
-    cursor: pointer;
-    font-size: 0.85rem;
-    font-weight: 500;
-    color: var(--text);
-    transition: var(--transition);
-}
-
-.theme-toggle:hover {
-    background: var(--surface-3);
-    box-shadow: var(--shadow-sm);
-}
-
-/* ============ Snackbar ============ */
-.snackbar {
-    position: fixed;
-    bottom: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--r);
-    padding: var(--sp-s) var(--sp);
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    align-items: center;
-    gap: var(--sp);
-    z-index: 10000;
-    animation: slideIn 0.3s ease;
-    max-width: 90vw;
-}
-
-.snackbar button {
-    background: none;
-    border: none;
-    color: var(--primary);
-    font-weight: 600;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    transition: var(--transition);
-}
-
-.snackbar button:hover {
-    background: var(--primary-soft);
-}
-
-@keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-/* ============ Details/Summary ============ */
-details {
-    cursor: pointer;
-}
-
-summary {
-    font-weight: 600;
-    padding: var(--sp-xs) 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: var(--sp-s);
-    list-style: none;
-    position: relative;
-}
-
-summary::before {
-    content: '▶';
-    position: absolute;
-    left: -20px;
-    transition: var(--transition);
-}
-
-details[open] summary::before {
-    transform: rotate(90deg);
-}
-
-/* ============ Responsive Design ============ */
-@media (max-width: 767px) {
-    header {
-        padding: var(--sp-s);
+/* 幅が十分ある場合のレイアウト調整 */
+@media (min-width: 480px) {
+    .money-controls {
+        grid-template-columns: 2fr 1fr;
     }
     
-    .container {
-        padding: var(--sp-s);
-        gap: var(--sp-s);
-    }
-    
-    section, details {
-        padding: var(--sp-s);
-    }
-    
-    .btn {
-        min-height: 44px;
-        font-size: 0.9rem;
-    }
-    
-    #gameButtons {
-        gap: 6px;
-    }
-    
-    .strategy-table {
-        font-size: 0.65rem;
-    }
-    
-    .strategy-table th,
-    .strategy-table td {
-        padding: 3px 4px;
-    }
-    
-    #floatingTimer {
-        bottom: var(--sp-s);
-        right: var(--sp-s);
-        padding: 6px var(--sp-xs);
-        font-size: 0.8rem;
-    }
-    
-    .tools {
+    .balance-grid {
         grid-template-columns: 1fr 1fr;
     }
 }
 
-/* ============ Accessibility ============ */
-@media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
+@media (min-width: 400px) {
+    .balance-grid {
+        grid-template-columns: 1fr 1fr;
     }
 }
 
-@media (prefers-contrast: high) {
-    :root {
-        --border: #000;
-        --primary: #0066cc;
-        --success: #006600;
-        --danger: #cc0000;
-        --warning: #996600;
+@media (min-width: 600px) {
+    .balance-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (min-width: 768px) {
+    .container {
+        max-width: min(90vw, 700px);
+        padding: var(--space-md);
     }
     
-    .btn {
-        border: 2px solid rgba(0,0,0,0.3);
+    .balance-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    
+    .main-content {
+        gap: var(--space-lg);
     }
 }
 
-/* ============ Print Styles ============ */
+@media (min-width: 1024px) {
+    .container {
+        max-width: min(85vw, 800px);
+        padding: var(--space-lg);
+    }
+    
+    .strategy-table-wrap {
+        --cell-size: 18px;
+        --header-width: 40px;
+        --cell-height: 28px;
+    }
+    
+    .game-buttons {
+        gap: var(--space-md);
+    }
+}
+
+/* モバイル最適化 */
+@media (max-width: 480px) {
+    .container {
+        padding: var(--space-xs);
+    }
+    
+    section {
+        padding: var(--space-sm);
+    }
+    
+    .strategy-table-wrap {
+        --cell-size: 8px;
+        --header-width: 20px;
+        --cell-height: 16px;
+    }
+    
+    .game-buttons {
+        gap: var(--space-xs);
+    }
+}
+
+@media (max-width: 360px) {
+    .balance-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+        padding: var(--space-xs) 0;
+    }
+    
+    .strategy-table-wrap {
+        --cell-size: 7px;
+        --header-width: 18px;
+        --cell-height: 14px;
+    }
+    
+    .legend {
+        gap: var(--space-sm);
+    }
+    
+    .legend-item {
+        gap: var(--space-xs);
+    }
+}
+
+@media (max-width: 320px) {
+    .strategy-table-wrap {
+        --cell-size: 6px;
+        --header-width: 16px;
+        --cell-height: 12px;
+    }
+    
+    .strategy-table {
+        min-width: 280px;
+    }
+}
+
+/* 縦向きモバイル専用最適化 */
+@media (max-width: 480px) and (orientation: portrait) {
+    .strategy-container {
+        margin: 0 calc(-1 * var(--space-sm));
+    }
+    
+    .strategy-table-wrap {
+        border-radius: 0;
+        border-left: none;
+        border-right: none;
+        --cell-height: 18px;
+    }
+}
+
+/* 横向きモバイル対応 */
+@media (max-height: 500px) and (orientation: landscape) {
+    .header {
+        margin-bottom: var(--space-sm);
+    }
+    
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .subtitle {
+        font-size: var(--font-size-sm);
+    }
+    
+    .strategy-table-wrap {
+        --cell-height: 12px;
+    }
+    
+    .timer {
+        bottom: var(--space-xs);
+        right: var(--space-xs);
+        font-size: var(--font-size-xs);
+    }
+}
+
+/* 超小型デバイス対応 */
+@media (max-width: 280px) {
+    .strategy-table {
+        min-width: 250px;
+    }
+    
+    .history-table {
+        min-width: 350px;
+    }
+    
+    .legend {
+        flex-direction: column;
+        gap: var(--space-xs);
+    }
+}
+
+/* 印刷対応 */
 @media print {
-    header,
-    #floatingTimer,
-    .btn,
-    .tools {
+    .timer,
+    .session-controls,
+    .game-section,
+    .theme-toggle {
         display: none !important;
     }
     
-    section, details {
-        break-inside: avoid;
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .strategy-table-wrap {
+        --cell-size: 12px;
+        --header-width: 28px;
+        --cell-height: 16px;
         box-shadow: none;
         border: 1px solid #000;
     }
     
-    body {
-        background: white;
-        color: black;
+    .table-wrapper {
+        overflow: visible;
+    }
+    
+    section {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .balance-panel {
+        border: 1px solid #000;
     }
 }
 
-/* ============ Scrollbar Styling ============ */
-::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+/* アクセシビリティ */
+.btn:focus-visible,
+.theme-toggle:focus-visible,
+input:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
 }
 
-::-webkit-scrollbar-track {
-    background: var(--surface-2);
-    border-radius: 4px;
+/* 高コントラストモード */
+@media (prefers-contrast: high) {
+    :root {
+        --border-color: #000000;
+        --shadow-md: 0 2px 4px rgba(0,0,0,0.8);
+    }
+    
+    .strategy-table th,
+    .strategy-table td {
+        border-width: 2px;
+    }
+    
+    .btn {
+        border: 2px solid currentColor;
+    }
 }
 
-::-webkit-scrollbar-thumb {
-    background: var(--primary);
-    border-radius: 4px;
+/* アニメーション削減 */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .btn:hover,
+    .strategy-table tbody td:hover {
+        transform: none;
+    }
 }
 
-::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-hover);
+/* スクリーンリーダー用 */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* カスタムスクロールバー（Webkit系） */
+.strategy-table-wrap::-webkit-scrollbar,
+.table-wrapper::-webkit-scrollbar {
+    height: 4px;
+}
+
+.strategy-table-wrap::-webkit-scrollbar-track,
+.table-wrapper::-webkit-scrollbar-track {
+    background: var(--bg-secondary);
+}
+
+.strategy-table-wrap::-webkit-scrollbar-thumb,
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: var(--sage);
+    border-radius: 2px;
+}
+
+.strategy-table-wrap::-webkit-scrollbar-thumb:hover,
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: var(--sage-dark);
+}
+
+/* 選択不可テキスト */
+.strategy-table,
+.legend,
+.timer {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* ロード時のアニメーション */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.3s ease-out;
+}
+
+section:nth-child(1) { animation-delay: 0.1s; }
+section:nth-child(2) { animation-delay: 0.2s; }
+section:nth-child(3) { animation-delay: 0.3s; }
+section:nth-child(4) { animation-delay: 0.4s; }
+
+/* パフォーマンス最適化 */
+.strategy-table,
+.history-table {
+    contain: layout style paint;
+}
+
+.timer {
+    will-change: transform;
+}
+
+/* 最終調整 */
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    position: relative;
 }
